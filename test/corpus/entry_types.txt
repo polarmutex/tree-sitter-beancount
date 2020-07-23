@@ -1,0 +1,268 @@
+=============================
+entry transaction one string
+=============================
+
+2013-05-18 * "Nice dinner at Mermaid Inn"
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(source_file
+    (transaction
+        (date)
+        (txn)
+        (txn_strings)
+        (posting
+            (account)
+            (amount)
+            (currency)
+        )
+        (posting
+            (account)
+            (amount)
+            (currency)
+        )
+    )
+)
+
+=============================
+entry transaction two string
+=============================
+
+2013-05-18 * "Mermaid Inn" "Nice dinner"
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(source_file
+    (transaction
+        (date)
+        (txn)
+        (txn_strings)
+        (posting
+            (account)
+            (amount)
+            (currency)
+        )
+        (posting
+            (account)
+            (amount)
+            (currency)
+        )
+    )
+)
+
+===================================
+entry transaction with txn keyword
+===================================
+
+2013-05-18 txn "Nice dinner at Mermaid Inn"
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(source_file
+    (transaction
+        (date)
+        (txn)
+        (txn_strings)
+        (posting
+            (account)
+            (amount)
+            (currency)
+        )
+        (posting
+            (account)
+            (amount)
+            (currency)
+        )
+    )
+)
+
+==============
+entry balance
+==============
+
+2013-05-18 balance Assets:US:BestBank:Checking  200 USD
+
+---
+
+(source_file
+    (directive
+        (date)
+        (balance_directive)
+        (account)
+        (amount)
+        (currency)
+    )
+)
+
+===============
+entry balnce 2
+===============
+
+2013-05-18 balance Assets:US:BestBank:Checking  200 ~ 0.002 USD
+
+---
+
+(source_file
+    (directive
+        (date)
+        (balance_directive)
+        (account)
+        (amount)
+        (currency)
+    )
+)
+
+===========
+entry open
+===========
+
+2013-05-18 open Assets:US:BestBank:Checking
+
+---
+
+(source_file)
+
+=============
+entry open 2
+=============
+
+2013-05-18 open Assets:US:BestBank:Checking   USD
+
+---
+
+(source_file)
+
+=============
+entry open 3
+=============
+
+2013-05-18 open Assets:Cash   USD,CAD,EUR
+
+---
+(source_file)
+
+=============
+entry open 4
+=============
+
+2013-05-18 open Assets:US:Vanguard:VIIPX  VIIPX  "STRICT"
+
+---
+
+(source_file)
+
+=============
+entry open 5
+=============
+
+2013-05-18 open Assets:US:Vanguard:VIIPX    "STRICT"
+
+---
+
+(source_file)
+
+============
+entry close
+============
+
+2013-05-18 close Assets:US:BestBank:Checking
+
+---
+
+(source_file)
+
+================
+entry commodity
+================
+
+2013-05-18 commodity MSFT
+
+---
+
+(source_file)
+
+==========
+entry pad
+==========
+
+2013-05-18 pad Assets:US:BestBank:Checking  Equity:Opening-Balances
+
+---
+
+(source_file)
+
+============
+entry event
+============
+
+2013-05-18 event "location" "New York, USA"
+
+---
+
+(source_file)
+
+==================
+entry event empty
+==================
+
+2013-05-18 event "location" ""
+
+---
+
+(source_file)
+
+============
+entry query
+============
+
+2013-05-18 query "cash" "SELECT SUM(position) WHERE currency = 'USD'"
+
+---
+
+(source_file)
+
+===========
+entry note
+===========
+
+2013-05-18 note Assets:US:BestBank:Checking  "Blah, di blah."
+
+---
+
+(source_file)
+
+===============
+entry document
+===============
+
+2013-05-18 document Assets:US:BestBank:Checking "/Accounting/statement.pdf"
+
+---
+
+(source_file)
+
+============
+entry price
+============
+
+2013-05-18 price USD   1.0290 CAD
+
+---
+
+(source_file)
+
+=============
+entry custom
+=============
+
+2013-05-18 custom "budget" "weekly < 1000.00 USD" 2016-02-28 TRUE 43.03 USD 23
+
+---
+
+(source_file)

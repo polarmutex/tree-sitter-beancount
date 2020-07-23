@@ -1,0 +1,134 @@
+[
+  {
+    "type": "account",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "posting",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "amount",
+          "named": true
+        },
+        {
+          "type": "currency",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "transaction",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "transaction",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "posting",
+          "named": true
+        },
+        {
+          "type": "txn",
+          "named": true
+        },
+        {
+          "type": "txn_strings",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "txn",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "txn_strings",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "!",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "Assets",
+    "named": false
+  },
+  {
+    "type": "Equity",
+    "named": false
+  },
+  {
+    "type": "Expenses",
+    "named": false
+  },
+  {
+    "type": "Income",
+    "named": false
+  },
+  {
+    "type": "Liabilities",
+    "named": false
+  },
+  {
+    "type": "amount",
+    "named": true
+  },
+  {
+    "type": "currency",
+    "named": true
+  },
+  {
+    "type": "date",
+    "named": true
+  },
+  {
+    "type": "txn",
+    "named": false
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "name": "tree-sitter-beancount",
+  "version": "1.0.0",
+  "description": "a tree-sitter parser for the beabcount syntax",
+  "main": "index.js",
+  "scripts": {
+    "tree-sitter": "tree-sitter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bryall@github.com/bryall/tree-sitter-beancount.git"
+  },
+  "keywords": [
+    "parser",
+    "tree-sitter",
+    "beancount"
+  ],
+  "author": "Brian Ryall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryall/tree-sitter-beancount/issues"
+  },
+  "homepage": "https://github.com/bryall/tree-sitter-beancount#readme",
+  "dependencies": {
+    "nan": "^2.14.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.16.9"
+  }
+}

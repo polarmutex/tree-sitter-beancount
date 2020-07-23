@@ -1,0 +1,447 @@
+{
+  "name": "beancount",
+  "rules": {
+    "source_file": {
+      "type": "SYMBOL",
+      "name": "_statement"
+    },
+    "_statement": {
+      "type": "SYMBOL",
+      "name": "transaction"
+    },
+    "transaction": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "date"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "txn"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "txn_strings"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "posting"
+          }
+        }
+      ]
+    },
+    "date": {
+      "type": "PATTERN",
+      "value": "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))"
+    },
+    "txn": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "txn"
+        },
+        {
+          "type": "STRING",
+          "value": "!"
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        }
+      ]
+    },
+    "txn_strings": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_string"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_string"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "tags_links": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_link"
+        }
+      ]
+    },
+    "posting": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "account"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "amount"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "currency"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "account"
+            }
+          ]
+        }
+      ]
+    },
+    "account": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_account_type"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ":"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_account_name"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "amount": {
+      "type": "PATTERN",
+      "value": "-?(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d\\d)?"
+    },
+    "currency": {
+      "type": "PATTERN",
+      "value": "[A-Z][A-Z0-9'._-]{0,22}[A-Z0-9]"
+    },
+    "_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^\\\\\"\\n]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\\\(.|\\n)"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "\""
+        }
+      ]
+    },
+    "_ASCII": {
+      "type": "PATTERN",
+      "value": "[\\x00-\\x7f]"
+    },
+    "_UTF_8_1": {
+      "type": "PATTERN",
+      "value": "[\\x80-\\xbf]"
+    },
+    "_UTF_8_2": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[\\xc2-\\xdf]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_UTF_8_1"
+        }
+      ]
+    },
+    "_UTF_8_3": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\xe0[\\xa0-\\xbf]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[\\xe1-\\xec]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\xed[\\x80-\\x9f]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[\\xee-\\xef]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        }
+      ]
+    },
+    "_UTF_8_4": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\xf0[\\x90-\\xbf]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[\\xf1-\\xf3]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\xf4[\\x80-\\x8f]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_1"
+            }
+          ]
+        }
+      ]
+    },
+    "_UTF_8_ONLY": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_UTF_8_2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_UTF_8_3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_UTF_8_4"
+        }
+      ]
+    },
+    "_UTF_8": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_ASCII"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_UTF_8_ONLY"
+        }
+      ]
+    },
+    "_account_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[A-Z0-9]"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_UTF_8_ONLY"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[A-Za-z0-9\\-]"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_UTF_8_ONLY"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_account_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "Assets"
+        },
+        {
+          "type": "STRING",
+          "value": "Liabilities"
+        },
+        {
+          "type": "STRING",
+          "value": "Equity"
+        },
+        {
+          "type": "STRING",
+          "value": "Income"
+        },
+        {
+          "type": "STRING",
+          "value": "Expenses"
+        }
+      ]
+    },
+    "_number": {
+      "type": "PATTERN",
+      "value": "([0-9]+|[0-9][0-9,]+[0-9])(\\.[0-9]*)?"
+    },
+    "_tag": {
+      "type": "PATTERN",
+      "value": "#[A-Za-z0-9\\-_/.]+"
+    },
+    "_link": {
+      "type": "PATTERN",
+      "value": "\\^[A-Za-z0-9\\-_/.]+"
+    },
+    "_key": {
+      "type": "PATTERN",
+      "value": "[a-z][a-zA-Z0-9\\-_]+:"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+
