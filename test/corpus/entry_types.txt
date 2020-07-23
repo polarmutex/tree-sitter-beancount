@@ -8,20 +8,22 @@ entry transaction one string
 
 ---
 
-(source_file
-    (transaction
-        (date)
-        (txn)
-        (txn_strings)
-        (posting
-            (account)
-            (amount)
-            (currency)
-        )
-        (posting
-            (account)
-            (amount)
-            (currency)
+(file
+    (entry
+        (transaction
+            (date)
+            (txn)
+            (txn_strings)
+            (posting
+                (account)
+                (number_expr)
+                (currency)
+            )
+            (posting
+                (account)
+                (number_expr)
+                (currency)
+            )
         )
     )
 )
@@ -36,20 +38,22 @@ entry transaction two string
 
 ---
 
-(source_file
-    (transaction
-        (date)
-        (txn)
-        (txn_strings)
-        (posting
-            (account)
-            (amount)
-            (currency)
-        )
-        (posting
-            (account)
-            (amount)
-            (currency)
+(file
+    (entry
+        (transaction
+            (date)
+            (txn)
+            (txn_strings)
+            (posting
+                (account)
+                (number_expr)
+                (currency)
+            )
+            (posting
+                (account)
+                (number_expr)
+                (currency)
+            )
         )
     )
 )
@@ -64,20 +68,22 @@ entry transaction with txn keyword
 
 ---
 
-(source_file
-    (transaction
-        (date)
-        (txn)
-        (txn_strings)
-        (posting
-            (account)
-            (amount)
-            (currency)
-        )
-        (posting
-            (account)
-            (amount)
-            (currency)
+(file
+    (entry
+        (transaction
+            (date)
+            (txn)
+            (txn_strings)
+            (posting
+                (account)
+                (number_expr)
+                (currency)
+            )
+            (posting
+                (account)
+                (number_expr)
+                (currency)
+            )
         )
     )
 )
@@ -90,13 +96,16 @@ entry balance
 
 ---
 
-(source_file
-    (directive
-        (date)
-        (balance_directive)
-        (account)
-        (amount)
-        (currency)
+(file
+    (entry
+        (balance
+            (date)
+            (account)
+            (amount_tolerance
+                (number_expr)
+                (currency)
+            )
+        )
     )
 )
 
@@ -108,13 +117,17 @@ entry balnce 2
 
 ---
 
-(source_file
-    (directive
-        (date)
-        (balance_directive)
-        (account)
-        (amount)
-        (currency)
+(file
+    (entry
+        (balance
+            (date)
+            (account)
+            (amount_tolerance
+                (number_expr)
+                (number_expr)
+                (currency)
+            )
+        )
     )
 )
 
@@ -126,7 +139,14 @@ entry open
 
 ---
 
-(source_file)
+(file
+    (entry
+        (open
+            (date)
+            (account)
+        )
+    )
+)
 
 =============
 entry open 2
@@ -136,7 +156,15 @@ entry open 2
 
 ---
 
-(source_file)
+(file
+    (entry
+        (open
+            (date)
+            (account)
+            (currency)
+        )
+    )
+)
 
 =============
 entry open 3
@@ -145,7 +173,18 @@ entry open 3
 2013-05-18 open Assets:Cash   USD,CAD,EUR
 
 ---
-(source_file)
+
+(file
+    (entry
+        (open
+            (date)
+            (account)
+            (currency)
+            (currency)
+            (currency)
+        )
+    )
+)
 
 =============
 entry open 4
@@ -155,7 +194,16 @@ entry open 4
 
 ---
 
-(source_file)
+(file
+    (entry
+        (open
+            (date)
+            (account)
+            (currency)
+            (opt_booking)
+        )
+    )
+)
 
 =============
 entry open 5
@@ -165,7 +213,15 @@ entry open 5
 
 ---
 
-(source_file)
+(file
+    (entry
+        (open
+            (date)
+            (account)
+            (opt_booking)
+        )
+    )
+)
 
 ============
 entry close
@@ -175,7 +231,14 @@ entry close
 
 ---
 
-(source_file)
+(file
+    (entry
+        (close
+            (date)
+            (account)
+        )
+    )
+)
 
 ================
 entry commodity
@@ -185,7 +248,14 @@ entry commodity
 
 ---
 
-(source_file)
+(file
+    (entry
+        (commodity
+            (date)
+            (currency)
+        )
+    )
+)
 
 ==========
 entry pad
@@ -195,7 +265,15 @@ entry pad
 
 ---
 
-(source_file)
+(file
+    (entry
+        (pad
+            (date)
+            (account)
+            (account)
+        )
+    )
+)
 
 ============
 entry event
@@ -205,7 +283,13 @@ entry event
 
 ---
 
-(source_file)
+(file
+    (entry
+        (event
+            (date)
+        )
+    )
+)
 
 ==================
 entry event empty
@@ -215,7 +299,13 @@ entry event empty
 
 ---
 
-(source_file)
+(file
+    (entry
+        (event
+            (date)
+        )
+    )
+)
 
 ============
 entry query
@@ -225,7 +315,13 @@ entry query
 
 ---
 
-(source_file)
+(file
+    (entry
+        (query
+            (date)
+        )
+    )
+)
 
 ===========
 entry note
@@ -235,7 +331,14 @@ entry note
 
 ---
 
-(source_file)
+(file
+    (entry
+        (note
+            (date)
+            (account)
+        )
+    )
+)
 
 ===============
 entry document
@@ -245,7 +348,15 @@ entry document
 
 ---
 
-(source_file)
+(file
+    (entry
+        (document
+            (date)
+            (account)
+            (filename)
+        )
+    )
+)
 
 ============
 entry price
@@ -255,7 +366,18 @@ entry price
 
 ---
 
-(source_file)
+(file
+    (entry
+        (price
+            (date)
+            (currency)
+            (amount
+                (number_expr)
+                (currency)
+            )
+        )
+    )
+)
 
 =============
 entry custom
@@ -265,4 +387,24 @@ entry custom
 
 ---
 
-(source_file)
+(file
+    (entry
+        (custom
+            (date)
+            (custom_value)
+            (custom_value
+                (date)
+            )
+            (custom_value)
+            (custom_value
+                (amount
+                    (number_expr)
+                    (currency)
+                )
+            )
+            (custom_value
+                (number_expr)
+            )
+        )
+    )
+)

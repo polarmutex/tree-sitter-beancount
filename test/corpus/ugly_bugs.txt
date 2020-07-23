@@ -6,4 +6,6 @@ comment
 
 ---
 
-(source_file)
+(file
+    (comment)
+)
