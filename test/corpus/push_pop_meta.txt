@@ -1,0 +1,15 @@
+==============
+push pop meta
+==============
+
+pushmeta location: "Lausanne, Switzerland"
+
+2015-06-07 * "Something"
+    Assets:Something   1 USD
+    Assets:Something  -1 USD
+
+popmeta location:
+
+---
+
+(file)

@@ -1,0 +1,139 @@
+===========
+cost empty
+===========
+
+2014-01-01 *
+    Assets:Invest:AAPL   20 AAPL {}
+    Assets:Invest:Cash  -20 AAPL
+
+---
+
+(file)
+
+===========
+cost amount
+============
+
+2014-01-01 *
+    Assets:Invest:AAPL      20 AAPL {45.23 USD}
+    Assets:Invest:Cash  -90.46 USD
+
+---
+
+(file)
+
+==========
+cost date
+==========
+
+2014-01-01 *
+    Assets:Invest:AAPL   20 AAPL {2014-12-26}
+    Assets:Invest:Cash  -20 AAPL
+
+---
+
+(file)
+
+===========
+cost label
+===========
+
+2014-01-01 *
+    Assets:Invest:AAPL   20 AAPL {"d82d55a0dbe8"}
+    Assets:Invest:Cash  -20 AAPL
+
+---
+
+(file)
+
+===========
+cost merge
+===========
+
+2014-01-01 *
+    Assets:Invest:AAPL   20 AAPL {*}
+    Assets:Invest:Cash  -20 AAPL
+
+---
+
+(file)
+
+===================
+cost two component
+===================
+
+2014-01-01 *
+    Assets:Invest:AAPL    1 AAPL {45.23 USD, 2014-12-26}
+    Assets:Invest:AAPL    1 AAPL {2014-12-26, 45.23 USD}
+    Assets:Invest:AAPL    1 AAPL {45.23 USD, "d82d55a0dbe8"}
+    Assets:Invest:AAPL    1 AAPL {"d82d55a0dbe8", 45.23 USD}
+    Assets:Invest:AAPL    1 AAPL {2014-12-26, "d82d55a0dbe8"}
+    Assets:Invest:AAPL    1 AAPL {"d82d55a0dbe8", 2014-12-26}
+
+---
+
+(file)
+
+=====================
+cost three component
+=====================
+
+2014-01-01 *
+    Assets:Invest:AAPL    1 AAPL {45.23 USD, 2014-12-26, "d82d55a0dbe8"}
+    Assets:Invest:AAPL    1 AAPL {2014-12-26, 45.23 USD, "d82d55a0dbe8"}
+    Assets:Invest:AAPL    1 AAPL {45.23 USD, "d82d55a0dbe8", 2014-12-26}
+    Assets:Invest:AAPL    1 AAPL {2014-12-26, "d82d55a0dbe8", 45.23 USD}
+    Assets:Invest:AAPL    1 AAPL {"d82d55a0dbe8", 45.23 USD, 2014-12-26}
+    Assets:Invest:AAPL    1 AAPL {"d82d55a0dbe8", 2014-12-26, 45.23 USD}
+
+---
+
+(file)
+
+================
+cost both costs
+================
+
+2014-01-01 *
+    Assets:Invest:AAPL       10 AAPL {45.23 # 9.95 USD}
+    Assets:Invest:Cash  -110.36 USD
+
+---
+
+(file)
+
+================
+cost total cost
+================
+
+2014-01-01 *
+    Assets:Invest:AAPL      10 AAPL {# 9.95 USD}
+    Assets:Invest:Cash  -19.90 USD
+
+---
+
+(file)
+
+=======================
+cost total empty total
+=======================
+
+2014-01-01 *
+    Assets:Invest:AAPL      20 AAPL {45.23 # USD}
+    Assets:Invest:Cash  -45.23 USD
+
+---
+
+(file)
+
+==============
+cost neagtive
+==============
+
+2013-05-18 * ""
+    Assets:Investments:MSFT      -10 MSFT {-200.00 USD}
+    Assets:Investments:Cash  2000.00 USD
+
+---
+
+(file)

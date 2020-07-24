@@ -1,0 +1,19 @@
+==================
+push tag
+==================
+
+pushtag #sampleTag
+
+---
+
+(file)
+
+================
+pop tag
+================
+
+poptag #sampleTag
+
+---
+
+(file)

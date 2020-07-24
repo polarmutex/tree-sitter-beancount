@@ -1,11 +1,43 @@
-========
-comment
-========
+=================
+extra whitespace
+=================
 
-;; This is some comment.
+
+2013-07-11 note Assets:Cash "test"
+
+
+;;
+
 
 ---
 
 (file
-    (comment)
+    (entry
+        (note
+            (date)
+            (account)
+        )
+    )
+)
+
+=============================
+extra whitespace transaction
+=============================
+
+2013-05-18 * "Nice dinner at Mermaid Inn"
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash
+
+;; End of file',
+
+---
+
+(file
+    (entry
+        (transaction
+            (date)
+            (txn)
+            (txn_strings)
+        )
+    )
 )

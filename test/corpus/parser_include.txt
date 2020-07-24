@@ -1,0 +1,19 @@
+=================
+include absolute
+=================
+
+include "/some/absolute/filename.beancount"
+
+---
+
+(file)
+
+=================
+include relative
+=================
+
+include "some/relative/filename.beancount"
+
+---
+
+(file)

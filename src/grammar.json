@@ -487,8 +487,16 @@
           "name": "txn"
         },
         {
-          "type": "SYMBOL",
-          "name": "txn_strings"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "txn_strings"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "CHOICE",

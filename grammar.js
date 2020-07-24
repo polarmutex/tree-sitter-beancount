@@ -161,7 +161,7 @@ module.exports = grammar({
         transaction: $ => seq(
             $.date,
             $.txn,
-            $.txn_strings,
+            optional($.txn_strings),
             optional(
                 $.tags_links
             ),
