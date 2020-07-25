@@ -16,6 +16,7 @@ extra whitespace
         (note
             (date)
             (account)
+            (string)
         )
     )
 )
@@ -36,8 +37,20 @@ extra whitespace transaction
     (entry
         (transaction
             (date)
-            (txn)
-            (txn_strings)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                )
+            )
         )
     )
 )

@@ -8,4 +8,29 @@ links
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (tags_and_links (link))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)

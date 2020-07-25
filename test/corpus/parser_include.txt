@@ -6,7 +6,11 @@ include "/some/absolute/filename.beancount"
 
 ---
 
-(file)
+(file
+    (directive
+        (include (string))
+    )
+)
 
 =================
 include relative
@@ -16,4 +20,8 @@ include "some/relative/filename.beancount"
 
 ---
 
-(file)
+(file
+    (directive
+        (include (string))
+    )
+)

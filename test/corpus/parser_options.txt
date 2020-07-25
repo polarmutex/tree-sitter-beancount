@@ -6,7 +6,11 @@ option "title" "Super Rich"
 
 ---
 
-(file)
+(file
+    (directive
+        (option (string) (string))
+    )
+)
 
 ==================
 option list value
@@ -18,4 +22,14 @@ option "documents" "/path/docs/c"
 
 ---
 
-(file)
+(file
+    (directive
+        (option (string) (string))
+    )
+    (directive
+        (option (string) (string))
+    )
+    (directive
+        (option (string) (string))
+    )
+)

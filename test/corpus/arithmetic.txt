@@ -8,7 +8,31 @@ expr add
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ==========
 expr sub
@@ -20,7 +44,31 @@ expr sub
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ==========
 expr mult
@@ -32,7 +80,31 @@ expr mult
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 =========
 expr div
@@ -44,7 +116,31 @@ expr div
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 =========
 expr neg
@@ -57,7 +153,38 @@ expr neg
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 =========
 expr pos
@@ -69,7 +196,31 @@ expr pos
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ==============
 expr predence
@@ -83,7 +234,31 @@ expr predence
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ============
 expr groups
@@ -95,7 +270,31 @@ expr groups
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ======================
 expr different places
@@ -109,4 +308,28 @@ expr different places
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (binary_number_expr (number) (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)

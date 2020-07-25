@@ -8,7 +8,28 @@ cost empty
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec)
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ===========
 cost amount
@@ -20,7 +41,42 @@ cost amount
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp
+                                (compound_amout
+                                    (number)
+                                    (currency)
+                                )
+                            )
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr
+                            (number)
+                        )
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ==========
 cost date
@@ -32,7 +88,30 @@ cost date
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list (cost_comp (date)))
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ===========
 cost label
@@ -44,7 +123,30 @@ cost label
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list (cost_comp (string)))
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ===========
 cost merge
@@ -56,7 +158,28 @@ cost merge
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec (cost_comp_list (cost_comp)))
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ===================
 cost two component
@@ -72,7 +195,76 @@ cost two component
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                            (cost_comp (date))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (date))
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                            (cost_comp (string))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (string))
+                            (cost_comp (compound_amout (number) (currency)))
+                            )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (date))
+                            (cost_comp (string))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (string))
+                            (cost_comp (date))
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
 
 =====================
 cost three component
@@ -88,7 +280,82 @@ cost three component
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                            (cost_comp (date))
+                            (cost_comp (string))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (date))
+                            (cost_comp (compound_amout (number) (currency)))
+                            (cost_comp (string))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                            (cost_comp (string))
+                            (cost_comp (date))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (date))
+                            (cost_comp (string))
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (string))
+                            (cost_comp (compound_amout (number) (currency)))
+                            (cost_comp (date))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (string))
+                            (cost_comp (date))
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
 
 ================
 cost both costs
@@ -100,7 +367,29 @@ cost both costs
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                )
+            )
+        )
+    )
+)
 
 ================
 cost total cost
@@ -112,7 +401,29 @@ cost total cost
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                )
+            )
+        )
+    )
+)
 
 =======================
 cost total empty total
@@ -124,7 +435,29 @@ cost total empty total
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                )
+            )
+        )
+    )
+)
 
 ==============
 cost neagtive
@@ -136,4 +469,27 @@ cost neagtive
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (unary_number_expr (number)) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                )
+            )
+        )
+    )
+)

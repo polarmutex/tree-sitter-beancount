@@ -8,7 +8,24 @@ no narration
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                )
+            )
+        )
+    )
+)
 
 ==============
 tag then link
@@ -20,7 +37,27 @@ tag then link
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (link)
+            (tag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                )
+            )
+        )
+    )
+)
 
 ==============
 link then tag
@@ -32,7 +69,28 @@ link then tag
 
 ----
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (tag)
+            (link)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (unary_number_expr (number)) (currency))
+                )
+            )
+        )
+    )
+)
+
 
 ============
 zero prices
@@ -45,7 +103,32 @@ zero prices
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (price_annotation (incomplete_amount (number) (currency)))
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (price_annotation (incomplete_amount (number) (currency)))
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (price_annotation (incomplete_amount (number) (currency)))
+                )
+            )
+        )
+    )
+)
 
 ===========
 zero units
@@ -57,7 +140,30 @@ zero units
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                )
+            )
+        )
+    )
+)
 
 ===========
 zero costs
@@ -69,7 +175,30 @@ zero costs
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                    (cost_spec
+                        (cost_comp_list
+                            (cost_comp (compound_amout (number) (currency)))
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount (number) (currency))
+                )
+            )
+        )
+    )
+)
 
 ============
 no postings

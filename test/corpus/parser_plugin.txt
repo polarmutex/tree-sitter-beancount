@@ -6,7 +6,11 @@ plugin "beancount.plugin.unrealized"
 
 ---
 
-(file)
+(file
+    (directive
+        (plugin (string))
+    )
+)
 
 ===================
 plugin with config
@@ -16,7 +20,11 @@ plugin "beancount.plugin.unrealized" "Unrealized"
 
 ---
 
-(file)
+(file
+    (directive
+        (plugin (string) (string))
+    )
+)
 
 =================
 plugin as option
@@ -26,4 +34,8 @@ option "plugin" "beancount.plugin.unrealized"
 
 ---
 
-(file)
+(file
+    (directive
+        (option (string) (string))
+    )
+)

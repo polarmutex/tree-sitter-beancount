@@ -6,9 +6,7 @@ comment
 
 ---
 
-(file
-    (comment)
-)
+(file)
 
 ===========================
 comment before transaction
@@ -22,20 +20,25 @@ comment before transaction
 ---
 
 (file
-    (comment)
     (entry
         (transaction
             (date)
-            (txn)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
-            )
-            (posting
-                (account)
-                (number_expr)
-                (currency)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
             )
         )
     )
@@ -56,20 +59,25 @@ comment after transaction
     (entry
         (transaction
             (date)
-            (txn)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
-            )
-            (posting
-                (account)
-                (number_expr)
-                (currency)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
             )
         )
     )
-    (comment)
 )
 
 ========================
@@ -87,17 +95,22 @@ comment between posting
     (entry
         (transaction
             (date)
-            (txn)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
-            )
-            (comment)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
             )
         )
     )
@@ -117,17 +130,22 @@ comment after posting
     (entry
         (transaction
             (date)
-            (txn)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
-            )
-            (comment)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
             )
         )
     )
@@ -147,17 +165,22 @@ comment adter transaction start
     (entry
         (transaction
             (date)
-            (txn)
-            (comment)
-            (posting
-                (account)
-                (number_expr)
-                (currency)
-            )
-            (posting
-                (account)
-                (number_expr)
-                (currency)
+            (flag)
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr (number))
+                        (currency)
+                    )
+                )
             )
         )
     )

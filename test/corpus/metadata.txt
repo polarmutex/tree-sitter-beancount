@@ -9,7 +9,42 @@ metadata begin
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (metadata
+                (key_value (key) (string))
+            )
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                    (price_annotation
+                        (incomplete_amount
+                            (number)
+                            (currency)
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr
+                            (number)
+                        )
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 ================
 metadata middle
@@ -22,7 +57,42 @@ metadata middle
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                    (price_annotation
+                        (incomplete_amount
+                            (number)
+                            (currency)
+                        )
+                    )
+                    (metadata
+                        (key_value (key) (string))
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr
+                            (number)
+                        )
+                        (currency)
+                    )
+                )
+            )
+        )
+    )
+)
 
 =============
 metadata end
@@ -35,7 +105,42 @@ metadata end
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                    (price_annotation
+                        (incomplete_amount
+                            (number)
+                            (currency)
+                        )
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr
+                            (number)
+                        )
+                        (currency)
+                    )
+                    (metadata
+                        (key_value (key) (string))
+                    )
+                )
+            )
+        )
+    )
+)
 
 ==============
 metadata many
@@ -52,7 +157,50 @@ metadata many
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (metadata
+                (key_value (key) (string))
+            )
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                    (price_annotation
+                        (incomplete_amount
+                            (number)
+                            (currency)
+                        )
+                    )
+                    (metadata
+                        (key_value (key) (string))
+                        (key_value (key) (string))
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr
+                            (number)
+                        )
+                        (currency)
+                    )
+                    (metadata
+                        (key_value (key) (string))
+                        (key_value (key) (string))
+                    )
+                )
+            )
+        )
+    )
+)
 
 ==================
 metadata indented
@@ -70,7 +218,51 @@ metadata indented
 
 ---
 
-(file)
+(file
+    (entry
+        (transaction
+            (date)
+            (flag)
+            (txn_strings (string))
+            (metadata
+                (key_value (key) (string))
+            )
+            (postings
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (number)
+                        (currency)
+                    )
+                    (price_annotation
+                        (incomplete_amount
+                            (number)
+                            (currency)
+                        )
+                    )
+                    (metadata
+                        (key_value (key) (string))
+                        (key_value (key) (string))
+                    )
+                )
+                (posting
+                    (account)
+                    (incomplete_amount
+                        (unary_number_expr
+                            (number)
+                        )
+                        (currency)
+                    )
+                    (metadata
+                        (key_value (key) (string))
+                        (key_value (key) (string))
+                        (key_value (key) (string))
+                    )
+                )
+            )
+        )
+    )
+)
 
 ===============
 metadata other
@@ -97,7 +289,99 @@ metadata other
 
 ---
 
-(file)
+(file
+    (entry
+        (open
+            (date)
+            (account)
+        )
+    )
+    (entry
+        (open
+            (date)
+            (account)
+            (metadata
+                (key_value (key) (string))
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (close
+            (date)
+            (account)
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (note
+            (date)
+            (account)
+            (string)
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (pad
+            (date)
+            (account)
+            (account)
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (balance
+            (date)
+            (account)
+            (amount
+                (number)
+                (currency)
+            )
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (event
+            (date)
+            (string)
+            (string)
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (document
+            (date)
+            (account)
+            (filename (string))
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+    (entry
+        (price
+            (date)
+            (currency)
+            (amount
+                (number)
+                (currency)
+            )
+            (metadata
+                (key_value (key) (string))
+            )
+        )
+    )
+)
 
 ===================
 metadata datatypes
@@ -116,7 +400,24 @@ metadata datatypes
 
 ----
 
-(file)
+(file
+    (entry
+        (date)
+        (flag)
+        (txn_strings (string))
+        (metadata
+            (key_value (key) (string))
+            (key_value (key) (account))
+            (key_value (key) (date))
+            (key_value (key) (currency))
+            (key_value (key) (tag))
+            (key_value (key) (number))
+            (key_value (key) (amount (number) (currency)))
+            (key_value (key) (bool))
+            (key_value (key) (bool))
+        )
+    )
+)
 
 ====================
 metadata key syntax
@@ -130,4 +431,16 @@ metadata key syntax
 
 ---
 
-(file)
+(file
+    (entry
+        (date)
+        (flag)
+        (txn_strings (string))
+        (metadata
+            (key_value (key) (string))
+            (key_value (key) (string))
+            (key_value (key) (string))
+            (key_value (key) (string))
+        )
+    )
+)
