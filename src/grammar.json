@@ -163,7 +163,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[!&?%PSTCURM*#]"
+        "value": "[!&?%PSTCURM*#]|txn"
       }
     },
     "bool": {

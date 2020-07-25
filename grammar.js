@@ -56,7 +56,7 @@ module.exports = grammar({
             ),
 
         date:     $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
-        flag:     $ => token(/[!&?%PSTCURM*#]/),
+        flag:     $ => token(/[!&?%PSTCURM*#]|txn/),
         bool:     $ => token(/TRUE|FALSE/),
         currency: $ => token(/[A-Z][A-Z0-9\'\._\-]{0,22}[A-Z0-9]/),
         tag:      $ => token(/#[A-Za-z0-9\-_/.]+/),
