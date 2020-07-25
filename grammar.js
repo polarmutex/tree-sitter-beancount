@@ -2,6 +2,10 @@ module.exports = grammar({
 
     name: 'beancount',
 
+    extras: $ => [/[ \t\r ]/],
+
+    conflicts: $ => [[$.posting], [$.metadata], [$.tags_and_links]],
+
     rules: {
 
         file: $ => repeat($._declarations),
@@ -9,207 +13,376 @@ module.exports = grammar({
         /*
          * From beancount lexar
         */
-        _indent: $ => /[\t]/,
-        _eol: $ => choice(
-            /[\n]/,
-            $.comment,
-        ),
-        comment: $     => /;+.*/,
-        _pipe: $       => '|',
-        _atat: $       => '@@',
-        _at: $         => '@',
+        _indent:     $ => /\n[ \r\t]+/,
+        _eol:        $ => /[\n]/,
+        _pipe:       $ => '|',
+        _atat:       $ => '@@',
+        _at:         $ => '@',
         _lcurllcurl: $ => '{{',
         _rcurlrcurl: $ => '}}',
-        _lcurl: $      => '{',
-        _rcurl: $      => '}',
-        _equal: $      => '=',
-        _comma: $      => ',',
-        _tilde: $      => '~',
-        _hash: $       => '#',
-        _asterisk: $   => '*',
-        _slash: $      => '/',
-        _colon: $      => ':',
-        _plus: $       => '+',
-        _minus: $      => '-',
-        _lparen: $     => '(',
-        _rparen: $     => ')',
-        flag: $        => /[!]/,
-        _bool: $       => choice('TRUE','FALSE'),
-        _none: $       => 'NULL',
-        date: $        => /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/,
+        _lcurl:      $ => '{',
+        _rcurl:      $ => '}',
+        _equal:      $ => '=',
+        _comma:      $ => ',',
+        _tilde:      $ => '~',
+        _hash:       $ => '#',
+        _asterisk:   $ => '*',
+        _slash:      $ => '/',
+        _colon:      $ => ':',
+        _plus:       $ => '+',
+        _minus:      $ => '-',
+        _lparen:     $ => '(',
+        _rparen:     $ => ')',
+        _none:       $ => 'NULL',
+        _comment:    $ => /;.*/,
 
-        _account_type: $ => choice(
-            'Assets',
-            'Liabilities',
-            'Equity',
-            'Income',
-            'Expenses',
-        ),
-        _account_name: $ => seq(
+        _skipped_lines: $ =>
             choice(
-                /[A-Z0-9]/,
-                $._UTF_8_ONLY,
-            ),
-            repeat(
-                choice(
-                    /[A-Za-z0-9\-]/,
-                    $._UTF_8_ONLY,
-                ),
-            ),
-        ),
-        account: $ => seq(
-            $._account_type,
-            repeat(
                 seq(
-                    ':',
-                    $._account_name
+                    $.flag,
+                    /.*/,
+                    $._eol
                 ),
-            ),
-            seq(
-                ':',
-                $._account_name,
-                /\s/
-            ),
-        ),
-        currency: $ => /[A-Z][A-Z0-9'._-]{0,22}[A-Z0-9]/,
-        _string: $ => seq(
-            '"',
-            repeat(
-                choice(
-                    /[^\\"\n]/,
-                    /\\(.|\n)/
+                seq(
+                    $._colon,
+                    /.*/,
+                    $._eol
                 ),
+                $._eol,
+                seq(
+                    $._comment,
+                    $._eol
+                )
             ),
-            '"',
-        ),
-        _number: $ => /([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/,
-        tag: $ => /#[A-Za-z0-9\-_/.]+/,
-        link: $ => /\^[A-Za-z0-9\-_/.]+/,
-        key: $ => /[a-z][a-zA-Z0-9\-_]+:/,
 
-        /*
-         * From beancount grammar
-        */
-        txn: $ => choice(
-            'txn',
-            $.flag,
-            $._asterisk,
-            $._hash,
-        ),
+        date:     $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
+        flag:     $ => token(/[!&?%PSTCURM*#]/),
+        bool:     $ => token(/TRUE|FALSE/),
+        currency: $ => token(/[A-Z][A-Z0-9\'\._\-]{0,22}[A-Z0-9]/),
+        tag:      $ => token(/#[A-Za-z0-9\-_/.]+/),
+        link:     $ => token(/\^[A-Za-z0-9\-_/.]+/),
+        key:      $ => token(/[a-z][a-zA-Z0-9\-_]+:/),
+        number:   $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
+        string:   $ => token(/"[^"]*"/),
 
-        number_expr: $ => choice(
-            $._number,
-            prec.right(2,
+        account: $ =>
+            token(
                 seq(
-                    $._number,
-                    $._plus,
-                    $._number,
+                    /[A-Z]|[^\x00-\x7F]/,
+                    repeat(/[A-Za-z0-9\-]|[^\x00-\x7F]/),
+                    repeat1(
+                        seq(
+                            ":",
+                            /[A-Z0-9]|[^\x00-\x7F]/,
+                            repeat(/[A-Za-z0-9\-]|[^\x00-\x7F]/),
+                        ),
+                    ),
                 ),
             ),
-            prec.right(2,
-                seq(
-                    $._number,
-                    $._minus,
-                    $._number,
-                ),
+
+        _number_expr: $ =>
+            choice(
+                $.number,
+                $._paren__number_expr,
+                $.unary_number_expr,
+                $.binary_number_expr,
             ),
-            prec.right(2,
-                seq(
-                    $._number,
-                    $._asterisk,
-                    $._number,
-                ),
-            ),
-            prec.right(1,
-                seq(
-                    $._number,
-                    $._slash,
-                    $._number,
-                ),
-            ),
-            prec.left(1,
-                seq(
-                    $._minus,
-                    $._number,
-                ),
-            ),
-            prec.left(1,
-                seq(
-                    $._plus,
-                    $._number,
-                ),
-            ),
+        _paren__number_expr: $ =>
             seq(
                 $._lparen,
-                $._number,
+                $.number,
                 $._rparen,
             ),
-        ),
-
-        txn_strings: $ => seq(
-            $._string,
-            optional(
-                $._string
-            ),
-        ),
-
-        tags_links: $ => choice(
-            $.link,
-            $.tag,
-        ),
-
-        transaction: $ => seq(
-            $.date,
-            $.txn,
-            optional($.txn_strings),
-            optional(
-                $.tags_links
-            ),
-            $._eol,
-            prec.left(2,
-                repeat1(
-                    $._posting_or_kv_list,
+        unary_number_expr: $ =>
+            prec(3,
+                choice(
+                    seq(
+                        $._minus,
+                        $.number,
+                    ),
+                    seq(
+                        $._plus,
+                        $.number,
+                    ),
                 ),
             ),
-        ),
+        binary_number_expr: $ =>
+            prec(3,
+                choice(
+                    prec.left(1,
+                        seq( $.number, $._plus, $.number ),
+                    ),
+                    prec.left(1,
+                        seq( $.number, $._minus, $.number ),
+                    ),
+                    prec.left(2,
+                        seq( $.number, $._asterisk, $.number ),
+                    ),
+                    prec.left(2,
+                        seq( $.number, $._slash, $.number ),
+                    ),
+                ),
+            ),
+
+        /*
+         * POSTING
+        */
+        cost_spec: $ =>
+            choice(
+                seq(
+                    $._lcurl,
+                    field("cost_comp_list",  optional($.cost_comp_list)),
+                    $._rcurl
+                ),
+                seq(
+                    $._lcurllcurl,
+                    field("cost_comp_list",  optional($.cost_comp_list)),
+                    $._rcurlrcurl
+                ),
+            ),
+        cost_comp_list: $ =>
+            seq(
+                $.cost_comp,
+                repeat(
+                    seq(
+                        $._comma,
+                        $.cost_comp
+                    )
+                )
+            ),
+        cost_comp: $ =>
+            choice(
+                $.compound_amout,
+                $.date,
+                $.string,
+                $._asterisk
+            ),
+        compound_amout: $ =>
+            choice(
+                seq(
+                    field("per", optional($._number_expr)),
+                    field("currency", $.currency)
+                ),
+                seq(
+                    field("per", $._number_expr),
+                    field("currency", optional($.currency))
+                ),
+                seq(
+                    field("per", optional($._number_expr)),
+                    $._hash,
+                    field("total", optional($._number_expr)),
+                    field("currency", $.currency)
+                ),
+            ),
+        incomplete_amount: $ =>
+            seq(
+                $._number_expr,
+                $.currency
+            ),
+        price_annotation: $ =>
+            choice(
+                seq(
+                    $._atat,
+                    $.incomplete_amount
+                ),
+                seq(
+                    $._at,
+                    $.incomplete_amount
+                )
+            ),
+        posting: $ =>
+            seq(
+                $._indent,
+                field("flag", optional($.flag)),
+                field("account", $.account),
+                field("amount", optional($.incomplete_amount)),
+                field("cost_spec", optional($.cost_spec)),
+                field("price_annotation", optional($.price_annotation)),
+                optional($._comment),
+                field("metadata", optional($.metadata))
+            ),
+        postings: $ =>
+            repeat1(
+                choice(
+                    $.posting,
+                    seq(
+                        $._indent,
+                        $._comment
+                    )
+                )
+            ),
+
+        /*
+         * Metadata
+        */
+        _key_value_value: $ =>
+            choice(
+                $.string,
+                $.account,
+                $.date,
+                $.currency,
+                $.tag,
+                $.bool,
+                $._number_expr,
+                $.amount
+            ),
+        key_value: $ =>
+            prec.left(seq(
+                $.key,
+                optional($._key_value_value),
+            )),
+        metadata: $ =>
+            repeat1(
+                seq(
+                    $._indent,
+                    $.key_value
+                )
+            ),
+
+        txn_strings: $ =>
+            seq(
+                $.string,
+                optional($.string),
+            ),
+
+        tags_and_links: $ =>
+            repeat1(
+                seq(
+                    optional($._indent),
+                    choice(
+                        $.link,
+                        $.tag,
+                    ),
+                ),
+            ),
+
+        transaction: $ =>
+            seq(
+                field("date", $.date),
+                field("flag", $.flag),
+                field("txn_strings", optional($.txn_strings)),
+                field("tags_and_links", optional($.tags_and_links)),
+                field("metadata", optional($.metadata)),
+                field("postings", $.postings),
+                $._eol
+            ),
+
+        /*
+         * Directives
+         */
+        balance: $ =>
+            seq(
+                field("date", $.date),
+                'balance',
+                field("account", $.account),
+                field("amount",
+                    choice(
+                        $.amount,
+                        $.amount_with_tolerance,
+                    )
+                ),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        close: $ =>
+            seq(
+                field("date", $.date),
+                'close',
+                field("account", $.account),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        commodity: $ =>
+            seq(
+                field("date", $.date),
+                'commodity',
+                field("currency", $.currency),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        custom: $ =>
+            seq(
+                field("date", $.date),
+                'custom',
+                field("name", $.string),
+                repeat(
+                    choice(
+                        $.string, $.date, $.bool, $.amount, $._number_expr, $.account
+                    ),
+                ),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        document: $=>
+            seq(
+                field("date", $.date),
+                'document',
+                field("account", $.account),
+                field("filename", $.filename),
+                field("tags_and_links", optional($.tags_and_links)),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        event: $ =>
+            seq(
+                field("date", $.date),
+                'event',
+                field("type", $.string),
+                field("desc", $.string),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        note: $ =>
+            seq(
+                field("date", $.date),
+                'note',
+                field("account", $.account),
+                field("note", $.string),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        open: $ =>
+            seq(
+                field("date", $.date),
+                'open',
+                field("account", $.account),
+                field("currencies", repeat($.currency_list)),
+                field("booking", optional($.opt_booking)),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        pad: $ =>
+            seq(
+                field("date", $.date),
+                'pad',
+                field("account", $.account),
+                field("from_account", $.account),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        price: $ =>
+            seq(
+                field("date", $.date),
+                'price',
+                field("currency", $.currency),
+                field("amount", $.amount),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
+        query: $ =>
+            seq(
+                field("date", $.date),
+                'query',
+                field("name", $.string),
+                field("query", $.string),
+                field("metadata", optional($.metadata)),
+                $._eol,
+            ),
 
         optflag: $ => choice(
             $._asterisk,
             $._hash,
             $.flag,
-        ),
-
-        posting: $ => choice(
-            seq(
-                optional($.optflag),
-                $.account,
-                $.number_expr,
-                $.currency,
-                optional($.cost_spec),
-            ),
-            seq(
-                optional($.optflag),
-                $.account,
-                optional($.number_expr),
-                optional($.currency),
-                optional($.cost_spec),
-                $._at,
-                optional($.number_expr),
-                optional($.currency),
-            ),
-            seq(
-                optional($.optflag),
-                $.account,
-                optional($.number_expr),
-                optional($.currency),
-                optional($.cost_spec),
-                $._atat,
-                optional($.number_expr),
-                optional($.currency),
-            ),
-            seq(
-                $.account
-            ),
         ),
 
         key_value_line: $ => seq(
@@ -219,27 +392,35 @@ module.exports = grammar({
         ),
 
         key_value_value: $ => choice(
-            $._string,
+            $.string,
             $.account,
             $.date,
             $.currency,
             $.tag,
-            $._bool,
-            $.number_expr,
+            $.bool,
+            $._number_expr,
             $.amount
         ),
 
-        _posting_or_kv_list: $ => choice(
-            $.comment,
-            $.tags_links,
-            $.key_value_line,
-            $.posting,
+        _posting_or_kv_list: $ => repeat1(
+            choice(
+                $._comment,
+                $.tags_and_links,
+                $.key_value_line,
+                $.posting,
+            ),
         ),
 
-        _currency_list: $ => seq(
-            $.currency,
-            optional($._comma),
-        ),
+        currency_list: $ =>
+            seq(
+                $.currency,
+                repeat(
+                    seq(
+                        $._comma,
+                        $.currency
+                    )
+                )
+            ),
 
         pushtag: $ => seq(
             'pushtag',
@@ -265,212 +446,25 @@ module.exports = grammar({
             $._eol
         ),
 
-        open: $ => choice(
-            prec(1,
-                seq(
-                    $.date,
-                    'open',
-                    $.account,
-                    repeat($._currency_list),
-                    optional($.opt_booking),
-                    $._eol,
-                    repeat($.key_value_line),
-                )
-            ),
+
+
+        opt_booking: $ => $.string,
+
+        amount: $ =>
             seq(
-                $.date,
-                'open',
-                $.account,
+                $._number_expr,
+                $.currency
             ),
-        ),
 
-
-        opt_booking: $ => $._string,
-
-        close: $ => choice(
-            prec(1,
-                seq(
-                    $.date,
-                    'close',
-                    $.account,
-                    $._eol,
-                    repeat($.key_value_line),
-                ),
-            ),
+        amount_with_tolerance: $ =>
             seq(
-                $.date,
-                'close',
-                $.account,
-            ),
-        ),
-
-        commodity: $ => seq(
-            $.date,
-            'commodity',
-            $.currency,
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        pad: $ => choice(
-            prec(1,
-                seq(
-                    $.date,
-                    'pad',
-                    $.account,
-                    $.account,
-                    $._eol,
-                    repeat($.key_value_line),
-                ),
-            ),
-            seq(
-                $.date,
-                'pad',
-                $.account,
-                $.account,
-            ),
-        ),
-
-        balance: $ => seq(
-            $.date,
-            'balance',
-            $.account,
-            $.amount_tolerance,
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        amount: $ => seq(
-            $.number_expr,
-            $.currency
-        ),
-
-        amount_tolerance: $ => choice(
-            seq(
-                $.number_expr,
-                $.currency,
-            ),
-            seq(
-                $.number_expr,
+                $._number_expr,
                 $._tilde,
-                $.number_expr,
+                $._number_expr,
                 $.currency
             ),
-        ),
 
-        compound_amout: $ => choice(
-            seq(
-                optional($.number_expr),
-                $.currency
-            ),
-            seq(
-                $.number_expr,
-                optional($.currency)
-            ),
-            seq(
-                optional($.number_expr),
-                $._hash,
-                optional($.number_expr),
-                $.currency
-            ),
-        ),
-
-        cost_spec: $ => choice(
-            seq(
-                $._lcurl,
-                $.cost_comp_list,
-                $._rcurl
-            ),
-            seq(
-                $._lcurllcurl,
-                $.cost_comp_list,
-                $._rcurlrcurl
-            ),
-        ),
-
-        cost_comp_list: $ => choice(
-            $.cost_comp,
-            seq(
-                $.cost_comp_list,
-                $._comma,
-                $.cost_comp
-            ),
-        ),
-
-        cost_comp: $ => choice(
-            $.compound_amout,
-            $.date,
-            $._string,
-            $._asterisk,
-        ),
-
-        price: $ => seq(
-            $.date,
-            'price',
-            $.currency,
-            $.amount,
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        event: $ => seq(
-            $.date,
-            'event',
-            $._string,
-            $._string,
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        query: $ => seq(
-            $.date,
-            'query',
-            $._string,
-            $._string,
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        note: $ => seq(
-            $.date,
-            'note',
-            $.account,
-            $._string,
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        filename: $ => $._string,
-
-        document: $=> seq(
-            $.date,
-            'document',
-            $.account,
-            $.filename,
-            optional($.tags_links),
-            $._eol,
-            repeat($.key_value_line),
-        ),
-
-        custom_value: $ => prec(5,
-            choice(
-                $._string,
-                $.date,
-                $._bool,
-                $.amount,
-                $.number_expr,
-                $.account
-            ),
-        ),
-
-        custom: $ => seq(
-            $.date,
-            'custom',
-            $._string,
-            repeat($.custom_value),
-            $._eol,
-            repeat($.key_value_line),
-        ),
+        filename: $ => $.string,
 
         entry: $ => choice(
             $.transaction,
@@ -489,20 +483,20 @@ module.exports = grammar({
 
         option: $ => seq(
             'option',
-            $._string,
-            $._string,
+            $.string,
+            $.string,
             $._eol,
         ),
 
         include: $ => seq(
             'include',
-            $._string,
+            $.string,
             $._eol,
         ),
 
         plugin: $ => seq(
             'plugin',
-            $._string,
+            $.string,
             $._eol,
         ),
 
@@ -519,7 +513,7 @@ module.exports = grammar({
         _declarations: $ => choice(
             $.directive,
             $.entry,
-            $.comment
+            $._skipped_lines,
             // $.error TODO look into
         ),
 
