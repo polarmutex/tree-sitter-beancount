@@ -466,7 +466,7 @@ module.exports = grammar({
 
         filename: $ => $.string,
 
-        entry: $ => choice(
+        _entry: $ => choice(
             $.transaction,
             $.balance,
             $.open,
@@ -500,7 +500,7 @@ module.exports = grammar({
             $._eol,
         ),
 
-        directive: $ => choice(
+        _directive: $ => choice(
             $.pushtag,
             $.poptag,
             $.pushmeta,
@@ -511,8 +511,8 @@ module.exports = grammar({
         ),
 
         _declarations: $ => choice(
-            $.directive,
-            $.entry,
+            $._directive,
+            $._entry,
             $._skipped_lines,
             // $.error TODO look into
         ),

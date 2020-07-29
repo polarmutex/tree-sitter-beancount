@@ -1900,7 +1900,7 @@
       "type": "SYMBOL",
       "name": "string"
     },
-    "entry": {
+    "_entry": {
       "type": "CHOICE",
       "members": [
         {
@@ -2008,7 +2008,7 @@
         }
       ]
     },
-    "directive": {
+    "_directive": {
       "type": "CHOICE",
       "members": [
         {
@@ -2046,11 +2046,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "directive"
+          "name": "_directive"
         },
         {
           "type": "SYMBOL",
-          "name": "entry"
+          "name": "_entry"
         },
         {
           "type": "SYMBOL",

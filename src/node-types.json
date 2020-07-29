@@ -386,45 +386,6 @@
     }
   },
   {
-    "type": "directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "option",
-          "named": true
-        },
-        {
-          "type": "plugin",
-          "named": true
-        },
-        {
-          "type": "popmeta",
-          "named": true
-        },
-        {
-          "type": "poptag",
-          "named": true
-        },
-        {
-          "type": "pushmeta",
-          "named": true
-        },
-        {
-          "type": "pushtag",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "document",
     "named": true,
     "fields": {
@@ -478,65 +439,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "entry",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "balance",
-          "named": true
-        },
-        {
-          "type": "close",
-          "named": true
-        },
-        {
-          "type": "commodity",
-          "named": true
-        },
-        {
-          "type": "custom",
-          "named": true
-        },
-        {
-          "type": "document",
-          "named": true
-        },
-        {
-          "type": "event",
-          "named": true
-        },
-        {
-          "type": "note",
-          "named": true
-        },
-        {
-          "type": "open",
-          "named": true
-        },
-        {
-          "type": "pad",
-          "named": true
-        },
-        {
-          "type": "price",
-          "named": true
-        },
-        {
-          "type": "query",
-          "named": true
-        },
-        {
-          "type": "transaction",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -594,15 +496,83 @@
       "required": false,
       "types": [
         {
-          "type": "directive",
+          "type": "balance",
           "named": true
         },
         {
-          "type": "entry",
+          "type": "close",
+          "named": true
+        },
+        {
+          "type": "commodity",
+          "named": true
+        },
+        {
+          "type": "custom",
+          "named": true
+        },
+        {
+          "type": "document",
+          "named": true
+        },
+        {
+          "type": "event",
           "named": true
         },
         {
           "type": "flag",
+          "named": true
+        },
+        {
+          "type": "include",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
+          "type": "open",
+          "named": true
+        },
+        {
+          "type": "option",
+          "named": true
+        },
+        {
+          "type": "pad",
+          "named": true
+        },
+        {
+          "type": "plugin",
+          "named": true
+        },
+        {
+          "type": "popmeta",
+          "named": true
+        },
+        {
+          "type": "poptag",
+          "named": true
+        },
+        {
+          "type": "price",
+          "named": true
+        },
+        {
+          "type": "pushmeta",
+          "named": true
+        },
+        {
+          "type": "pushtag",
+          "named": true
+        },
+        {
+          "type": "query",
+          "named": true
+        },
+        {
+          "type": "transaction",
           "named": true
         }
       ]
