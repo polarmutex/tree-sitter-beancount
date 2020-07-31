@@ -112,7 +112,23 @@
       "required": true,
       "types": [
         {
+          "type": "binary_number_expr",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        },
+        {
+          "type": "unary_number_expr",
           "named": true
         }
       ]
@@ -191,7 +207,7 @@
     }
   },
   {
-    "type": "compound_amout",
+    "type": "compound_amount",
     "named": true,
     "fields": {
       "currency": {
@@ -251,7 +267,7 @@
       "required": false,
       "types": [
         {
-          "type": "compound_amout",
+          "type": "compound_amount",
           "named": true
         },
         {
@@ -294,6 +310,28 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lcurl",
+          "named": true
+        },
+        {
+          "type": "lcurllcurl",
+          "named": true
+        },
+        {
+          "type": "rcurl",
+          "named": true
+        },
+        {
+          "type": "rcurlrcurl",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1130,9 +1168,17 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "at",
+          "named": true
+        },
+        {
+          "type": "atat",
+          "named": true
+        },
         {
           "type": "incomplete_amount",
           "named": true
@@ -1321,11 +1367,27 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
+          "type": "binary_number_expr",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        },
+        {
+          "type": "unary_number_expr",
           "named": true
         }
       ]
@@ -1333,6 +1395,14 @@
   },
   {
     "type": "account",
+    "named": true
+  },
+  {
+    "type": "at",
+    "named": true
+  },
+  {
+    "type": "atat",
     "named": true
   },
   {
@@ -1384,7 +1454,19 @@
     "named": true
   },
   {
+    "type": "lcurl",
+    "named": true
+  },
+  {
+    "type": "lcurllcurl",
+    "named": true
+  },
+  {
     "type": "link",
+    "named": true
+  },
+  {
+    "type": "minus",
     "named": true
   },
   {
@@ -1412,6 +1494,10 @@
     "named": false
   },
   {
+    "type": "plus",
+    "named": true
+  },
+  {
     "type": "popmeta",
     "named": false
   },
@@ -1434,6 +1520,14 @@
   {
     "type": "query",
     "named": false
+  },
+  {
+    "type": "rcurl",
+    "named": true
+  },
+  {
+    "type": "rcurlrcurl",
+    "named": true
   },
   {
     "type": "string",

@@ -16,12 +16,12 @@ module.exports = grammar({
         _indent:     $ => /\n[ \r\t]+/,
         _eol:        $ => /[\n]/,
         _pipe:       $ => '|',
-        _atat:       $ => '@@',
-        _at:         $ => '@',
-        _lcurllcurl: $ => '{{',
-        _rcurlrcurl: $ => '}}',
-        _lcurl:      $ => '{',
-        _rcurl:      $ => '}',
+        atat:       $ => '@@',
+        at:         $ => '@',
+        lcurllcurl: $ => '{{',
+        rcurlrcurl: $ => '}}',
+        lcurl:      $ => '{',
+        rcurl:      $ => '}',
         _equal:      $ => '=',
         _comma:      $ => ',',
         _tilde:      $ => '~',
@@ -29,8 +29,8 @@ module.exports = grammar({
         _asterisk:   $ => '*',
         _slash:      $ => '/',
         _colon:      $ => ':',
-        _plus:       $ => '+',
-        _minus:      $ => '-',
+        plus:       $ => '+',
+        minus:      $ => '-',
         _lparen:     $ => '(',
         _rparen:     $ => ')',
         _none:       $ => 'NULL',
@@ -90,19 +90,19 @@ module.exports = grammar({
         _paren__number_expr: $ =>
             seq(
                 $._lparen,
-                $.number,
+                $._number_expr,
                 $._rparen,
             ),
         unary_number_expr: $ =>
             prec(3,
                 choice(
                     seq(
-                        $._minus,
-                        $.number,
+                        $.minus,
+                        $._number_expr,
                     ),
                     seq(
-                        $._plus,
-                        $.number,
+                        $.plus,
+                        $._number_expr,
                     ),
                 ),
             ),
@@ -110,16 +110,16 @@ module.exports = grammar({
             prec(3,
                 choice(
                     prec.left(1,
-                        seq( $.number, $._plus, $.number ),
+                        seq( $._number_expr, $.plus, $._number_expr ),
                     ),
                     prec.left(1,
-                        seq( $.number, $._minus, $.number ),
+                        seq( $._number_expr, $.minus, $._number_expr ),
                     ),
                     prec.left(2,
-                        seq( $.number, $._asterisk, $.number ),
+                        seq( $._number_expr, $._asterisk, $._number_expr ),
                     ),
                     prec.left(2,
-                        seq( $.number, $._slash, $.number ),
+                        seq( $._number_expr, $._slash, $._number_expr ),
                     ),
                 ),
             ),
@@ -130,14 +130,14 @@ module.exports = grammar({
         cost_spec: $ =>
             choice(
                 seq(
-                    $._lcurl,
+                    $.lcurl,
                     field("cost_comp_list",  optional($.cost_comp_list)),
-                    $._rcurl
+                    $.rcurl
                 ),
                 seq(
-                    $._lcurllcurl,
+                    $.lcurllcurl,
                     field("cost_comp_list",  optional($.cost_comp_list)),
-                    $._rcurlrcurl
+                    $.rcurlrcurl
                 ),
             ),
         cost_comp_list: $ =>
@@ -152,12 +152,12 @@ module.exports = grammar({
             ),
         cost_comp: $ =>
             choice(
-                $.compound_amout,
+                $.compound_amount,
                 $.date,
                 $.string,
                 $._asterisk
             ),
-        compound_amout: $ =>
+        compound_amount: $ =>
             choice(
                 seq(
                     field("per", optional($._number_expr)),
@@ -182,11 +182,11 @@ module.exports = grammar({
         price_annotation: $ =>
             choice(
                 seq(
-                    $._atat,
+                    $.atat,
                     $.incomplete_amount
                 ),
                 seq(
-                    $._at,
+                    $.at,
                     $.incomplete_amount
                 )
             ),
