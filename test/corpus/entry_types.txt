@@ -9,27 +9,25 @@ entry transaction one string
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (number)
                     )
+                    (currency)
                 )
             )
         )
@@ -47,27 +45,25 @@ entry transaction two string
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string) (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string) (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (number)
                     )
+                    (currency)
                 )
             )
         )
@@ -85,27 +81,25 @@ entry transaction with txn keyword
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (number)
                     )
+                    (currency)
                 )
             )
         )
@@ -121,14 +115,12 @@ entry balance
 ---
 
 (file
-    (entry
-        (balance
-            (date)
-            (account)
-            (amount
-                (number)
-                (currency)
-            )
+    (balance
+        (date)
+        (account)
+        (amount
+            (number)
+            (currency)
         )
     )
 )
@@ -142,15 +134,13 @@ entry balnce 2
 ---
 
 (file
-    (entry
-        (balance
-            (date)
-            (account)
-            (amount_with_tolerance
-                (number)
-                (number)
-                (currency)
-            )
+    (balance
+        (date)
+        (account)
+        (amount_with_tolerance
+            (number)
+            (number)
+            (currency)
         )
     )
 )
@@ -164,11 +154,9 @@ entry open
 ---
 
 (file
-    (entry
-        (open
-            (date)
-            (account)
-        )
+    (open
+        (date)
+        (account)
     )
 )
 
@@ -181,13 +169,11 @@ entry open 2
 ---
 
 (file
-    (entry
-        (open
-            (date)
-            (account)
-            (currency_list
-                (currency)
-            )
+    (open
+        (date)
+        (account)
+        (currency_list
+            (currency)
         )
     )
 )
@@ -201,15 +187,13 @@ entry open 3
 ---
 
 (file
-    (entry
-        (open
-            (date)
-            (account)
-            (currency_list
-                (currency)
-                (currency)
-                (currency)
-            )
+    (open
+        (date)
+        (account)
+        (currency_list
+            (currency)
+            (currency)
+            (currency)
         )
     )
 )
@@ -223,15 +207,13 @@ entry open 4
 ---
 
 (file
-    (entry
-        (open
-            (date)
-            (account)
-            (currency_list
-                (currency)
-            )
-            (opt_booking (string))
+    (open
+        (date)
+        (account)
+        (currency_list
+            (currency)
         )
+        (opt_booking (string))
     )
 )
 
@@ -244,12 +226,10 @@ entry open 5
 ---
 
 (file
-    (entry
-        (open
-            (date)
-            (account)
-            (opt_booking (string))
-        )
+    (open
+        (date)
+        (account)
+        (opt_booking (string))
     )
 )
 
@@ -262,11 +242,9 @@ entry close
 ---
 
 (file
-    (entry
-        (close
-            (date)
-            (account)
-        )
+    (close
+        (date)
+        (account)
     )
 )
 
@@ -279,11 +257,9 @@ entry commodity
 ---
 
 (file
-    (entry
-        (commodity
-            (date)
-            (currency)
-        )
+    (commodity
+        (date)
+        (currency)
     )
 )
 
@@ -296,12 +272,10 @@ entry pad
 ---
 
 (file
-    (entry
-        (pad
-            (date)
-            (account)
-            (account)
-        )
+    (pad
+        (date)
+        (account)
+        (account)
     )
 )
 
@@ -314,12 +288,10 @@ entry event
 ---
 
 (file
-    (entry
-        (event
-            (date)
-            (string)
-            (string)
-        )
+    (event
+        (date)
+        (string)
+        (string)
     )
 )
 
@@ -332,12 +304,10 @@ entry event empty
 ---
 
 (file
-    (entry
-        (event
-            (date)
-            (string)
-            (string)
-        )
+    (event
+        (date)
+        (string)
+        (string)
     )
 )
 
@@ -350,12 +320,10 @@ entry query
 ---
 
 (file
-    (entry
-        (query
-            (date)
-            (string)
-            (string)
-        )
+    (query
+        (date)
+        (string)
+        (string)
     )
 )
 
@@ -368,12 +336,10 @@ entry note
 ---
 
 (file
-    (entry
-        (note
-            (date)
-            (account)
-            (string)
-        )
+    (note
+        (date)
+        (account)
+        (string)
     )
 )
 
@@ -386,12 +352,10 @@ entry document
 ---
 
 (file
-    (entry
-        (document
-            (date)
-            (account)
-            (filename (string))
-        )
+    (document
+        (date)
+        (account)
+        (filename (string))
     )
 )
 
@@ -404,14 +368,12 @@ entry price
 ---
 
 (file
-    (entry
-        (price
-            (date)
+    (price
+        (date)
+        (currency)
+        (amount
+            (number)
             (currency)
-            (amount
-                (number)
-                (currency)
-            )
         )
     )
 )
@@ -425,19 +387,17 @@ entry custom
 ---
 
 (file
-    (entry
-        (custom
-            (date)
-            (string)
-            (string)
-            (date)
-            (bool)
-            (amount
-                (number)
-                (currency)
-            )
+    (custom
+        (date)
+        (string)
+        (string)
+        (date)
+        (bool)
+        (amount
             (number)
+            (currency)
         )
+        (number)
     )
 )
 

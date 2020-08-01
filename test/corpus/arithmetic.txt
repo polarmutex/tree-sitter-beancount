@@ -9,25 +9,23 @@ expr add
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (plus) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (plus) (number))
+                    (currency)
                 )
             )
         )
@@ -45,25 +43,23 @@ expr sub
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (minus) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -81,25 +77,23 @@ expr mult
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (asterick) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (asterick) (number))
+                    (currency)
                 )
             )
         )
@@ -117,25 +111,23 @@ expr div
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (slash) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (slash) (number))
+                    (currency)
                 )
             )
         )
@@ -154,32 +146,30 @@ expr neg
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -197,25 +187,23 @@ expr pos
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (plus) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -235,25 +223,53 @@ expr predence
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr
+                        (binary_number_expr (number) (asterick) (number))
+                        (plus)
+                        (number)
                     )
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr
+                        (binary_number_expr (number) (plus) (number))
+                        (asterick)
+                        (number)
                     )
+                    (currency)
+                )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr
+                        (binary_number_expr (number) (plus) (minus) (number))
+                        (asterick)
+                        (number)
+                    )
+                    (currency)
+                )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr
+                        (binary_number_expr (number) (plus) (minus) (number))
+                        (asterick)
+                        (number)
+                    )
+                    (currency)
                 )
             )
         )
@@ -271,25 +287,31 @@ expr groups
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr
+                        (binary_number_expr (number) (plus) (minus) (number))
+                        (asterick)
+                        (number)
                     )
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr
+                        (number)
+                        (asterick)
+                        (binary_number_expr (number) (plus) (minus) (number))
                     )
+                    (currency)
                 )
             )
         )
@@ -309,25 +331,23 @@ expr different places
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (number))
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (binary_number_expr (number) (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (binary_number_expr (number) (number))
+                    (currency)
                 )
             )
         )

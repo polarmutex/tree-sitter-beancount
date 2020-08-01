@@ -11,20 +11,18 @@ and why not another!"
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount (number) (currency))
-                )
-                (posting
-                    (account)
-                    (incomplete_amount (unary_number_expr (number)) (currency))
-                )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount (number) (currency))
+            )
+            (posting
+                (account)
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
             )
         )
     )

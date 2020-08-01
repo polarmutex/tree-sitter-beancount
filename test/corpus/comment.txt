@@ -20,24 +20,22 @@ comment before transaction
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -56,24 +54,22 @@ comment after transaction
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -92,24 +88,22 @@ comment between posting
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -127,24 +121,22 @@ comment after posting
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )
@@ -162,24 +154,22 @@ comment adter transaction start
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr (number))
-                        (currency)
-                    )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr (minus) (number))
+                    (currency)
                 )
             )
         )

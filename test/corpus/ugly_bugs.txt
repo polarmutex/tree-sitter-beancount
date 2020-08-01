@@ -12,12 +12,10 @@ extra whitespace
 ---
 
 (file
-    (entry
-        (note
-            (date)
-            (account)
-            (string)
-        )
+    (note
+        (date)
+        (account)
+        (string)
     )
 )
 
@@ -34,22 +32,20 @@ extra whitespace transaction
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (number)
-                        (currency)
-                    )
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
                 )
-                (posting
-                    (account)
-                )
+            )
+            (posting
+                (account)
             )
         )
     )

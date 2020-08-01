@@ -10,36 +10,35 @@ metadata begin
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (metadata
-                (key_value (key) (string))
-            )
-            (postings
-                (posting
-                    (account)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (metadata
+            (key_value (key) (string))
+        )
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
+                )
+                (price_annotation
+                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
-                    (price_annotation
-                        (incomplete_amount
-                            (number)
-                            (currency)
-                        )
-                    )
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (minus) (number)
                     )
+                    (currency)
                 )
             )
         )
@@ -58,36 +57,35 @@ metadata middle
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
+                )
+                (price_annotation
+                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
-                    (price_annotation
-                        (incomplete_amount
-                            (number)
-                            (currency)
-                        )
-                    )
-                    (metadata
-                        (key_value (key) (string))
-                    )
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+                (metadata
+                    (key_value (key) (string))
+                )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (minus) (number)
                     )
+                    (currency)
                 )
             )
         )
@@ -106,36 +104,35 @@ metadata end
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (postings
-                (posting
-                    (account)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
+                )
+                (price_annotation
+                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
-                    (price_annotation
-                        (incomplete_amount
-                            (number)
-                            (currency)
-                        )
-                    )
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (minus) (number)
                     )
-                    (metadata
-                        (key_value (key) (string))
-                    )
+                    (currency)
+                )
+                (metadata
+                    (key_value (key) (string))
                 )
             )
         )
@@ -158,44 +155,43 @@ metadata many
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (metadata
-                (key_value (key) (string))
-            )
-            (postings
-                (posting
-                    (account)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (metadata
+            (key_value (key) (string))
+        )
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
+                )
+                (price_annotation
+                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
-                    (price_annotation
-                        (incomplete_amount
-                            (number)
-                            (currency)
-                        )
-                    )
-                    (metadata
-                        (key_value (key) (string))
-                        (key_value (key) (string))
-                    )
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+                (metadata
+                    (key_value (key) (string))
+                    (key_value (key) (string))
+                )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (minus) (number)
                     )
-                    (metadata
-                        (key_value (key) (string))
-                        (key_value (key) (string))
-                    )
+                    (currency)
+                )
+                (metadata
+                    (key_value (key) (string))
+                    (key_value (key) (string))
                 )
             )
         )
@@ -219,45 +215,44 @@ metadata indented
 ---
 
 (file
-    (entry
-        (transaction
-            (date)
-            (flag)
-            (txn_strings (string))
-            (metadata
-                (key_value (key) (string))
-            )
-            (postings
-                (posting
-                    (account)
+    (transaction
+        (date)
+        (flag)
+        (txn_strings (string))
+        (metadata
+            (key_value (key) (string))
+        )
+        (postings
+            (posting
+                (account)
+                (incomplete_amount
+                    (number)
+                    (currency)
+                )
+                (price_annotation
+                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
-                    (price_annotation
-                        (incomplete_amount
-                            (number)
-                            (currency)
-                        )
-                    )
-                    (metadata
-                        (key_value (key) (string))
-                        (key_value (key) (string))
-                    )
                 )
-                (posting
-                    (account)
-                    (incomplete_amount
-                        (unary_number_expr
-                            (number)
-                        )
-                        (currency)
+                (metadata
+                    (key_value (key) (string))
+                    (key_value (key) (string))
+                )
+            )
+            (posting
+                (account)
+                (incomplete_amount
+                    (unary_number_expr
+                        (minus) (number)
                     )
-                    (metadata
-                        (key_value (key) (string))
-                        (key_value (key) (string))
-                        (key_value (key) (string))
-                    )
+                    (currency)
+                )
+                (metadata
+                    (key_value (key) (string))
+                    (key_value (key) (string))
+                    (key_value (key) (string))
                 )
             )
         )
@@ -290,95 +285,77 @@ metadata other
 ---
 
 (file
-    (entry
-        (open
-            (date)
-            (account)
+    (open
+        (date)
+        (account)
+    )
+    (open
+        (date)
+        (account)
+        (metadata
+            (key_value (key) (string))
+            (key_value (key) (string))
         )
     )
-    (entry
-        (open
-            (date)
-            (account)
-            (metadata
-                (key_value (key) (string))
-                (key_value (key) (string))
-            )
+    (close
+        (date)
+        (account)
+        (metadata
+            (key_value (key) (string))
         )
     )
-    (entry
-        (close
-            (date)
-            (account)
-            (metadata
-                (key_value (key) (string))
-            )
+    (note
+        (date)
+        (account)
+        (string)
+        (metadata
+            (key_value (key) (string))
         )
     )
-    (entry
-        (note
-            (date)
-            (account)
-            (string)
-            (metadata
-                (key_value (key) (string))
-            )
+    (pad
+        (date)
+        (account)
+        (account)
+        (metadata
+            (key_value (key) (string))
         )
     )
-    (entry
-        (pad
-            (date)
-            (account)
-            (account)
-            (metadata
-                (key_value (key) (string))
-            )
-        )
-    )
-    (entry
-        (balance
-            (date)
-            (account)
-            (amount
-                (number)
-                (currency)
-            )
-            (metadata
-                (key_value (key) (string))
-            )
-        )
-    )
-    (entry
-        (event
-            (date)
-            (string)
-            (string)
-            (metadata
-                (key_value (key) (string))
-            )
-        )
-    )
-    (entry
-        (document
-            (date)
-            (account)
-            (filename (string))
-            (metadata
-                (key_value (key) (string))
-            )
-        )
-    )
-    (entry
-        (price
-            (date)
+    (balance
+        (date)
+        (account)
+        (amount
+            (number)
             (currency)
-            (amount
-                (number)
-                (currency)
-            )
-            (metadata
-                (key_value (key) (string))
-            )
+        )
+        (metadata
+            (key_value (key) (string))
+        )
+    )
+    (event
+        (date)
+        (string)
+        (string)
+        (metadata
+            (key_value (key) (string))
+        )
+    )
+    (document
+        (date)
+        (account)
+        (filename (string))
+        (metadata
+            (key_value (key) (string))
+        )
+    )
+    (price
+        (date)
+        (currency)
+        (amount
+            (number)
+            (currency)
+        )
+        (metadata
+            (key_value (key) (string))
         )
     )
 )
@@ -401,7 +378,7 @@ metadata datatypes
 ----
 
 (file
-    (entry
+    (transaction
         (date)
         (flag)
         (txn_strings (string))
@@ -432,7 +409,7 @@ metadata key syntax
 ---
 
 (file
-    (entry
+    (transaction
         (date)
         (flag)
         (txn_strings (string))
