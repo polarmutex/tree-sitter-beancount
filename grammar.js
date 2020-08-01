@@ -26,8 +26,8 @@ module.exports = grammar({
         _comma:      $ => ',',
         _tilde:      $ => '~',
         _hash:       $ => '#',
-        _asterisk:   $ => '*',
-        _slash:      $ => '/',
+        asterisk:   $ => '*',
+        slash:      $ => '/',
         _colon:      $ => ':',
         plus:       $ => '+',
         minus:      $ => '-',
@@ -116,10 +116,10 @@ module.exports = grammar({
                         seq( $._number_expr, $.minus, $._number_expr ),
                     ),
                     prec.left(2,
-                        seq( $._number_expr, $._asterisk, $._number_expr ),
+                        seq( $._number_expr, $.asterisk, $._number_expr ),
                     ),
                     prec.left(2,
-                        seq( $._number_expr, $._slash, $._number_expr ),
+                        seq( $._number_expr, $.slash, $._number_expr ),
                     ),
                 ),
             ),
@@ -155,7 +155,7 @@ module.exports = grammar({
                 $.compound_amount,
                 $.date,
                 $.string,
-                $._asterisk
+                $.asterisk
             ),
         compound_amount: $ =>
             choice(
@@ -380,7 +380,7 @@ module.exports = grammar({
             ),
 
         optflag: $ => choice(
-            $._asterisk,
+            $.asterisk,
             $._hash,
             $.flag,
         ),

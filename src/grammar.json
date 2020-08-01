@@ -60,11 +60,11 @@
       "type": "STRING",
       "value": "#"
     },
-    "_asterisk": {
+    "asterisk": {
       "type": "STRING",
       "value": "*"
     },
-    "_slash": {
+    "slash": {
       "type": "STRING",
       "value": "/"
     },
@@ -390,7 +390,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_asterisk"
+                  "name": "asterisk"
                 },
                 {
                   "type": "SYMBOL",
@@ -411,7 +411,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_slash"
+                  "name": "slash"
                 },
                 {
                   "type": "SYMBOL",
@@ -528,7 +528,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_asterisk"
+          "name": "asterisk"
         }
       ]
     },
@@ -1675,7 +1675,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_asterisk"
+          "name": "asterisk"
         },
         {
           "type": "SYMBOL",

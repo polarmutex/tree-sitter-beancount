@@ -112,6 +112,10 @@
       "required": true,
       "types": [
         {
+          "type": "asterisk",
+          "named": true
+        },
+        {
           "type": "binary_number_expr",
           "named": true
         },
@@ -125,6 +129,10 @@
         },
         {
           "type": "plus",
+          "named": true
+        },
+        {
+          "type": "slash",
           "named": true
         },
         {
@@ -264,8 +272,12 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "asterisk",
+          "named": true
+        },
         {
           "type": "compound_amount",
           "named": true
@@ -1398,6 +1410,10 @@
     "named": true
   },
   {
+    "type": "asterisk",
+    "named": true
+  },
+  {
     "type": "at",
     "named": true
   },
@@ -1527,6 +1543,10 @@
   },
   {
     "type": "rcurlrcurl",
+    "named": true
+  },
+  {
+    "type": "slash",
     "named": true
   },
   {
