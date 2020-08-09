@@ -92,7 +92,7 @@
       "type": "STRING",
       "value": "NULL"
     },
-    "_comment": {
+    "comment": {
       "type": "PATTERN",
       "value": ";.*"
     },
@@ -142,7 +142,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_comment"
+              "name": "comment"
             },
             {
               "type": "SYMBOL",
@@ -772,7 +772,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_comment"
+              "name": "comment"
             },
             {
               "type": "BLANK"
@@ -815,7 +815,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_comment"
+                "name": "comment"
               }
             ]
           }
@@ -1748,7 +1748,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_comment"
+            "name": "comment"
           },
           {
             "type": "SYMBOL",

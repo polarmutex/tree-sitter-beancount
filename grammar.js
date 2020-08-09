@@ -34,7 +34,7 @@ module.exports = grammar({
         _lparen:     $ => '(',
         _rparen:     $ => ')',
         _none:       $ => 'NULL',
-        _comment:    $ => /;.*/,
+        comment:    $ => /;.*/,
 
         _skipped_lines: $ =>
             choice(
@@ -50,7 +50,7 @@ module.exports = grammar({
                 ),
                 $._eol,
                 seq(
-                    $._comment,
+                    $.comment,
                     $._eol
                 )
             ),
@@ -198,7 +198,7 @@ module.exports = grammar({
                 field("amount", optional($.incomplete_amount)),
                 field("cost_spec", optional($.cost_spec)),
                 field("price_annotation", optional($.price_annotation)),
-                optional($._comment),
+                optional($.comment),
                 field("metadata", optional($.metadata))
             ),
         postings: $ =>
@@ -207,7 +207,7 @@ module.exports = grammar({
                     $.posting,
                     seq(
                         $._indent,
-                        $._comment
+                        $.comment
                     )
                 )
             ),
@@ -404,7 +404,7 @@ module.exports = grammar({
 
         _posting_or_kv_list: $ => repeat1(
             choice(
-                $._comment,
+                $.comment,
                 $.tags_and_links,
                 $.key_value_line,
                 $.posting,

@@ -554,6 +554,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "commodity",
           "named": true
         },
@@ -1123,6 +1127,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1131,8 +1145,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "posting",
           "named": true
@@ -1443,6 +1461,10 @@
   {
     "type": "close",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "commodity",
