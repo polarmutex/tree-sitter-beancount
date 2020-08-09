@@ -1961,12 +1961,20 @@
           "value": "option"
         },
         {
-          "type": "SYMBOL",
-          "name": "string"
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "string"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "string"
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "string"
+          }
         },
         {
           "type": "SYMBOL",
