@@ -483,8 +483,8 @@ module.exports = grammar({
 
         option: $ => seq(
             'option',
-            $.string,
-            $.string,
+            field("key", $.string),
+            field("value",$.string),
             $._eol,
         ),
 
