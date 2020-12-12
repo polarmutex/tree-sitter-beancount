@@ -27,7 +27,7 @@
     }
   },
   {
-    "type": "amount_with_tolerance",
+    "type": "amount_tolerance",
     "named": true,
     "fields": {},
     "children": {
@@ -72,11 +72,7 @@
         "required": true,
         "types": [
           {
-            "type": "amount",
-            "named": true
-          },
-          {
-            "type": "amount_with_tolerance",
+            "type": "amount_tolerance",
             "named": true
           }
         ]
@@ -90,17 +86,21 @@
             "named": true
           }
         ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "BALANCE",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -165,17 +165,21 @@
             "named": true
           }
         ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "CLOSE",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -201,17 +205,21 @@
             "named": true
           }
         ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMODITY",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -365,22 +373,22 @@
     "type": "custom",
     "named": true,
     "fields": {
+      "custom_value_list": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "custom_value_list",
+            "named": true
+          }
+        ]
+      },
       "date": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "date",
-            "named": true
-          }
-        ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
             "named": true
           }
         ]
@@ -398,7 +406,26 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
+      "types": [
+        {
+          "type": "CUSTOM",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "custom_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
       "types": [
         {
           "type": "account",
@@ -430,6 +457,21 @@
         },
         {
           "type": "unary_number_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "custom_value_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "custom_value",
           "named": true
         }
       ]
@@ -469,26 +511,30 @@
           }
         ]
       },
-      "metadata": {
+      "tags_links": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "metadata",
-            "named": true
-          }
-        ]
-      },
-      "tags_and_links": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "tags_and_links",
+            "type": "tags_links",
             "named": true
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "DOCUMENT",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -515,16 +561,6 @@
           }
         ]
       },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
-      },
       "type": {
         "multiple": false,
         "required": true,
@@ -535,6 +571,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "EVENT",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -652,9 +702,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "INCLUDE",
+          "named": true
+        },
         {
           "type": "string",
           "named": true
@@ -749,81 +803,26 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "key",
-          "named": true
-        },
-        {
-          "type": "key_value_value",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "key_value_value",
-    "named": true,
-    "fields": {},
-    "children": {
       "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "account",
-          "named": true
-        },
-        {
-          "type": "amount",
-          "named": true
-        },
-        {
-          "type": "binary_number_expr",
-          "named": true
-        },
-        {
-          "type": "bool",
-          "named": true
-        },
-        {
-          "type": "currency",
-          "named": true
-        },
-        {
-          "type": "date",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "tag",
-          "named": true
-        },
-        {
-          "type": "unary_number_expr",
+          "type": "key_value",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "metadata",
+    "type": "key_value_list",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "key_value",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -853,16 +852,6 @@
           }
         ]
       },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
-      },
       "note": {
         "multiple": false,
         "required": true,
@@ -873,6 +862,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "NOTE",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -885,16 +888,6 @@
         "types": [
           {
             "type": "account",
-            "named": true
-          }
-        ]
-      },
-      "booking": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "opt_booking",
             "named": true
           }
         ]
@@ -919,16 +912,30 @@
           }
         ]
       },
-      "metadata": {
+      "opt_booking": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "metadata",
+            "type": "opt_booking",
             "named": true
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "OPEN",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -941,6 +948,25 @@
       "types": [
         {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "optflag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "asterisk",
+          "named": true
+        },
+        {
+          "type": "flag",
           "named": true
         }
       ]
@@ -970,6 +996,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "OPTION",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1005,17 +1041,21 @@
             "named": true
           }
         ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "PAD",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1023,9 +1063,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "PLUGIN",
+          "named": true
+        },
         {
           "type": "string",
           "named": true
@@ -1038,11 +1082,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "POPMETA",
+          "named": true
+        },
+        {
+          "type": "key",
           "named": true
         }
       ]
@@ -1053,9 +1101,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "POPTAG",
+          "named": true
+        },
         {
           "type": "tag",
           "named": true
@@ -1097,22 +1149,12 @@
           }
         ]
       },
-      "flag": {
+      "optflag": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "flag",
-            "named": true
-          }
-        ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
+            "type": "optflag",
             "named": true
           }
         ]
@@ -1133,26 +1175,34 @@
       "required": false,
       "types": [
         {
-          "type": "comment",
+          "type": "at",
+          "named": true
+        },
+        {
+          "type": "atat",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "postings",
+    "type": "posting_or_kv_list",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "comment",
+          "type": "key_value_line",
           "named": true
         },
         {
           "type": "posting",
+          "named": true
+        },
+        {
+          "type": "tags_links",
           "named": true
         }
       ]
@@ -1191,17 +1241,21 @@
             "named": true
           }
         ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "PRICE",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1209,17 +1263,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "at",
-          "named": true
-        },
-        {
-          "type": "atat",
-          "named": true
-        },
         {
           "type": "incomplete_amount",
           "named": true
@@ -1232,11 +1278,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "PUSHMETA",
+          "named": true
+        },
+        {
+          "type": "key_value",
           "named": true
         }
       ]
@@ -1247,9 +1297,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "PUSHTAG",
+          "named": true
+        },
         {
           "type": "tag",
           "named": true
@@ -1267,16 +1321,6 @@
         "types": [
           {
             "type": "date",
-            "named": true
-          }
-        ]
-      },
-      "metadata": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "metadata",
             "named": true
           }
         ]
@@ -1301,10 +1345,24 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "QUERY",
+          "named": true
+        },
+        {
+          "type": "key_value_list",
+          "named": true
+        }
+      ]
     }
   },
   {
-    "type": "tags_and_links",
+    "type": "tags_links",
     "named": true,
     "fields": {},
     "children": {
@@ -1336,42 +1394,32 @@
           }
         ]
       },
-      "flag": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "flag",
-            "named": true
-          }
-        ]
-      },
-      "metadata": {
+      "posting_or_kv_list": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "metadata",
+            "type": "posting_or_kv_list",
             "named": true
           }
         ]
       },
-      "postings": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "postings",
-            "named": true
-          }
-        ]
-      },
-      "tags_and_links": {
+      "tags_links": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "tags_and_links",
+            "type": "tags_links",
+            "named": true
+          }
+        ]
+      },
+      "txn": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "txn",
             "named": true
           }
         ]
@@ -1386,6 +1434,29 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "txn",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "TXN",
+          "named": true
+        },
+        {
+          "type": "asterisk",
+          "named": true
+        },
+        {
+          "type": "flag",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1435,6 +1506,82 @@
     }
   },
   {
+    "type": "BALANCE",
+    "named": true
+  },
+  {
+    "type": "CLOSE",
+    "named": true
+  },
+  {
+    "type": "COMMODITY",
+    "named": true
+  },
+  {
+    "type": "CUSTOM",
+    "named": true
+  },
+  {
+    "type": "DOCUMENT",
+    "named": true
+  },
+  {
+    "type": "EVENT",
+    "named": true
+  },
+  {
+    "type": "INCLUDE",
+    "named": true
+  },
+  {
+    "type": "NOTE",
+    "named": true
+  },
+  {
+    "type": "OPEN",
+    "named": true
+  },
+  {
+    "type": "OPTION",
+    "named": true
+  },
+  {
+    "type": "PAD",
+    "named": true
+  },
+  {
+    "type": "PLUGIN",
+    "named": true
+  },
+  {
+    "type": "POPMETA",
+    "named": true
+  },
+  {
+    "type": "POPTAG",
+    "named": true
+  },
+  {
+    "type": "PRICE",
+    "named": true
+  },
+  {
+    "type": "PUSHMETA",
+    "named": true
+  },
+  {
+    "type": "PUSHTAG",
+    "named": true
+  },
+  {
+    "type": "QUERY",
+    "named": true
+  },
+  {
+    "type": "TXN",
+    "named": true
+  },
+  {
     "type": "account",
     "named": true
   },
@@ -1451,52 +1598,24 @@
     "named": true
   },
   {
-    "type": "balance",
-    "named": false
-  },
-  {
     "type": "bool",
     "named": true
-  },
-  {
-    "type": "close",
-    "named": false
   },
   {
     "type": "comment",
     "named": true
   },
   {
-    "type": "commodity",
-    "named": false
-  },
-  {
     "type": "currency",
     "named": true
-  },
-  {
-    "type": "custom",
-    "named": false
   },
   {
     "type": "date",
     "named": true
   },
   {
-    "type": "document",
-    "named": false
-  },
-  {
-    "type": "event",
-    "named": false
-  },
-  {
     "type": "flag",
     "named": true
-  },
-  {
-    "type": "include",
-    "named": false
   },
   {
     "type": "key",
@@ -1519,56 +1638,12 @@
     "named": true
   },
   {
-    "type": "note",
-    "named": false
-  },
-  {
     "type": "number",
     "named": true
   },
   {
-    "type": "open",
-    "named": false
-  },
-  {
-    "type": "option",
-    "named": false
-  },
-  {
-    "type": "pad",
-    "named": false
-  },
-  {
-    "type": "plugin",
-    "named": false
-  },
-  {
     "type": "plus",
     "named": true
-  },
-  {
-    "type": "popmeta",
-    "named": false
-  },
-  {
-    "type": "poptag",
-    "named": false
-  },
-  {
-    "type": "price",
-    "named": false
-  },
-  {
-    "type": "pushmeta",
-    "named": false
-  },
-  {
-    "type": "pushtag",
-    "named": false
-  },
-  {
-    "type": "query",
-    "named": false
   },
   {
     "type": "rcurl",

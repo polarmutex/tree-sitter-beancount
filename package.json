@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-beancount",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "a tree-sitter parser for the beancount syntax",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,6 @@
     "nan": "^2.14.1"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.16.9"
+    "tree-sitter-cli": "^0.17.3"
   }
 }
