@@ -2,9 +2,10 @@
   "name": "tree-sitter-beancount",
   "version": "2.0.0",
   "description": "a tree-sitter parser for the beancount syntax",
-  "main": "index.js",
+  "main": "bindings/node",
   "scripts": {
-    "tree-sitter": "tree-sitter"
+    "build": "tree-sitter generate",
+    "test": "tree-sitter test"
   },
   "repository": {
     "type": "git",
@@ -24,10 +25,6 @@
     "nan": "^2.14.1"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.17.3"
-  },
-  "scripts": {
-    "build": "tree-sitter generate",
-    "test": "tree-sitter test"
+    "tree-sitter-cli": "^0.19.0"
   }
 }
