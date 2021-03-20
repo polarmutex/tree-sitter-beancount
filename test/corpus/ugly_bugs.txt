@@ -14,9 +14,11 @@ extra whitespace
 (file
     (note
         (date)
+        (NOTE)
         (account)
         (string)
     )
+    (comment)
 )
 
 =============================
@@ -34,9 +36,9 @@ extra whitespace transaction
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -49,4 +51,5 @@ extra whitespace transaction
             )
         )
     )
+    (comment)
 )

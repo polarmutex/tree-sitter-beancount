@@ -12,20 +12,20 @@ metadata begin
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (metadata
-            (key_value (key) (string))
-        )
-        (postings
+        (posting_or_kv_list
+            (key_value_line
+                (key_value (key) (string))
+            )
             (posting
                 (account)
                 (incomplete_amount
                     (number)
                     (currency)
                 )
+                (atat)
                 (price_annotation
-                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
@@ -59,25 +59,25 @@ metadata middle
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
                     (number)
                     (currency)
                 )
+                (atat)
                 (price_annotation
-                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
                 )
-                (metadata
-                    (key_value (key) (string))
-                )
+            )
+            (key_value_line
+                (key_value (key) (string))
             )
             (posting
                 (account)
@@ -106,17 +106,17 @@ metadata end
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
                     (number)
                     (currency)
                 )
+                (atat)
                 (price_annotation
-                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
@@ -131,9 +131,9 @@ metadata end
                     )
                     (currency)
                 )
-                (metadata
-                    (key_value (key) (string))
-                )
+            )
+            (key_value_line
+                (key_value (key) (string))
             )
         )
     )
@@ -157,29 +157,31 @@ metadata many
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (metadata
-            (key_value (key) (string))
-        )
-        (postings
+        (posting_or_kv_list
+            (key_value_line
+                (key_value (key) (string))
+            )
             (posting
                 (account)
                 (incomplete_amount
                     (number)
                     (currency)
                 )
+                (atat)
                 (price_annotation
-                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
                 )
-                (metadata
-                    (key_value (key) (string))
-                    (key_value (key) (string))
-                )
+            )
+            (key_value_line
+                (key_value (key) (string))
+            )
+            (key_value_line
+                (key_value (key) (string))
             )
             (posting
                 (account)
@@ -189,10 +191,12 @@ metadata many
                     )
                     (currency)
                 )
-                (metadata
-                    (key_value (key) (string))
-                    (key_value (key) (string))
-                )
+            )
+            (key_value_line
+                (key_value (key) (string))
+            )
+            (key_value_line
+                (key_value (key) (string))
             )
         )
     )
@@ -217,29 +221,29 @@ metadata indented
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (metadata
-            (key_value (key) (string))
-        )
-        (postings
+        (posting_or_kv_list
+            (key_value_line (key_value (key) (string)))
             (posting
                 (account)
                 (incomplete_amount
                     (number)
                     (currency)
                 )
+                (atat)
                 (price_annotation
-                    (atat)
                     (incomplete_amount
                         (number)
                         (currency)
                     )
                 )
-                (metadata
-                    (key_value (key) (string))
-                    (key_value (key) (string))
-                )
+            )
+            (key_value_line
+                (key_value (key) (string))
+            )
+            (key_value_line
+                (key_value (key) (string))
             )
             (posting
                 (account)
@@ -249,11 +253,15 @@ metadata indented
                     )
                     (currency)
                 )
-                (metadata
-                    (key_value (key) (string))
-                    (key_value (key) (string))
-                    (key_value (key) (string))
-                )
+            )
+            (key_value_line
+                (key_value (key) (string))
+            )
+            (key_value_line
+                (key_value (key) (string))
+            )
+            (key_value_line
+                (key_value (key) (string))
             )
         )
     )
@@ -287,75 +295,84 @@ metadata other
 (file
     (open
         (date)
+        (OPEN)
         (account)
     )
     (open
         (date)
+        (OPEN)
         (account)
-        (metadata
-            (key_value (key) (string))
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
+            (key_value_line (key_value (key) (string)))
         )
     )
     (close
         (date)
+        (CLOSE)
         (account)
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
     (note
         (date)
+        (NOTE)
         (account)
         (string)
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
     (pad
         (date)
+        (PAD)
         (account)
         (account)
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
     (balance
         (date)
+        (BALANCE)
         (account)
-        (amount
+        (amount_tolerance
             (number)
             (currency)
         )
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
     (event
         (date)
+        (EVENT)
         (string)
         (string)
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
     (document
         (date)
+        (DOCUMENT)
         (account)
         (filename (string))
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
     (price
         (date)
+        (PRICE)
         (currency)
         (amount
             (number)
             (currency)
         )
-        (metadata
-            (key_value (key) (string))
+        (key_value_list
+            (key_value_line (key_value (key) (string)))
         )
     )
 )
@@ -380,18 +397,18 @@ metadata datatypes
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (metadata
-            (key_value (key) (string))
-            (key_value (key) (account))
-            (key_value (key) (date))
-            (key_value (key) (currency))
-            (key_value (key) (tag))
-            (key_value (key) (number))
-            (key_value (key) (amount (number) (currency)))
-            (key_value (key) (bool))
-            (key_value (key) (bool))
+        (posting_or_kv_list
+            (key_value_line (key_value (key) (string)))
+            (key_value_line (key_value (key) (account)))
+            (key_value_line (key_value (key) (date)))
+            (key_value_line (key_value (key) (currency)))
+            (key_value_line (key_value (key) (tag)))
+            (key_value_line (key_value (key) (number)))
+            (key_value_line (key_value (key) (amount (number) (currency))))
+            (key_value_line (key_value (key) (bool)))
+            (key_value_line (key_value (key) (bool)))
         )
     )
 )
@@ -411,13 +428,13 @@ metadata key syntax
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (metadata
-            (key_value (key) (string))
-            (key_value (key) (string))
-            (key_value (key) (string))
-            (key_value (key) (string))
+        (posting_or_kv_list
+            (key_value_line (key_value (key) (string)))
+            (key_value_line (key_value (key) (string)))
+            (key_value_line (key_value (key) (string)))
+            (key_value_line (key_value (key) (string)))
         )
     )
 )

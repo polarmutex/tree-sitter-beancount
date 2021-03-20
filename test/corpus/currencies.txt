@@ -12,27 +12,32 @@ parse currencies
 (file
     (open
         (date)
+        (OPEN)
         (account)
         (currency_list (currency))
     )
     (open
         (date)
-        (account)
-        (currency_list (currency))))
-    (open
-        (date)
+        (OPEN)
         (account)
         (currency_list (currency))
     )
     (open
         (date)
+        (OPEN)
+        (account)
+        (currency_list (currency))
+    )
+    (open
+        (date)
+        (OPEN)
         (account)
         (currency_list (currency))
     )
 )
 
 ================================
-diffent cost and price currency
+different cost and price currency
 ================================
 
 2018-03-21 * "Convert MR to KrisFlyer"
@@ -44,17 +49,20 @@ diffent cost and price currency
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (unary_number_expr (minus) (number)) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
+                (at)
                 (price_annotation
                     (incomplete_amount (number) (currency))
                 )
