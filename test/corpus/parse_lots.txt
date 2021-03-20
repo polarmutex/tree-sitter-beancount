@@ -11,12 +11,12 @@ cost empty
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
-                (cost_spec)
+                (cost_spec (lcurl) (rcurl))
             )
             (posting
                 (account)
@@ -42,8 +42,8 @@ cost amount
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -51,14 +51,16 @@ cost amount
                     (currency)
                 )
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp
-                            (compound_amout
+                            (compound_amount
                                 (number)
                                 (currency)
                             )
                         )
                     )
+                    (rcurl)
                 )
             )
             (posting
@@ -87,13 +89,15 @@ cost date
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list (cost_comp (date)))
+                    (rcurl)
                 )
             )
             (posting
@@ -120,13 +124,15 @@ cost label
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list (cost_comp (string)))
+                    (rcurl)
                 )
             )
             (posting
@@ -153,12 +159,12 @@ cost merge
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
-                (cost_spec (cost_comp_list (cost_comp)))
+                (cost_spec (lcurl) (cost_comp_list (cost_comp (asterisk))) (rcurl))
             )
             (posting
                 (account)
@@ -188,66 +194,78 @@ cost two component
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                         (cost_comp (date))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (date))
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                         (cost_comp (string))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (string))
-                        (cost_comp (compound_amout (number) (currency)))
-                        )
+                        (cost_comp (compound_amount (number) (currency)))
+                    )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (date))
                         (cost_comp (string))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (string))
                         (cost_comp (date))
                     )
+                    (rcurl)
                 )
             )
         )
@@ -271,72 +289,84 @@ cost three component
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                         (cost_comp (date))
                         (cost_comp (string))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (date))
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                         (cost_comp (string))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                         (cost_comp (string))
                         (cost_comp (date))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (date))
                         (cost_comp (string))
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (string))
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                         (cost_comp (date))
                     )
+                    (rcurl)
                 )
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
                         (cost_comp (string))
                         (cost_comp (date))
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
         )
@@ -356,15 +386,17 @@ cost both costs
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (number) (currency)))
+                        (cost_comp (compound_amount (number) (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
@@ -388,15 +420,17 @@ cost total cost
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
@@ -420,15 +454,17 @@ cost total empty total
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
@@ -440,7 +476,7 @@ cost total empty total
 )
 
 ==============
-cost neagtive
+cost negative
 ==============
 
 2013-05-18 * ""
@@ -452,16 +488,18 @@ cost neagtive
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (unary_number_expr (minus) (number)) (currency))
                 (cost_spec
-                    (cost_comp_list
-                        (cost_comp (compound_amout (unary_number_expr (number)) (currency)))
+                    (lcurl)
+                   (cost_comp_list
+                        (cost_comp (compound_amount (unary_number_expr (minus) (number)) (currency)))
                     )
+                   (rcurl)
                 )
             )
             (posting

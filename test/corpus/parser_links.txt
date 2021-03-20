@@ -11,10 +11,10 @@ links
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (tags_and_links (link))
-        (postings
+        (tags_links (link))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -25,7 +25,7 @@ links
             (posting
                 (account)
                 (incomplete_amount
-                    (unary_number_expr (number))
+                    (unary_number_expr (minus) (number))
                     (currency)
                 )
             )

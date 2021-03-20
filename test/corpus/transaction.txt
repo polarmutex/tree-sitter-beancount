@@ -11,15 +11,15 @@ no narration
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
             )
             (posting
                 (account)
-                (incomplete_amount (unary_number_expr (number)) (currency))
+                (incomplete_amount (unary_number_expr (minus)(number)) (currency))
             )
         )
     )
@@ -38,18 +38,17 @@ tag then link
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (link)
-        (tag)
-        (postings
+        (tags_links (link) (tag))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
             )
             (posting
                 (account)
-                (incomplete_amount (unary_number_expr (number)) (currency))
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
             )
         )
     )
@@ -68,18 +67,17 @@ link then tag
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (tag)
-        (link)
-        (postings
+        (tags_links (tag) (link))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
             )
             (posting
                 (account)
-                (incomplete_amount (unary_number_expr (number)) (currency))
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
             )
         )
     )
@@ -100,22 +98,25 @@ zero prices
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
+                (at)
                 (price_annotation (incomplete_amount (number) (currency)))
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
+                (at)
                 (price_annotation (incomplete_amount (number) (currency)))
             )
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
+                (at)
                 (price_annotation (incomplete_amount (number) (currency)))
             )
         )
@@ -135,16 +136,18 @@ zero units
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
@@ -168,16 +171,18 @@ zero costs
 (file
     (transaction
         (date)
-        (flag)
+        (txn (asterisk))
         (txn_strings (string))
-        (postings
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
                 (cost_spec
+                    (lcurl)
                     (cost_comp_list
-                        (cost_comp (compound_amout (number) (currency)))
+                        (cost_comp (compound_amount (number) (currency)))
                     )
+                    (rcurl)
                 )
             )
             (posting
@@ -196,7 +201,14 @@ no postings
 
 ---
 
-(file)
+(file
+    (transaction
+        (date)
+        (txn (asterisk))
+        (txn_strings (string))
+        (tags_links (link))
+    )
+ )
 
 ======================
 tags after first line
@@ -214,4 +226,21 @@ tags after first line
 
 ---
 
-(file)
+(file
+    (transaction
+        (date)
+        (txn (asterisk))
+        (txn_strings (string))
+        (tags_links (tag) (link))
+        (posting_or_kv_list
+            (tags_links (tag) (tag))
+            (tags_links (link) (tag))
+            (tags_links (tag) (link))
+            (tags_links (link) (link))
+            (tags_links (tag))
+            (tags_links (link))
+            (posting (account) (incomplete_amount (number) (currency)))
+            (posting (account) (incomplete_amount (unary_number_expr (minus) (number)) (currency)))
+        )
+    )
+ )
