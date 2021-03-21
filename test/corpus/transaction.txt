@@ -19,7 +19,7 @@ no narration
             )
             (posting
                 (account)
-                (incomplete_amount (unary_number_expr (minus)(number)) (currency))
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
             )
         )
     )

@@ -57,8 +57,8 @@ comment after transaction
 (file
     (transaction
         (date)
-        (flag)
-        (postings
+        (txn (asterisk))
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -73,9 +73,9 @@ comment after transaction
                     (currency)
                 )
             )
+            (comment)
         )
     )
-    (comment)
 )
 
 ========================
@@ -93,7 +93,7 @@ comment between posting
     (transaction
         (date)
         (txn (asterisk))
-        (posting_kv_list
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -127,13 +127,14 @@ comment after posting
     (transaction
         (date)
         (txn (asterisk))
-        (posting_kv_list
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
                     (number)
                     (currency)
                 )
+                (comment)
             )
             (posting
                 (account)
@@ -147,7 +148,7 @@ comment after posting
 )
 
 ================================
-comment adter transaction start
+comment after transaction start
 ================================
 
 2015-06-07 *     ; Hi
@@ -160,7 +161,8 @@ comment adter transaction start
     (transaction
         (date)
         (txn (asterisk))
-        (posting_kv_list
+        (comment)
+        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount

@@ -77,6 +77,16 @@
           }
         ]
       },
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "date": {
         "multiple": false,
         "required": true,
@@ -156,6 +166,16 @@
           }
         ]
       },
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "date": {
         "multiple": false,
         "required": true,
@@ -186,6 +206,16 @@
     "type": "commodity",
     "named": true,
     "fields": {
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "currency": {
         "multiple": false,
         "required": true,
@@ -892,6 +922,16 @@
           }
         ]
       },
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "currencies": {
         "multiple": true,
         "required": false,
@@ -1022,6 +1062,16 @@
           }
         ]
       },
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "date": {
         "multiple": false,
         "required": true,
@@ -1139,6 +1189,16 @@
           }
         ]
       },
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "cost_spec": {
         "multiple": false,
         "required": false,
@@ -1193,6 +1253,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "key_value_line",
           "named": true
@@ -1384,6 +1448,16 @@
     "type": "transaction",
     "named": true,
     "fields": {
+      "comment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
       "date": {
         "multiple": false,
         "required": true,
