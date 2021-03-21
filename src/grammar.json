@@ -223,7 +223,7 @@
       "type": "TOKEN",
       "content": {
         "type": "STRING",
-        "value": "docuemnt"
+        "value": "document"
       }
     },
     "QUERY": {
@@ -244,7 +244,7 @@
       "type": "TOKEN",
       "content": {
         "type": "STRING",
-        "value": "pusgtag"
+        "value": "pushtag"
       }
     },
     "POPTAG": {

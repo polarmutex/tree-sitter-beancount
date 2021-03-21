@@ -3351,35 +3351,34 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'c') ADVANCE(57);
       END_STATE();
     case 41:
-      if (lookahead == 'g') ADVANCE(58);
-      if (lookahead == 'h') ADVANCE(59);
+      if (lookahead == 'h') ADVANCE(58);
       END_STATE();
     case 42:
-      if (lookahead == 'r') ADVANCE(60);
+      if (lookahead == 'r') ADVANCE(59);
       END_STATE();
     case 43:
       ACCEPT_TOKEN(sym_TXN);
       END_STATE();
     case 44:
-      if (lookahead == 'n') ADVANCE(61);
+      if (lookahead == 'n') ADVANCE(60);
       END_STATE();
     case 45:
-      if (lookahead == 'e') ADVANCE(62);
+      if (lookahead == 'e') ADVANCE(61);
       END_STATE();
     case 46:
-      if (lookahead == 'o') ADVANCE(63);
+      if (lookahead == 'o') ADVANCE(62);
       END_STATE();
     case 47:
-      if (lookahead == 'o') ADVANCE(64);
+      if (lookahead == 'o') ADVANCE(63);
       END_STATE();
     case 48:
-      if (lookahead == 'e') ADVANCE(65);
+      if (lookahead == 'm') ADVANCE(64);
       END_STATE();
     case 49:
-      if (lookahead == 't') ADVANCE(66);
+      if (lookahead == 't') ADVANCE(65);
       END_STATE();
     case 50:
-      if (lookahead == 'u') ADVANCE(67);
+      if (lookahead == 'u') ADVANCE(66);
       END_STATE();
     case 51:
       ACCEPT_TOKEN(sym_NOTE);
@@ -3388,138 +3387,136 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(sym_OPEN);
       END_STATE();
     case 53:
-      if (lookahead == 'o') ADVANCE(68);
+      if (lookahead == 'o') ADVANCE(67);
       END_STATE();
     case 54:
-      if (lookahead == 'i') ADVANCE(69);
+      if (lookahead == 'i') ADVANCE(68);
       END_STATE();
     case 55:
-      if (lookahead == 'e') ADVANCE(70);
+      if (lookahead == 'e') ADVANCE(69);
       END_STATE();
     case 56:
-      if (lookahead == 'a') ADVANCE(71);
+      if (lookahead == 'a') ADVANCE(70);
       END_STATE();
     case 57:
-      if (lookahead == 'e') ADVANCE(72);
+      if (lookahead == 'e') ADVANCE(71);
       END_STATE();
     case 58:
+      if (lookahead == 'm') ADVANCE(72);
       if (lookahead == 't') ADVANCE(73);
       END_STATE();
     case 59:
-      if (lookahead == 'm') ADVANCE(74);
+      if (lookahead == 'y') ADVANCE(74);
       END_STATE();
     case 60:
-      if (lookahead == 'y') ADVANCE(75);
+      if (lookahead == 'c') ADVANCE(75);
       END_STATE();
     case 61:
-      if (lookahead == 'c') ADVANCE(76);
-      END_STATE();
-    case 62:
       ACCEPT_TOKEN(sym_CLOSE);
       END_STATE();
+    case 62:
+      if (lookahead == 'd') ADVANCE(76);
+      END_STATE();
     case 63:
-      if (lookahead == 'd') ADVANCE(77);
+      if (lookahead == 'm') ADVANCE(77);
       END_STATE();
     case 64:
-      if (lookahead == 'm') ADVANCE(78);
+      if (lookahead == 'e') ADVANCE(78);
       END_STATE();
     case 65:
-      if (lookahead == 'm') ADVANCE(79);
-      END_STATE();
-    case 66:
       ACCEPT_TOKEN(sym_EVENT);
       END_STATE();
+    case 66:
+      if (lookahead == 'd') ADVANCE(79);
+      END_STATE();
     case 67:
-      if (lookahead == 'd') ADVANCE(80);
+      if (lookahead == 'n') ADVANCE(80);
       END_STATE();
     case 68:
       if (lookahead == 'n') ADVANCE(81);
       END_STATE();
     case 69:
-      if (lookahead == 'n') ADVANCE(82);
+      if (lookahead == 't') ADVANCE(82);
       END_STATE();
     case 70:
-      if (lookahead == 't') ADVANCE(83);
+      if (lookahead == 'g') ADVANCE(83);
       END_STATE();
     case 71:
-      if (lookahead == 'g') ADVANCE(84);
+      ACCEPT_TOKEN(sym_PRICE);
       END_STATE();
     case 72:
-      ACCEPT_TOKEN(sym_PRICE);
+      if (lookahead == 'e') ADVANCE(84);
       END_STATE();
     case 73:
       if (lookahead == 'a') ADVANCE(85);
       END_STATE();
     case 74:
-      if (lookahead == 'e') ADVANCE(86);
-      END_STATE();
-    case 75:
       ACCEPT_TOKEN(sym_QUERY);
       END_STATE();
+    case 75:
+      if (lookahead == 'e') ADVANCE(86);
+      END_STATE();
     case 76:
-      if (lookahead == 'e') ADVANCE(87);
+      if (lookahead == 'i') ADVANCE(87);
       END_STATE();
     case 77:
-      if (lookahead == 'i') ADVANCE(88);
-      END_STATE();
-    case 78:
       ACCEPT_TOKEN(sym_CUSTOM);
       END_STATE();
+    case 78:
+      if (lookahead == 'n') ADVANCE(88);
+      END_STATE();
     case 79:
-      if (lookahead == 'n') ADVANCE(89);
+      if (lookahead == 'e') ADVANCE(89);
       END_STATE();
     case 80:
-      if (lookahead == 'e') ADVANCE(90);
-      END_STATE();
-    case 81:
       ACCEPT_TOKEN(sym_OPTION);
       END_STATE();
-    case 82:
+    case 81:
       ACCEPT_TOKEN(sym_PLUGIN);
       END_STATE();
+    case 82:
+      if (lookahead == 'a') ADVANCE(90);
+      END_STATE();
     case 83:
-      if (lookahead == 'a') ADVANCE(91);
+      ACCEPT_TOKEN(sym_POPTAG);
       END_STATE();
     case 84:
-      ACCEPT_TOKEN(sym_POPTAG);
+      if (lookahead == 't') ADVANCE(91);
       END_STATE();
     case 85:
       if (lookahead == 'g') ADVANCE(92);
       END_STATE();
     case 86:
-      if (lookahead == 't') ADVANCE(93);
+      ACCEPT_TOKEN(sym_BALANCE);
       END_STATE();
     case 87:
-      ACCEPT_TOKEN(sym_BALANCE);
+      if (lookahead == 't') ADVANCE(93);
       END_STATE();
     case 88:
       if (lookahead == 't') ADVANCE(94);
       END_STATE();
     case 89:
-      if (lookahead == 't') ADVANCE(95);
-      END_STATE();
-    case 90:
       ACCEPT_TOKEN(sym_INCLUDE);
       END_STATE();
-    case 91:
+    case 90:
       ACCEPT_TOKEN(sym_POPMETA);
+      END_STATE();
+    case 91:
+      if (lookahead == 'a') ADVANCE(95);
       END_STATE();
     case 92:
       ACCEPT_TOKEN(sym_PUSHTAG);
       END_STATE();
     case 93:
-      if (lookahead == 'a') ADVANCE(96);
+      if (lookahead == 'y') ADVANCE(96);
       END_STATE();
     case 94:
-      if (lookahead == 'y') ADVANCE(97);
-      END_STATE();
-    case 95:
       ACCEPT_TOKEN(sym_DOCUMENT);
       END_STATE();
-    case 96:
+    case 95:
       ACCEPT_TOKEN(sym_PUSHMETA);
       END_STATE();
-    case 97:
+    case 96:
       ACCEPT_TOKEN(sym_COMMODITY);
       END_STATE();
     default:
