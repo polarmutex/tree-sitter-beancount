@@ -19,7 +19,7 @@ no narration
             )
             (posting
                 (account)
-                (incomplete_amount (unary_number_expr (minus)(number)) (currency))
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
             )
         )
     )
@@ -58,7 +58,7 @@ tag then link
 link then tag
 ==============
 
-2014-04-20 * #trip "Money from CC" ^610fa7f17e7a
+2014-04-20 * "Money from CC" #trip ^610fa7f17e7a
     Expenses:Restaurant         100 USD
     Assets:US:Cash             -100 USD
 

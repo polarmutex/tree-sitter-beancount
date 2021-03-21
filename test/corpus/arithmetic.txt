@@ -325,7 +325,8 @@ expr different places
 2013-05-18 * "Test"
     Assets:Something   -(3 * 4) HOOL {120.01 * 2.1 USD} @ 134.02 * 2.1 USD
     Assets:Something   1000000 USD ;; No balance checks.
-    2014-01-01 balance Assets:Something  3 * 4 * 120.01 * 2.1  USD
+
+2014-01-01 balance Assets:Something  3 * 4 * 120.01 * 2.1  USD
     number: -(5662.23 + 22.3)
 
 ---
@@ -367,28 +368,30 @@ expr different places
                 (incomplete_amount (number) (currency))
                 (comment)
             )
-            (balance
-                (date)
-                (BALANCE)
-                (account)
-                (amount_tolerance
-                    (binary_number_expr
-                        (binary_number_expr
-                            (binary_number_expr (number) (asterisk) (number))
-                            (asterisk)
-                            (number)
-                        )
-                        (asterisk)
-                        (number)
-                    )
-                    (currency)
+        )
+    )
+    (balance
+        (date)
+        (BALANCE)
+        (account)
+        (amount_tolerance
+            (binary_number_expr
+                (binary_number_expr
+                    (binary_number_expr (number) (asterisk) (number))
+                    (asterisk)
+                    (number)
                 )
-                (key_value_list
-                    (key_value_line
-                        (key_value (key)
-                            (unary_number_expr (minus) (binary_number_expr (number) (plus) (number)))
-                        )
-                    )
+                (asterisk)
+                (number)
+            )
+            (currency)
+        )
+        (key_value_list
+            (key_value_line
+                (key_value (key)
+                    (unary_number_expr (minus) (binary_number_expr (number) (plus) (number)))
                 )
             )
         )
+    )
+)

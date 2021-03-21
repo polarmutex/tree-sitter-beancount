@@ -47,10 +47,10 @@ module.exports = grammar({
         EVENT:      $ => token('event'),
         PRICE:      $ => token('price'),
         NOTE:       $ => token('note'),
-        DOCUMENT:   $ => token('docuemnt'),
+        DOCUMENT:   $ => token('document'),
         QUERY:      $ => token('query'),
         CUSTOM:     $ => token('custom'),
-        PUSHTAG:    $ => token('pusgtag'),
+        PUSHTAG:    $ => token('pushtag'),
         POPTAG:     $ => token('poptag'),
         PUSHMETA:   $ => token('pushmeta'),
         POPMETA:    $ => token('popmeta'),
@@ -172,6 +172,7 @@ module.exports = grammar({
                 field("txn", $.txn),
                 field("txn_strings", optional($.txn_strings)),
                 field("tags_links", optional($.tags_links)),
+                field("comment", optional($.comment)),
                 $._eol,
                 field("posting_or_kv_list", optional($.posting_or_kv_list)),
             ),
@@ -206,6 +207,7 @@ module.exports = grammar({
                     field("account", $.account),
                     field("amount", optional($.incomplete_amount)),
                     field("cost_spec", optional($.cost_spec)),
+                    field("comment", optional($.comment)),
                     $._eol
                 ),
                 seq(
@@ -216,6 +218,7 @@ module.exports = grammar({
                     field("cost_spec", optional($.cost_spec)),
                     $.at,
                     field("price_annotation", optional($.price_annotation)),
+                    field("comment", optional($.comment)),
                     $._eol
                 ),
                 seq(
@@ -226,6 +229,7 @@ module.exports = grammar({
                     field("cost_spec", optional($.cost_spec)),
                     $.atat,
                     field("price_annotation", optional($.price_annotation)),
+                    field("comment", optional($.comment)),
                     $._eol
                 ),
                 seq(
@@ -233,6 +237,7 @@ module.exports = grammar({
                     field("optflag", optional($.optflag)),
                     field("account", $.account),
                     field("amount", optional($.incomplete_amount)),
+                    field("comment", optional($.comment)),
                     $._eol
                 )
             ),
@@ -278,11 +283,12 @@ module.exports = grammar({
                         $._eol
                     ),
                     $.key_value_line,
-                    $.posting
-                    //seq(
-                    //    $._indent,
-                    //    $.comment
-                    //)
+                    $.posting,
+                    seq(
+                        $._indent,
+                        $.comment,
+                        $._eol
+                    )
                 )
             ),
 
@@ -344,6 +350,7 @@ module.exports = grammar({
                 field("account", $.account),
                 field("currencies", repeat($.currency_list)),
                 field("opt_booking", optional($.opt_booking)),
+                field("comment", optional($.comment)),
                 $._eol,
                 optional($.key_value_list)
             ),
@@ -356,6 +363,7 @@ module.exports = grammar({
                 field("date", $.date),
                 $.CLOSE,
                 field("account", $.account),
+                field("comment", optional($.comment)),
                 $._eol,
                 optional($.key_value_list)
             ),
@@ -365,6 +373,7 @@ module.exports = grammar({
                 field("date", $.date),
                 $.COMMODITY,
                 field("currency", $.currency),
+                field("comment", optional($.comment)),
                 $._eol,
                 optional($.key_value_list)
             ),
@@ -375,6 +384,7 @@ module.exports = grammar({
                 $.PAD,
                 field("account", $.account),
                 field("from_account", $.account),
+                field("comment", optional($.comment)),
                 $._eol,
                 optional($.key_value_list)
             ),
@@ -390,6 +400,7 @@ module.exports = grammar({
                         $.amount_tolerance,
                     //)
                 ),
+                field("comment", optional($.comment)),
                 $._eol,
                 optional($.key_value_list)
             ),
