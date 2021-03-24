@@ -295,12 +295,10 @@ metadata other
 (file
     (open
         (date)
-        (OPEN)
         (account)
     )
     (open
         (date)
-        (OPEN)
         (account)
         (key_value_list
             (key_value_line (key_value (key) (string)))
@@ -309,7 +307,6 @@ metadata other
     )
     (close
         (date)
-        (CLOSE)
         (account)
         (key_value_list
             (key_value_line (key_value (key) (string)))
@@ -317,7 +314,6 @@ metadata other
     )
     (note
         (date)
-        (NOTE)
         (account)
         (string)
         (key_value_list
@@ -326,7 +322,6 @@ metadata other
     )
     (pad
         (date)
-        (PAD)
         (account)
         (account)
         (key_value_list
@@ -335,7 +330,6 @@ metadata other
     )
     (balance
         (date)
-        (BALANCE)
         (account)
         (amount_tolerance
             (number)
@@ -347,7 +341,6 @@ metadata other
     )
     (event
         (date)
-        (EVENT)
         (string)
         (string)
         (key_value_list
@@ -356,7 +349,6 @@ metadata other
     )
     (document
         (date)
-        (DOCUMENT)
         (account)
         (filename (string))
         (key_value_list
@@ -365,7 +357,6 @@ metadata other
     )
     (price
         (date)
-        (PRICE)
         (currency)
         (amount
             (number)

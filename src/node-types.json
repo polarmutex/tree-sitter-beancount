@@ -99,13 +99,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "BALANCE",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -188,13 +184,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "CLOSE",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -238,13 +230,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "COMMODITY",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -435,13 +423,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "CUSTOM",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -553,13 +537,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "DOCUMENT",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -603,13 +583,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "EVENT",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -732,13 +708,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "INCLUDE",
-          "named": true
-        },
         {
           "type": "string",
           "named": true
@@ -894,13 +866,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "NOTE",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -964,13 +932,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "OPEN",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -1036,16 +1000,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "OPTION",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1094,13 +1048,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "PAD",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -1117,10 +1067,6 @@
       "required": true,
       "types": [
         {
-          "type": "PLUGIN",
-          "named": true
-        },
-        {
           "type": "string",
           "named": true
         }
@@ -1132,13 +1078,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "POPMETA",
-          "named": true
-        },
         {
           "type": "key",
           "named": true
@@ -1151,13 +1093,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "POPTAG",
-          "named": true
-        },
         {
           "type": "tag",
           "named": true
@@ -1308,13 +1246,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "PRICE",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -1342,13 +1276,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "PUSHMETA",
-          "named": true
-        },
         {
           "type": "key_value",
           "named": true
@@ -1361,13 +1291,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "PUSHTAG",
-          "named": true
-        },
         {
           "type": "tag",
           "named": true
@@ -1411,13 +1337,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "QUERY",
-          "named": true
-        },
         {
           "type": "key_value_list",
           "named": true
@@ -1580,78 +1502,6 @@
     }
   },
   {
-    "type": "BALANCE",
-    "named": true
-  },
-  {
-    "type": "CLOSE",
-    "named": true
-  },
-  {
-    "type": "COMMODITY",
-    "named": true
-  },
-  {
-    "type": "CUSTOM",
-    "named": true
-  },
-  {
-    "type": "DOCUMENT",
-    "named": true
-  },
-  {
-    "type": "EVENT",
-    "named": true
-  },
-  {
-    "type": "INCLUDE",
-    "named": true
-  },
-  {
-    "type": "NOTE",
-    "named": true
-  },
-  {
-    "type": "OPEN",
-    "named": true
-  },
-  {
-    "type": "OPTION",
-    "named": true
-  },
-  {
-    "type": "PAD",
-    "named": true
-  },
-  {
-    "type": "PLUGIN",
-    "named": true
-  },
-  {
-    "type": "POPMETA",
-    "named": true
-  },
-  {
-    "type": "POPTAG",
-    "named": true
-  },
-  {
-    "type": "PRICE",
-    "named": true
-  },
-  {
-    "type": "PUSHMETA",
-    "named": true
-  },
-  {
-    "type": "PUSHTAG",
-    "named": true
-  },
-  {
-    "type": "QUERY",
-    "named": true
-  },
-  {
     "type": "TXN",
     "named": true
   },
@@ -1672,24 +1522,52 @@
     "named": true
   },
   {
+    "type": "balance",
+    "named": false
+  },
+  {
     "type": "bool",
     "named": true
+  },
+  {
+    "type": "close",
+    "named": false
   },
   {
     "type": "comment",
     "named": true
   },
   {
+    "type": "commodity",
+    "named": false
+  },
+  {
     "type": "currency",
     "named": true
+  },
+  {
+    "type": "custom",
+    "named": false
   },
   {
     "type": "date",
     "named": true
   },
   {
+    "type": "document",
+    "named": false
+  },
+  {
+    "type": "event",
+    "named": false
+  },
+  {
     "type": "flag",
     "named": true
+  },
+  {
+    "type": "include",
+    "named": false
   },
   {
     "type": "key",
@@ -1712,12 +1590,56 @@
     "named": true
   },
   {
+    "type": "note",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
   },
   {
+    "type": "open",
+    "named": false
+  },
+  {
+    "type": "option",
+    "named": false
+  },
+  {
+    "type": "pad",
+    "named": false
+  },
+  {
+    "type": "plugin",
+    "named": false
+  },
+  {
     "type": "plus",
     "named": true
+  },
+  {
+    "type": "popmeta",
+    "named": false
+  },
+  {
+    "type": "poptag",
+    "named": false
+  },
+  {
+    "type": "price",
+    "named": false
+  },
+  {
+    "type": "pushmeta",
+    "named": false
+  },
+  {
+    "type": "pushtag",
+    "named": false
+  },
+  {
+    "type": "query",
+    "named": false
   },
   {
     "type": "rcurl",

@@ -12,25 +12,21 @@ parse currencies
 (file
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list (currency))
     )
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list (currency))
     )
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list (currency))
     )
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list (currency))
     )

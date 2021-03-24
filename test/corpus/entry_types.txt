@@ -117,7 +117,6 @@ entry balance
 (file
     (balance
         (date)
-        (BALANCE)
         (account)
         (amount_tolerance
             (number)
@@ -137,7 +136,6 @@ entry balnce 2
 (file
     (balance
         (date)
-        (BALANCE)
         (account)
         (amount_tolerance
             (number)
@@ -158,7 +156,6 @@ entry open
 (file
     (open
         (date)
-        (OPEN)
         (account)
     )
 )
@@ -174,7 +171,6 @@ entry open 2
 (file
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list
             (currency)
@@ -193,7 +189,6 @@ entry open 3
 (file
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list
             (currency)
@@ -214,7 +209,6 @@ entry open 4
 (file
     (open
         (date)
-        (OPEN)
         (account)
         (currency_list
             (currency)
@@ -234,7 +228,6 @@ entry open 5
 (file
     (open
         (date)
-        (OPEN)
         (account)
         (opt_booking (string))
     )
@@ -251,7 +244,6 @@ entry close
 (file
     (close
         (date)
-        (CLOSE)
         (account)
     )
 )
@@ -267,7 +259,6 @@ entry commodity
 (file
     (commodity
         (date)
-        (COMMODITY)
         (currency)
     )
 )
@@ -283,7 +274,6 @@ entry pad
 (file
     (pad
         (date)
-        (PAD)
         (account)
         (account)
     )
@@ -300,7 +290,6 @@ entry event
 (file
     (event
         (date)
-        (EVENT)
         (string)
         (string)
     )
@@ -317,7 +306,6 @@ entry event empty
 (file
     (event
         (date)
-        (EVENT)
         (string)
         (string)
     )
@@ -334,7 +322,6 @@ entry query
 (file
     (query
         (date)
-        (QUERY)
         (string)
         (string)
     )
@@ -351,7 +338,6 @@ entry note
 (file
     (note
         (date)
-        (NOTE)
         (account)
         (string)
     )
@@ -368,7 +354,6 @@ entry document
 (file
     (document
         (date)
-        (DOCUMENT)
         (account)
         (filename (string))
     )
@@ -385,7 +370,6 @@ entry price
 (file
     (price
         (date)
-        (PRICE)
         (currency)
         (amount
             (number)
@@ -405,7 +389,6 @@ entry custom
 (file
     (custom
         (date)
-        (CUSTOM)
         (string)
         (custom_value_list
             (custom_value (string))

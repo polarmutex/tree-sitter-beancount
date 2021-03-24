@@ -14,7 +14,6 @@ extra whitespace
 (file
     (note
         (date)
-        (NOTE)
         (account)
         (string)
     )

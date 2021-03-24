@@ -372,7 +372,6 @@ expr different places
     )
     (balance
         (date)
-        (BALANCE)
         (account)
         (amount_tolerance
             (binary_number_expr

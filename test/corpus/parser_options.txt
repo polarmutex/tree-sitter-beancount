@@ -7,7 +7,7 @@ option "title" "Super Rich"
 ---
 
 (file
-    (option (OPTION) (string) (string))
+    (option (string) (string))
 )
 
 ==================
@@ -21,9 +21,9 @@ option "documents" "/path/docs/c"
 ---
 
 (file
-    (option (OPTION) (string) (string))
-    (option (OPTION) (string) (string))
-    (option (OPTION) (string) (string))
+    (option (string) (string))
+    (option (string) (string))
+    (option (string) (string))
 )
 
 ====================
@@ -35,5 +35,5 @@ option "precision" "*.5000"
 ---
 
 (file
-    (option (OPTION) (string) (string))
+    (option (string) (string))
 )

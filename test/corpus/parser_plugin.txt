@@ -7,7 +7,7 @@ plugin "beancount.plugin.unrealized"
 ---
 
 (file
-    (plugin (PLUGIN) (string))
+    (plugin (string))
 )
 
 ===================
@@ -19,7 +19,7 @@ plugin "beancount.plugin.unrealized" "Unrealized"
 ---
 
 (file
-    (plugin (PLUGIN) (string) (string))
+    (plugin (string) (string))
 )
 
 =================
@@ -31,5 +31,5 @@ option "plugin" "beancount.plugin.unrealized"
 ---
 
 (file
-    (option (OPTION) (string) (string))
+    (option (string) (string))
 )
