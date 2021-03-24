@@ -14,7 +14,6 @@ popmeta location:
 
 (file
     (pushmeta
-        (PUSHMETA)
         (key_value (key) (string))
     )
     (transaction
@@ -32,8 +31,6 @@ popmeta location:
             )
         )
     )
-    (popmeta
-        (POPMETA) (key)
-    )
+    (popmeta (key))
 )
 

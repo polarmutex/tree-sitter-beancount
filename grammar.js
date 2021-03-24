@@ -319,25 +319,25 @@ module.exports = grammar({
             ),
 
         pushtag: $ => seq(
-            $.PUSHTAG,
+            alias($.PUSHTAG, "pushtag"),
             $.tag,
             $._eol
         ),
 
         poptag: $ => seq(
-            $.POPTAG,
+            alias($.POPTAG, "poptag"),
             $.tag,
             $._eol
         ),
 
         pushmeta: $ => seq(
-            $.PUSHMETA,
+            alias($.PUSHMETA,"pushmeta"),
             $.key_value,
             $._eol
         ),
 
         popmeta: $ => seq(
-            $.POPMETA,
+            alias($.POPMETA, "popmeta"),
             $.key,
             $._colon,
             $._eol
@@ -346,7 +346,7 @@ module.exports = grammar({
         open: $ =>
             seq(
                 field("date", $.date),
-                $.OPEN,
+                alias($.OPEN, "open"),
                 field("account", $.account),
                 field("currencies", repeat($.currency_list)),
                 field("opt_booking", optional($.opt_booking)),
@@ -361,7 +361,7 @@ module.exports = grammar({
         close: $ =>
             seq(
                 field("date", $.date),
-                $.CLOSE,
+                alias($.CLOSE, "close"),
                 field("account", $.account),
                 field("comment", optional($.comment)),
                 $._eol,
@@ -371,7 +371,7 @@ module.exports = grammar({
         commodity: $ =>
             seq(
                 field("date", $.date),
-                $.COMMODITY,
+                alias($.COMMODITY, "commodity"),
                 field("currency", $.currency),
                 field("comment", optional($.comment)),
                 $._eol,
@@ -381,7 +381,7 @@ module.exports = grammar({
         pad: $ =>
             seq(
                 field("date", $.date),
-                $.PAD,
+                alias($.PAD, "pad"),
                 field("account", $.account),
                 field("from_account", $.account),
                 field("comment", optional($.comment)),
@@ -392,7 +392,7 @@ module.exports = grammar({
         balance: $ =>
             seq(
                 field("date", $.date),
-                $.BALANCE,
+                alias($.BALANCE, "balance"),
                 field("account", $.account),
                 field("amount",
                     //choice(
@@ -495,7 +495,7 @@ module.exports = grammar({
         price: $ =>
             seq(
                 field("date", $.date),
-                $.PRICE,
+                alias($.PRICE, "price"),
                 field("currency", $.currency),
                 field("amount", $.amount),
                 $._eol,
@@ -505,7 +505,7 @@ module.exports = grammar({
         event: $ =>
             seq(
                 field("date", $.date),
-                $.EVENT,
+                alias($.EVENT, "event"),
                 field("type", $.string),
                 field("desc", $.string),
                 $._eol,
@@ -515,7 +515,7 @@ module.exports = grammar({
         query: $ =>
             seq(
                 field("date", $.date),
-                $.QUERY,
+                alias($.QUERY, "query"),
                 field("name", $.string),
                 field("query", $.string),
                 $._eol,
@@ -525,7 +525,7 @@ module.exports = grammar({
         note: $ =>
             seq(
                 field("date", $.date),
-                $.NOTE,
+                alias($.NOTE, "note"),
                 field("account", $.account),
                 field("note", $.string),
                 $._eol,
@@ -537,7 +537,7 @@ module.exports = grammar({
         document: $=>
             seq(
                 field("date", $.date),
-                $.DOCUMENT,
+                alias($.DOCUMENT, "document"),
                 field("account", $.account),
                 field("filename", $.filename),
                 field("tags_links", optional($.tags_links)),
@@ -563,7 +563,7 @@ module.exports = grammar({
         custom: $ =>
             seq(
                 field("date", $.date),
-                $.CUSTOM,
+                alias($.CUSTOM, "custom"),
                 field("name", $.string),
                 field("custom_value_list", optional($.custom_value_list)),
                 $._eol,
@@ -587,14 +587,14 @@ module.exports = grammar({
             ),
 
         option: $ => seq(
-            $.OPTION,
+            alias($.OPTION, "option"),
             field("key", $.string),
             field("value",$.string),
             $._eol,
         ),
 
         include: $ => seq(
-            $.INCLUDE,
+            alias($.INCLUDE, "include"),
             $.string,
             $._eol,
         ),
@@ -602,12 +602,12 @@ module.exports = grammar({
         plugin: $ =>
             choice(
                 seq(
-                    $.PLUGIN,
+                    alias($.PLUGIN, "plugin"),
                     $.string,
                     $._eol
                 ),
                 seq(
-                    $.PLUGIN,
+                    alias($.PLUGIN, "plugin"),
                     $.string,
                     $.string,
                     $._eol

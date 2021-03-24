@@ -1306,8 +1306,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "PUSHTAG"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "PUSHTAG"
+          },
+          "named": false,
+          "value": "pushtag"
         },
         {
           "type": "SYMBOL",
@@ -1323,8 +1328,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "POPTAG"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "POPTAG"
+          },
+          "named": false,
+          "value": "poptag"
         },
         {
           "type": "SYMBOL",
@@ -1340,8 +1350,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "PUSHMETA"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "PUSHMETA"
+          },
+          "named": false,
+          "value": "pushmeta"
         },
         {
           "type": "SYMBOL",
@@ -1357,8 +1372,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "POPMETA"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "POPMETA"
+          },
+          "named": false,
+          "value": "popmeta"
         },
         {
           "type": "SYMBOL",
@@ -1386,8 +1406,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "OPEN"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "OPEN"
+          },
+          "named": false,
+          "value": "open"
         },
         {
           "type": "FIELD",
@@ -1474,8 +1499,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "CLOSE"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CLOSE"
+          },
+          "named": false,
+          "value": "close"
         },
         {
           "type": "FIELD",
@@ -1531,8 +1561,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "COMMODITY"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "COMMODITY"
+          },
+          "named": false,
+          "value": "commodity"
         },
         {
           "type": "FIELD",
@@ -1588,8 +1623,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "PAD"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "PAD"
+          },
+          "named": false,
+          "value": "pad"
         },
         {
           "type": "FIELD",
@@ -1653,8 +1693,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "BALANCE"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "BALANCE"
+          },
+          "named": false,
+          "value": "balance"
         },
         {
           "type": "FIELD",
@@ -2004,8 +2049,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "PRICE"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "PRICE"
+          },
+          "named": false,
+          "value": "price"
         },
         {
           "type": "FIELD",
@@ -2053,8 +2103,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "EVENT"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "EVENT"
+          },
+          "named": false,
+          "value": "event"
         },
         {
           "type": "FIELD",
@@ -2102,8 +2157,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "QUERY"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "QUERY"
+          },
+          "named": false,
+          "value": "query"
         },
         {
           "type": "FIELD",
@@ -2151,8 +2211,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "NOTE"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "NOTE"
+          },
+          "named": false,
+          "value": "note"
         },
         {
           "type": "FIELD",
@@ -2204,8 +2269,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "DOCUMENT"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "DOCUMENT"
+          },
+          "named": false,
+          "value": "document"
         },
         {
           "type": "FIELD",
@@ -2305,8 +2375,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "CUSTOM"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CUSTOM"
+          },
+          "named": false,
+          "value": "custom"
         },
         {
           "type": "FIELD",
@@ -2407,8 +2482,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "OPTION"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "OPTION"
+          },
+          "named": false,
+          "value": "option"
         },
         {
           "type": "FIELD",
@@ -2436,8 +2516,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "INCLUDE"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "INCLUDE"
+          },
+          "named": false,
+          "value": "include"
         },
         {
           "type": "SYMBOL",
@@ -2456,8 +2541,13 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "PLUGIN"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "PLUGIN"
+              },
+              "named": false,
+              "value": "plugin"
             },
             {
               "type": "SYMBOL",
@@ -2473,8 +2563,13 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "PLUGIN"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "PLUGIN"
+              },
+              "named": false,
+              "value": "plugin"
             },
             {
               "type": "SYMBOL",
