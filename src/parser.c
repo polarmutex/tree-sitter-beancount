@@ -140,7 +140,7 @@ enum {
   aux_sym_custom_value_list_repeat1 = 121,
 };
 
-static const char *ts_symbol_names[] = {
+static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [sym_identifier] = "identifier",
   [sym__indent] = "_indent",
@@ -265,7 +265,7 @@ static const char *ts_symbol_names[] = {
   [aux_sym_custom_value_list_repeat1] = "custom_value_list_repeat1",
 };
 
-static TSSymbol ts_symbol_map[] = {
+static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [sym_identifier] = sym_identifier,
   [sym__indent] = sym__indent,
@@ -911,7 +911,7 @@ enum {
   field_value = 27,
 };
 
-static const char *ts_field_names[] = {
+static const char * const ts_field_names[] = {
   [0] = NULL,
   [field_account] = "account",
   [field_amount] = "amount",
@@ -1412,11 +1412,11 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_price_annotation, 6},
 };
 
-static TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
+static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
   [0] = {0},
 };
 
-static uint16_t ts_non_terminal_alias_map[] = {
+static const uint16_t ts_non_terminal_alias_map[] = {
   0,
 };
 
@@ -3524,7 +3524,7 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
   }
 }
 
-static TSLexMode ts_lex_modes[STATE_COUNT] = {
+static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [0] = {.lex_state = 0},
   [1] = {.lex_state = 91},
   [2] = {.lex_state = 91},
@@ -3859,7 +3859,7 @@ static TSLexMode ts_lex_modes[STATE_COUNT] = {
   [331] = {.lex_state = 0},
 };
 
-static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
+static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [0] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [sym_identifier] = ACTIONS(1),
@@ -3961,7 +3961,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   },
 };
 
-static uint16_t ts_small_parse_table[] = {
+static const uint16_t ts_small_parse_table[] = {
   [0] = 13,
     ACTIONS(9), 1,
       sym_PUSHTAG,
@@ -8018,7 +8018,7 @@ static uint16_t ts_small_parse_table[] = {
       sym_tag,
 };
 
-static uint32_t ts_small_parse_table_map[] = {
+static const uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(2)] = 0,
   [SMALL_STATE(3)] = 64,
   [SMALL_STATE(4)] = 128,
@@ -8351,7 +8351,7 @@ static uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(331)] = 4942,
 };
 
-static TSParseActionEntry ts_parse_actions[] = {
+static const TSParseActionEntry ts_parse_actions[] = {
   [0] = {.entry = {.count = 0, .reusable = false}},
   [1] = {.entry = {.count = 1, .reusable = false}}, RECOVER(),
   [3] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_file, 0),
@@ -8927,7 +8927,7 @@ extern "C" {
 #endif
 
 extern const TSLanguage *tree_sitter_beancount(void) {
-  static TSLanguage language = {
+  static const TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
     .alias_count = ALIAS_COUNT,
@@ -8938,18 +8938,18 @@ extern const TSLanguage *tree_sitter_beancount(void) {
     .production_id_count = PRODUCTION_ID_COUNT,
     .field_count = FIELD_COUNT,
     .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
-    .parse_table = (const uint16_t *)ts_parse_table,
-    .small_parse_table = (const uint16_t *)ts_small_parse_table,
-    .small_parse_table_map = (const uint32_t *)ts_small_parse_table_map,
+    .parse_table = &ts_parse_table[0][0],
+    .small_parse_table = ts_small_parse_table,
+    .small_parse_table_map = ts_small_parse_table_map,
     .parse_actions = ts_parse_actions,
     .symbol_names = ts_symbol_names,
     .field_names = ts_field_names,
-    .field_map_slices = (const TSFieldMapSlice *)ts_field_map_slices,
-    .field_map_entries = (const TSFieldMapEntry *)ts_field_map_entries,
+    .field_map_slices = ts_field_map_slices,
+    .field_map_entries = ts_field_map_entries,
     .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,
-    .alias_sequences = (const TSSymbol *)ts_alias_sequences,
+    .alias_sequences = &ts_alias_sequences[0][0],
     .lex_modes = ts_lex_modes,
     .lex_fn = ts_lex,
     .keyword_lex_fn = ts_lex_keywords,
