@@ -1,0 +1,125 @@
+==============
+H1 markdown heading
+==============
+
+# TITLE
+
+2014-04-20 * "Money from CC" ^610fa7f17e7a #trip
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(file
+    (heading)
+    (transaction
+        (date)
+        (txn (asterisk))
+        (txn_strings (string))
+        (tags_links (link) (tag))
+        (posting_or_kv_list
+            (posting
+                (account)
+                (incomplete_amount (number) (currency))
+            )
+            (posting
+                (account)
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
+            )
+        )
+    )
+)
+
+==============
+H6 markdown heading
+==============
+
+###### TITLE
+2014-04-20 * "Money from CC" ^610fa7f17e7a #trip
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(file
+    (heading)
+    (transaction
+        (date)
+        (txn (asterisk))
+        (txn_strings (string))
+        (tags_links (link) (tag))
+        (posting_or_kv_list
+            (posting
+                (account)
+                (incomplete_amount (number) (currency))
+            )
+            (posting
+                (account)
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
+            )
+        )
+    )
+)
+
+==============
+orgmode heading
+==============
+
+* TITLE
+
+2014-04-20 * "Money from CC" ^610fa7f17e7a #trip
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(file
+    (heading (asterisk))
+    (transaction
+        (date)
+        (txn (asterisk))
+        (txn_strings (string))
+        (tags_links (link) (tag))
+        (posting_or_kv_list
+            (posting
+                (account)
+                (incomplete_amount (number) (currency))
+            )
+            (posting
+                (account)
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
+            )
+        )
+    )
+)
+
+==============
+orgmode subheading
+==============
+
+****** TITLE
+2014-04-20 * "Money from CC" ^610fa7f17e7a #trip
+    Expenses:Restaurant         100 USD
+    Assets:US:Cash             -100 USD
+
+---
+
+(file
+    (heading (asterisk))
+    (transaction
+        (date)
+        (txn (asterisk))
+        (txn_strings (string))
+        (tags_links (link) (tag))
+        (posting_or_kv_list
+            (posting
+                (account)
+                (incomplete_amount (number) (currency))
+            )
+            (posting
+                (account)
+                (incomplete_amount (unary_number_expr (minus) (number)) (currency))
+            )
+        )
+    )
+)

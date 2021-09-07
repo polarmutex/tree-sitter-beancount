@@ -634,6 +634,10 @@
           "named": true
         },
         {
+          "type": "heading",
+          "named": true
+        },
+        {
           "type": "include",
           "named": true
         },
@@ -698,6 +702,21 @@
       "types": [
         {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "asterisk",
           "named": true
         }
       ]

@@ -630,6 +630,24 @@ module.exports = grammar({
             $._entry,
             $._skipped_lines,
         ),
+
+        _markdown_heading: $ => seq(
+            repeat1($._hash),
+            /.*/,
+            $._eol
+        ),
+
+        _orgmode_heading: $ => seq(
+            repeat1($.asterisk),
+            /.*/,
+            $._eol
+        ),
+
+        heading: $ => choice(
+            $._markdown_heading,
+            $._orgmode_heading
+        ),
+
         /* End Grammar Rules */
         /*--------------------------------------------------------------------------------*/
 
@@ -653,7 +671,8 @@ module.exports = grammar({
                 seq(
                     $.comment,
                     $._eol
-                )
+                ),
+                $.heading
             ),
 
         _ASCII: $ => /[\x00-\x7f]/,
