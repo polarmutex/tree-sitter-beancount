@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish-cargo:
+    name: Publish Crate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installing Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+      - name: Checking out sources
+        uses: actions/checkout@v1
+      - name: Cache Cargo
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-publish-${{ hashFiles('**/Cargo.lock') }}
+      - name: Installing dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y -qq pkg-config libssl-dev
+      - uses: actions-rs/cargo@v1
+        with:
+          command: publish
+          args: --token ${{ secrets.CARGO_API_KEY }} --allow-dirty
