@@ -1,0 +1,20 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+---
+Language: Cpp
+# Force pointers to the type for C.
+DerivePointerAlignment: false
+PointerAlignment: Right
+
+# Short functions should not be on a single line, unless empty
+AllowShortFunctionsOnASingleLine: Empty
+
+# It makes more sense this way
+BreakBeforeBinaryOperators: All
+BreakBeforeTernaryOperators: true
+
+# Aesthetic
+AlignOperands: AlignAfterOperator
+BinPackParameters: false
+---

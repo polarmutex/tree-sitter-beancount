@@ -1,26 +1,149 @@
 {
   "name": "beancount",
-  "word": "identifier",
   "rules": {
     "file": {
       "type": "REPEAT",
       "content": {
-        "type": "SYMBOL",
-        "name": "_declarations"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_declarations"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_nl"
+          }
+        ]
       }
     },
-    "_indent": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[ \\r\\t]+"
-      }
+    "_nl": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
+          "type": "STRING",
+          "value": "\r"
+        }
+      ]
     },
     "_eol": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "\\n"
+      }
+    },
+    "_any": {
+      "type": "PATTERN",
+      "value": ".*"
+    },
+    "section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "headline",
+          "content": {
+            "type": "SYMBOL",
+            "name": "headline"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_declarations"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_nl"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "FIELD",
+            "name": "subsection",
+            "content": {
+              "type": "SYMBOL",
+              "name": "section"
+            }
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_sectionend"
+        }
+      ]
+    },
+    "_org_stars": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_stars"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\*+"
+        }
+      ]
+    },
+    "headline": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_org_stars"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[ \\t]+"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "item",
+              "content": {
+                "type": "SYMBOL",
+                "name": "item"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_nl"
+        }
+      ]
+    },
+    "item": {
+      "type": "SYMBOL",
+      "name": "_any"
+    },
+    "_indent": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[ \\r\\t]+"
       }
     },
     "_pipe": {
@@ -2637,66 +2760,22 @@
         }
       ]
     },
-    "_markdown_heading": {
+    "comment": {
       "type": "SEQ",
       "members": [
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_hash"
-          }
+          "type": "STRING",
+          "value": ";"
         },
         {
           "type": "PATTERN",
           "value": ".*"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_eol"
-        }
-      ]
-    },
-    "_orgmode_heading": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "asterisk"
-          }
-        },
-        {
-          "type": "PATTERN",
-          "value": ".*"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_eol"
-        }
-      ]
-    },
-    "heading": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_markdown_heading"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_orgmode_heading"
         }
       ]
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-z]+"
-    },
-    "comment": {
-      "type": "PATTERN",
-      "value": ";.*"
+      "value": "[_a-zA-Z0-9]+"
     },
     "_skipped_lines": {
       "type": "CHOICE",
@@ -2751,10 +2830,6 @@
               "name": "_eol"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "heading"
         }
       ]
     },
@@ -2938,12 +3013,25 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "[ \\t\\r ]"
+      "value": "( |\\r|\\t)+"
     }
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_stars"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_sectionend"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_eof"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }
