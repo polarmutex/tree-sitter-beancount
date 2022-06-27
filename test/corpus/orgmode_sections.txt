@@ -1,0 +1,53 @@
+==============
+1 orgmode heading
+==============
+
+* Title
+
+---
+(file
+    (section
+        (headline (item))
+    )
+)
+
+==============
+2 orgmode heading
+==============
+
+* Title
+
+* B
+
+---
+(file
+    (section
+        (headline (item))
+    )
+    (section
+        (headline (item))
+    )
+)
+
+==============
+orgmode heading in different levels
+==============
+
+* Title
+
+** Title
+
+*** Title
+
+---
+(file
+    (section
+        (headline (item))
+        (section
+            (headline (item))
+            (section
+                (headline (item))
+            )
+        )
+    )
+)

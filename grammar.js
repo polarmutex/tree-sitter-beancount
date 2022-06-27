@@ -3,64 +3,108 @@ module.exports = grammar({
      * From beancount grammar.y
      */
 
-    name: 'beancount',
+    name: "beancount",
 
-    extras: $ => [/[ \t\r ]/],
+    // Ensure we don't extract keywords from tokens
+    //word: ($) => $.identifier,
 
-    // TODO look at this to speed up
-    word: $ => $.identifier,
+    inline: ($) => [
+    ],
 
-    //conflicts: $ => [[$.posting], [$.tags_links]],
+    conflicts: ($) => [
+    ],
+
+    externals: ($) => [
+        $._stars,
+        $._sectionend,
+        $._eof,  // Basically just '\0', but allows multiple to be matched
+    ],
+
+    extras: ($) => [
+        /( |\r|\t)+/,
+    ],
 
     rules: {
+        file: $ => repeat(
+            choice(
+                $.section,
+                $._declarations,
+                $._nl,
+            )
+        ),
 
-        file: $ => repeat($._declarations),
+        _nl: _ => choice('\n', '\r'),
+        _eol: $ => choice('\n', '\r', $._eof),
+        _any: $ => /.*/,
+
+
+        /*
+         * Org Header Sections
+         */
+        section: $ => seq(
+            field('headline', $.headline),
+            repeat(choice(
+                $._declarations,
+                $._nl
+            )),
+            repeat(field('subsection', $.section)),
+            $._sectionend
+        ),
+        _org_stars: $ => seq($._stars, /\*+/),
+        headline: $ => seq(
+            $._org_stars,
+            /[ \t]+/, // so it's not part of (item)
+            optional(field('item', $.item)),
+            $._nl,
+        ),
+        item: $ => $._any,
+
 
         /* Types for terminal symbols */
-        _indent:    $ => token(/[ \r\t]+/),
-        _eol:       $ => token(/\n/),
-        _pipe:      $ => token('|'),
-        atat:       $ => token('@@'),
-        at:         $ => token('@'),
+        _indent: $ => token(/[ \r\t]+/),
+        _eol: $ => token(/\n/),
+        _pipe: $ => token('|'),
+        atat: $ => token('@@'),
+        at: $ => token('@'),
         lcurllcurl: $ => token('{{'),
         rcurlrcurl: $ => token('}}'),
-        lcurl:      $ => token('{'),
-        rcurl:      $ => token('}'),
-        _equal:     $ => token('='),
-        _comma:     $ => token(','),
-        _tilde:     $ => token('~'),
-        _hash:      $ => token('#'),
-        asterisk:   $ => token('*'),
-        slash:      $ => token('/'),
-        _colon:     $ => token(':'),
-        plus:       $ => token('+'),
-        minus:      $ => token('-'),
-        _lparen:    $ => token('('),
-        _rparen:    $ => token(')'),
-        flag:       $ => token(/[!&?%PSTCURM*#]/),
-        TXN:        $ => token('txn'),
-        BALANCE:    $ => token('balance'),
-        OPEN:       $ => token('open'),
-        CLOSE:      $ => token('close'),
-        COMMODITY:  $ => token('commodity'),
-        PAD:        $ => token('pad'),
-        EVENT:      $ => token('event'),
-        PRICE:      $ => token('price'),
-        NOTE:       $ => token('note'),
-        DOCUMENT:   $ => token('document'),
-        QUERY:      $ => token('query'),
-        CUSTOM:     $ => token('custom'),
-        PUSHTAG:    $ => token('pushtag'),
-        POPTAG:     $ => token('poptag'),
-        PUSHMETA:   $ => token('pushmeta'),
-        POPMETA:    $ => token('popmeta'),
-        OPTION:     $ => token('option'),
-        INCLUDE:    $ => token('include'),
-        PLUGIN:     $ => token('plugin'),
-        _none:      $ => token('NULL'),
-        bool:       $ => token(/TRUE|FALSE/),
-        date:       $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
-        account:    $ =>
+        lcurl: $ => token('{'),
+        rcurl: $ => token('}'),
+        _equal: $ => token('='),
+        _comma: $ => token(','),
+        _tilde: $ => token('~'),
+        _hash: $ => token('#'),
+        asterisk: $ => token('*'),
+        slash: $ => token('/'),
+        _colon: $ => token(':'),
+        plus: $ => token('+'),
+        minus: $ => token('-'),
+        _lparen: $ => token('('),
+        _rparen: $ => token(')'),
+        flag: $ => token(/[!&?%PSTCURM*#]/),
+        TXN: $ => token('txn'),
+        BALANCE: $ => token('balance'),
+        OPEN: $ => token('open'),
+        CLOSE: $ => token('close'),
+        COMMODITY: $ => token('commodity'),
+        PAD: $ => token('pad'),
+        EVENT: $ => token('event'),
+        PRICE: $ => token('price'),
+        NOTE: $ => token('note'),
+        DOCUMENT: $ => token('document'),
+        QUERY: $ => token('query'),
+        CUSTOM: $ => token('custom'),
+        PUSHTAG: $ => token('pushtag'),
+        POPTAG: $ => token('poptag'),
+        PUSHMETA: $ => token('pushmeta'),
+        POPMETA: $ => token('popmeta'),
+        OPTION: $ => token('option'),
+        INCLUDE: $ => token('include'),
+        PLUGIN: $ => token('plugin'),
+        _none: $ => token('NULL'),
+        bool: $ => token(/TRUE|FALSE/),
+        date: $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
+        account: $ =>
             token(
                 seq(
                     /[A-Z]|[^\x00-\x7F]/,
@@ -74,20 +118,20 @@ module.exports = grammar({
                     ),
                 ),
             ),
-        currency:   $ => token(/[A-Z][A-Z0-9\'\._\-]{0,22}[A-Z0-9]/),
-        string:     $ => token(/"[^"]*"/),
-        number:     $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
-        tag:        $ => token(/#[A-Za-z0-9\-_/.]+/),
-        link:       $ => token(/\^[A-Za-z0-9\-_/.]+/),
-        key:        $ => token(/[a-z][a-zA-Z0-9\-_]+/),
+        currency: $ => token(/[A-Z][A-Z0-9\'\._\-]{0,22}[A-Z0-9]/),
+        string: $ => token(/"[^"]*"/),
+        number: $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
+        tag: $ => token(/#[A-Za-z0-9\-_/.]+/),
+        link: $ => token(/\^[A-Za-z0-9\-_/.]+/),
+        key: $ => token(/[a-z][a-zA-Z0-9\-_]+/),
 
         /* Operator precedence.
          * This is pulled straight out of the textbook example:
          * https://www.gnu.org/software/bison/manual/html_node/Infix-Calc.html#Infix-Calc
          */
-       // %left MINUS PLUS
-       // %left ASTERISK SLASH
-       // %precedence NEGATIVE /* negation--unary minus */
+        // %left MINUS PLUS
+        // %left ASTERISK SLASH
+        // %precedence NEGATIVE /* negation--unary minus */
 
         // Start symbol: file
         /* We have some number of expected shift/reduce conflicts at 'eol'. */
@@ -133,16 +177,16 @@ module.exports = grammar({
             prec(3,
                 choice(
                     prec.left(1,
-                        seq( $._number_expr, $.plus, $._number_expr ),
+                        seq($._number_expr, $.plus, $._number_expr),
                     ),
                     prec.left(1,
-                        seq( $._number_expr, $.minus, $._number_expr ),
+                        seq($._number_expr, $.minus, $._number_expr),
                     ),
                     prec.left(2,
-                        seq( $._number_expr, $.asterisk, $._number_expr ),
+                        seq($._number_expr, $.asterisk, $._number_expr),
                     ),
                     prec.left(2,
-                        seq( $._number_expr, $.slash, $._number_expr ),
+                        seq($._number_expr, $.slash, $._number_expr),
                     ),
                 ),
             ),
@@ -158,11 +202,11 @@ module.exports = grammar({
         tags_links: $ =>
             repeat1(
                 //seq(
-                 //   optional($._indent),
-                    choice(
-                        $.link,
-                        $.tag,
-                    ),
+                //   optional($._indent),
+                choice(
+                    $.link,
+                    $.tag,
+                ),
                 //),
             ),
 
@@ -186,16 +230,16 @@ module.exports = grammar({
             ),
 
         price_annotation: $ => $.incomplete_amount,
-            //choice(
-            //    seq(
-            //        $.atat,
-            //        $.incomplete_amount
-            //    ),
-            //    seq(
-            //        $.at,
-            //        $.incomplete_amount
-            //    )
-            //),
+        //choice(
+        //    seq(
+        //        $.atat,
+        //        $.incomplete_amount
+        //    ),
+        //    seq(
+        //        $.at,
+        //        $.incomplete_amount
+        //    )
+        //),
 
         //account: $ => $.ACCOUNT,
 
@@ -331,7 +375,7 @@ module.exports = grammar({
         ),
 
         pushmeta: $ => seq(
-            alias($.PUSHMETA,"pushmeta"),
+            alias($.PUSHMETA, "pushmeta"),
             $.key_value,
             $._eol
         ),
@@ -397,7 +441,7 @@ module.exports = grammar({
                 field("amount",
                     //choice(
                     //    $.amount,
-                        $.amount_tolerance,
+                    $.amount_tolerance,
                     //)
                 ),
                 field("comment", optional($.comment)),
@@ -462,12 +506,12 @@ module.exports = grammar({
             choice(
                 seq(
                     $.lcurl,
-                    field("cost_comp_list",  optional($.cost_comp_list)),
+                    field("cost_comp_list", optional($.cost_comp_list)),
                     $.rcurl
                 ),
                 seq(
                     $.lcurllcurl,
-                    field("cost_comp_list",  optional($.cost_comp_list)),
+                    field("cost_comp_list", optional($.cost_comp_list)),
                     $.rcurlrcurl
                 ),
             ),
@@ -534,7 +578,7 @@ module.exports = grammar({
 
         filename: $ => $.string,
 
-        document: $=>
+        document: $ =>
             seq(
                 field("date", $.date),
                 alias($.DOCUMENT, "document"),
@@ -589,7 +633,7 @@ module.exports = grammar({
         option: $ => seq(
             alias($.OPTION, "option"),
             field("key", $.string),
-            field("value",$.string),
+            field("value", $.string),
             $._eol,
         ),
 
@@ -631,29 +675,13 @@ module.exports = grammar({
             $._skipped_lines,
         ),
 
-        _markdown_heading: $ => seq(
-            repeat1($._hash),
-            /.*/,
-            $._eol
-        ),
-
-        _orgmode_heading: $ => seq(
-            repeat1($.asterisk),
-            /.*/,
-            $._eol
-        ),
-
-        heading: $ => choice(
-            $._markdown_heading,
-            $._orgmode_heading
-        ),
-
         /* End Grammar Rules */
         /*--------------------------------------------------------------------------------*/
 
-        identifier: $ => /[a-z]+/,
+        comment: $ => seq(';', /.*/),
 
-        comment:    $ => /;.*/,
+        // NOTE: includes reserved identifiers
+        identifier: $ => /[_a-zA-Z0-9]+/,
 
         _skipped_lines: $ =>
             choice(
@@ -672,7 +700,6 @@ module.exports = grammar({
                     $.comment,
                     $._eol
                 ),
-                $.heading
             ),
 
         _ASCII: $ => /[\x00-\x7f]/,
@@ -724,10 +751,9 @@ module.exports = grammar({
             $._UTF_8_3,
             $._UTF_8_4,
         ),
-        _UTF_8: $ =>  choice(
+        _UTF_8: $ => choice(
             $._ASCII,
             $._UTF_8_ONLY,
         ),
-
     }
-});
+})
