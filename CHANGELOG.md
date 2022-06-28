@@ -6,3 +6,10 @@
 ### Features
 
 * support org sections ([1b06224](https://github.com/polarmutex/tree-sitter-beancount/commit/1b06224c446f49586b0952de795e1562c6d76e3b))
+
+## [2.0.0] (2021-11-11)
+
+### Features
+
+* Initial version of grammar
+
