@@ -86,6 +86,7 @@
             default = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 nodejs-16_x
+                python39
                 nodePackages.typescript
                 rustc
                 cargo
