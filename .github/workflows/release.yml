@@ -56,14 +56,14 @@ jobs:
     needs: [release-please]
     if: needs.release-please.outputs.release_created
     steps:
+      - name: Checking out sources
+        uses: actions/checkout@v1
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
           node-version: '16'
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
-      - name: Checking out sources
-        uses: actions/checkout@v1
       - name: Install dependencies
         run: npm install
       - name: Publish to npm
