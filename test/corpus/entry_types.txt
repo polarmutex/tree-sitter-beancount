@@ -12,7 +12,7 @@ entry transaction one string
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -46,7 +46,8 @@ entry transaction two string
     (transaction
         (date)
         (txn)
-        (txn_strings (string) (string))
+        (payee)
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -80,7 +81,7 @@ entry transaction with txn keyword
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount

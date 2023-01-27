@@ -488,24 +488,40 @@
         ]
       }
     },
-    "txn_strings": {
-      "type": "SEQ",
+    "_txn_strings": {
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "string"
-        },
-        {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "string"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "string"
+              },
+              "named": true,
+              "value": "payee"
             },
             {
-              "type": "BLANK"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "string"
+              },
+              "named": true,
+              "value": "narration"
             }
           ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "string"
+          },
+          "named": true,
+          "value": "narration"
         }
       ]
     },
@@ -545,20 +561,16 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "txn_strings",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "txn_strings"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_txn_strings"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -597,79 +609,75 @@
           "name": "_eol"
         },
         {
-          "type": "FIELD",
-          "name": "posting_or_kv_list",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "_indent"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "_eol"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "_indent"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "tags_links"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "_eol"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "key_value_line"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "posting"
-                    },
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "_indent"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "comment"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "_eol"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "BLANK"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_indent"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_eol"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_indent"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "tags_links"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_eol"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "key_value_line"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "posting"
+                  },
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_indent"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "comment"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_eol"
+                      }
+                    ]
+                  }
+                ]
               }
-            ]
-          }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

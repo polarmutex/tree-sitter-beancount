@@ -37,7 +37,7 @@ tag then link
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
         (tags_links (link) (tag))
             (posting
                 (account)
@@ -64,7 +64,7 @@ link then tag
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
         (tags_links (tag) (link))
             (posting
                 (account)
@@ -93,7 +93,7 @@ zero prices
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
@@ -129,7 +129,7 @@ zero units
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
@@ -158,18 +158,18 @@ zero costs
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
-            (posting
-                (account)
-                (incomplete_amount (number) (currency))
-                (cost_spec
-                        (cost_comp (compound_amount (number) (currency)))
-                )
+        (narration)
+        (posting
+            (account)
+            (incomplete_amount (number) (currency))
+            (cost_spec
+                    (cost_comp (compound_amount (number) (currency)))
             )
-            (posting
-                (account)
-                (incomplete_amount (number) (currency))
-            )
+        )
+        (posting
+            (account)
+            (incomplete_amount (number) (currency))
+        )
     )
 )
 
@@ -185,7 +185,7 @@ no postings
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
         (tags_links (link))
     )
  )
@@ -210,7 +210,7 @@ tags after first line
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
         (tags_links (tag) (link))
             (tags_links (tag) (tag))
             (tags_links (link) (tag))

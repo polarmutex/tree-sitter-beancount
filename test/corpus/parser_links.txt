@@ -12,7 +12,7 @@ links
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
         (tags_links (link))
             (posting
                 (account)

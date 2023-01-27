@@ -166,10 +166,13 @@ module.exports = grammar({
             ),
 
         // OPTIONAL
-        txn_strings: $ =>
-            seq(
-                $.string,
-                optional($.string),
+        _txn_strings: $ =>
+            choice(
+                seq(
+                    alias($.string, $.payee),
+                    alias($.string, $.narration),
+                ),
+                alias($.string, $.narration),
             ),
 
         // OPTIONAL
@@ -188,11 +191,11 @@ module.exports = grammar({
             seq(
                 field("date", $.date),
                 field("txn", $.txn),
-                field("txn_strings", optional($.txn_strings)),
+                optional($._txn_strings),
                 field("tags_links", optional($.tags_links)),
                 field("comment", optional($.comment)),
                 $._eol,
-                field("posting_or_kv_list", optional(
+                optional(
                     repeat1(
                         choice(
                             seq(
@@ -213,7 +216,7 @@ module.exports = grammar({
                             )
                         )
                     ),
-                )),
+                ),
 
             ),
 

@@ -15,7 +15,7 @@ orgmode heading
         (transaction
             (date)
             (txn)
-            (txn_strings (string))
+            (narration)
             (tags_links (link) (tag))
                 (posting
                     (account)
@@ -45,7 +45,7 @@ orgmode subheading
         (transaction
             (date)
             (txn)
-            (txn_strings (string))
+            (narration)
             (tags_links (link) (tag))
                 (posting
                     (account)

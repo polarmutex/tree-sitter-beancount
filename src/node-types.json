@@ -1400,28 +1400,6 @@
           }
         ]
       },
-      "posting_or_kv_list": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "comment",
-            "named": true
-          },
-          {
-            "type": "key_value_line",
-            "named": true
-          },
-          {
-            "type": "posting",
-            "named": true
-          },
-          {
-            "type": "tags_links",
-            "named": true
-          }
-        ]
-      },
       "tags_links": {
         "multiple": false,
         "required": false,
@@ -1441,17 +1419,37 @@
             "named": true
           }
         ]
-      },
-      "txn_strings": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "txn_strings",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "key_value_line",
+          "named": true
+        },
+        {
+          "type": "narration",
+          "named": true
+        },
+        {
+          "type": "payee",
+          "named": true
+        },
+        {
+          "type": "posting",
+          "named": true
+        },
+        {
+          "type": "tags_links",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1464,21 +1462,6 @@
       "types": [
         {
           "type": "flag",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "txn_strings",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "string",
           "named": true
         }
       ]
@@ -1620,6 +1603,10 @@
     "named": true
   },
   {
+    "type": "narration",
+    "named": true
+  },
+  {
     "type": "note",
     "named": false
   },
@@ -1638,6 +1625,10 @@
   {
     "type": "pad",
     "named": false
+  },
+  {
+    "type": "payee",
+    "named": true
   },
   {
     "type": "plugin",

@@ -13,7 +13,7 @@ metadata begin
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (key_value_line
                 (key_value (key) (string))
             )
@@ -58,7 +58,7 @@ metadata middle
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -103,7 +103,7 @@ metadata end
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -152,7 +152,7 @@ metadata many
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (key_value_line
                 (key_value (key) (string))
             )
@@ -214,7 +214,7 @@ metadata indented
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (key_value_line (key_value (key) (string)))
             (posting
                 (account)
@@ -363,7 +363,7 @@ metadata datatypes
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (account)))
             (key_value_line (key_value (key) (date)))
@@ -392,7 +392,7 @@ metadata key syntax
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (string)))

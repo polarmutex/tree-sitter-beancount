@@ -19,7 +19,7 @@ popmeta location:
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
