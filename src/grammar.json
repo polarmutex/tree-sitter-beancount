@@ -224,14 +224,7 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[A-Z]|[^\\x00-\\x7F]"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "PATTERN",
-              "value": "[A-Za-z0-9\\-]|[^\\x00-\\x7F]"
-            }
+            "value": "Assets|Liabilities|Equity|Income|Expenses"
           },
           {
             "type": "REPEAT1",
@@ -244,14 +237,7 @@
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[A-Z0-9]|[^\\x00-\\x7F]"
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[A-Za-z0-9\\-]|[^\\x00-\\x7F]"
-                  }
+                  "value": "[\\p{Lu}\\p{N}][\\p{L}\\p{N}\\-]*"
                 }
               ]
             }
