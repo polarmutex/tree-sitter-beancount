@@ -14,7 +14,6 @@ links
         (txn)
         (txn_strings (string))
         (tags_links (link))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -29,6 +28,5 @@ links
                     (currency)
                 )
             )
-        )
     )
 )

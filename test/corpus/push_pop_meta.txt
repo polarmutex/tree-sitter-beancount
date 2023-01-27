@@ -20,7 +20,6 @@ popmeta location:
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (number) (currency))
@@ -29,7 +28,6 @@ popmeta location:
                 (account)
                 (incomplete_amount (unary_number_expr (minus) (number)) (currency))
             )
-        )
     )
     (popmeta (key))
 )

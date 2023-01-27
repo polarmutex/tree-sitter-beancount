@@ -13,22 +13,22 @@ parse currencies
     (open
         (date)
         (account)
-        (currency_list (currency))
+        (currency)
     )
     (open
         (date)
         (account)
-        (currency_list (currency))
+        (currency)
     )
     (open
         (date)
         (account)
-        (currency_list (currency))
+        (currency)
     )
     (open
         (date)
         (account)
-        (currency_list (currency))
+        (currency)
     )
 )
 
@@ -47,14 +47,11 @@ different cost and price currency
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (unary_number_expr (minus) (number)) (currency))
                 (cost_spec
-                    (cost_comp_list
                         (cost_comp (compound_amount (number) (currency)))
-                    )
                 )
                 (at)
                 (price_annotation
@@ -65,6 +62,5 @@ different cost and price currency
                 (account)
                 (incomplete_amount (number) (currency))
             )
-        )
     )
 )
