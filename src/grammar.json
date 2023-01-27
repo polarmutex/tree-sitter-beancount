@@ -1,5 +1,6 @@
 {
   "name": "beancount",
+  "word": "identifier",
   "rules": {
     "file": {
       "type": "REPEAT",
@@ -2775,7 +2776,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[_a-zA-Z0-9]+"
+      "value": "[a-z]+"
     },
     "_skipped_lines": {
       "type": "CHOICE",

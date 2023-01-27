@@ -6,7 +6,7 @@ module.exports = grammar({
     name: "beancount",
 
     // Ensure we don't extract keywords from tokens
-    //word: ($) => $.identifier,
+    word: ($) => $.identifier,
 
     inline: ($) => [
     ],
@@ -686,7 +686,7 @@ module.exports = grammar({
         comment: $ => seq(';', /.*/),
 
         // NOTE: includes reserved identifiers
-        identifier: $ => /[_a-zA-Z0-9]+/,
+        identifier: $ => /[a-z]+/,
 
         _skipped_lines: $ =>
             choice(
