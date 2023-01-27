@@ -24,6 +24,11 @@ module.exports = grammar({
         /( |\r|\t)+/,
     ],
 
+    supertypes: $ => [
+        $._entry,
+        $._directive,
+    ],
+
     rules: {
         file: $ => repeat(
             choice(

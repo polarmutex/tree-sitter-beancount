@@ -3033,6 +3033,9 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [
+    "_entry",
+    "_directive"
+  ]
 }
 
