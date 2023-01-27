@@ -12,7 +12,7 @@ metadata begin
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (key_value_line
@@ -59,7 +59,7 @@ metadata middle
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -106,7 +106,7 @@ metadata end
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -157,7 +157,7 @@ metadata many
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (key_value_line
@@ -221,7 +221,7 @@ metadata indented
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (key_value_line (key_value (key) (string)))
@@ -388,7 +388,7 @@ metadata datatypes
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (key_value_line (key_value (key) (string)))
@@ -419,7 +419,7 @@ metadata key syntax
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (key_value_line (key_value (key) (string)))

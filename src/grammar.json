@@ -147,13 +147,6 @@
         "value": "[ \\r\\t]+"
       }
     },
-    "_pipe": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "|"
-      }
-    },
     "atat": {
       "type": "TOKEN",
       "content": {
@@ -166,62 +159,6 @@
       "content": {
         "type": "STRING",
         "value": "@"
-      }
-    },
-    "lcurllcurl": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "{{"
-      }
-    },
-    "rcurlrcurl": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "}}"
-      }
-    },
-    "lcurl": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "{"
-      }
-    },
-    "rcurl": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "}"
-      }
-    },
-    "_equal": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "="
-      }
-    },
-    "_comma": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": ","
-      }
-    },
-    "_tilde": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "~"
-      }
-    },
-    "_hash": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "#"
       }
     },
     "asterisk": {
@@ -238,13 +175,6 @@
         "value": "/"
       }
     },
-    "_colon": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": ":"
-      }
-    },
     "plus": {
       "type": "TOKEN",
       "content": {
@@ -259,109 +189,11 @@
         "value": "-"
       }
     },
-    "_lparen": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "("
-      }
-    },
-    "_rparen": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": ")"
-      }
-    },
     "flag": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "[!&?%PSTCURM*#]"
-      }
-    },
-    "TXN": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "txn"
-      }
-    },
-    "BALANCE": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "balance"
-      }
-    },
-    "OPEN": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "open"
-      }
-    },
-    "CLOSE": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "close"
-      }
-    },
-    "COMMODITY": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "commodity"
-      }
-    },
-    "PAD": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "pad"
-      }
-    },
-    "EVENT": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "event"
-      }
-    },
-    "PRICE": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "price"
-      }
-    },
-    "NOTE": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "note"
-      }
-    },
-    "DOCUMENT": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "document"
-      }
-    },
-    "QUERY": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "query"
-      }
-    },
-    "CUSTOM": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "custom"
       }
     },
     "_none": {
@@ -473,20 +305,20 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "TXN"
+          "type": "STRING",
+          "value": "txn"
         },
         {
           "type": "SYMBOL",
           "name": "flag"
         },
         {
-          "type": "SYMBOL",
-          "name": "asterisk"
+          "type": "STRING",
+          "value": "*"
         },
         {
-          "type": "SYMBOL",
-          "name": "_hash"
+          "type": "STRING",
+          "value": "#"
         }
       ]
     },
@@ -515,16 +347,16 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_lparen"
+          "type": "STRING",
+          "value": "("
         },
         {
           "type": "SYMBOL",
           "name": "_number_expr"
         },
         {
-          "type": "SYMBOL",
-          "name": "_rparen"
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
@@ -786,12 +618,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "asterisk"
+          "type": "STRING",
+          "value": "*"
         },
         {
-          "type": "SYMBOL",
-          "name": "_hash"
+          "type": "STRING",
+          "value": "#"
         },
         {
           "type": "SYMBOL",
@@ -1183,8 +1015,8 @@
             "name": "key"
           },
           {
-            "type": "SYMBOL",
-            "name": "_colon"
+            "type": "STRING",
+            "value": ":"
           },
           {
             "type": "SYMBOL",
@@ -1357,8 +1189,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_comma"
+                "type": "STRING",
+                "value": ","
               },
               {
                 "type": "SYMBOL",
@@ -1432,8 +1264,8 @@
           "name": "key"
         },
         {
-          "type": "SYMBOL",
-          "name": "_colon"
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "SYMBOL",
@@ -1453,12 +1285,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "OPEN"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "open"
         },
         {
@@ -1546,12 +1373,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CLOSE"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "close"
         },
         {
@@ -1608,12 +1430,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "COMMODITY"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "commodity"
         },
         {
@@ -1670,12 +1487,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "PAD"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "pad"
         },
         {
@@ -1740,12 +1552,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "BALANCE"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "balance"
         },
         {
@@ -1835,8 +1642,8 @@
               "name": "_number_expr"
             },
             {
-              "type": "SYMBOL",
-              "name": "_tilde"
+              "type": "STRING",
+              "value": "~"
             },
             {
               "type": "SYMBOL",
@@ -1931,8 +1738,8 @@
               }
             },
             {
-              "type": "SYMBOL",
-              "name": "_hash"
+              "type": "STRING",
+              "value": "#"
             },
             {
               "type": "FIELD",
@@ -1982,8 +1789,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "lcurl"
+              "type": "STRING",
+              "value": "{"
             },
             {
               "type": "FIELD",
@@ -2002,8 +1809,8 @@
               }
             },
             {
-              "type": "SYMBOL",
-              "name": "rcurl"
+              "type": "STRING",
+              "value": "}"
             }
           ]
         },
@@ -2011,8 +1818,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "lcurllcurl"
+              "type": "STRING",
+              "value": "{{"
             },
             {
               "type": "FIELD",
@@ -2031,8 +1838,8 @@
               }
             },
             {
-              "type": "SYMBOL",
-              "name": "rcurlrcurl"
+              "type": "STRING",
+              "value": "}}"
             }
           ]
         }
@@ -2051,8 +1858,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_comma"
+                "type": "STRING",
+                "value": ","
               },
               {
                 "type": "SYMBOL",
@@ -2079,8 +1886,8 @@
           "name": "string"
         },
         {
-          "type": "SYMBOL",
-          "name": "asterisk"
+          "type": "STRING",
+          "value": "*"
         }
       ]
     },
@@ -2096,12 +1903,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "PRICE"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "price"
         },
         {
@@ -2150,12 +1952,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "EVENT"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "event"
         },
         {
@@ -2204,12 +2001,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "QUERY"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "query"
         },
         {
@@ -2258,12 +2050,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "NOTE"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "note"
         },
         {
@@ -2316,12 +2103,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "DOCUMENT"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "document"
         },
         {
@@ -2422,12 +2204,7 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CUSTOM"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "custom"
         },
         {
@@ -2705,8 +2482,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_colon"
+              "type": "STRING",
+              "value": ":"
             },
             {
               "type": "PATTERN",

@@ -11,7 +11,7 @@ entry transaction one string
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -47,7 +47,7 @@ entry transaction two string
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string) (string))
         (posting_or_kv_list
             (posting
@@ -83,7 +83,7 @@ entry transaction with txn keyword
 (file
     (transaction
         (date)
-        (txn (TXN))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting

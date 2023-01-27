@@ -14,7 +14,7 @@ orgmode heading
     (section (headline (item))
         (transaction
             (date)
-            (txn (asterisk))
+            (txn)
             (txn_strings (string))
             (tags_links (link) (tag))
             (posting_or_kv_list
@@ -46,7 +46,7 @@ orgmode subheading
     (section (headline (item))
         (transaction
             (date)
-            (txn (asterisk))
+            (txn)
             (txn_strings (string))
             (tags_links (link) (tag))
             (posting_or_kv_list
