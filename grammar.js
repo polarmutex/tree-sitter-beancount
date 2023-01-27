@@ -78,16 +78,17 @@ module.exports = grammar({
         _none: $ => token('NULL'),
         bool: $ => token(/TRUE|FALSE/),
         date: $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
+        //An account name is a colon-separated list of capitalized words which begin with a letter, and whose first word must be one of five account types:
+        //Each component of the account names begin with a capital letter or a number and are followed by letters, numbers or dash (-) characters.
+        //All other characters are disallowed.
         account: $ =>
             token(
                 seq(
-                    /[A-Z]|[^\x00-\x7F]/,
-                    repeat(/[A-Za-z0-9\-]|[^\x00-\x7F]/),
+                    /Assets|Liabilities|Equity|Income|Expenses/,
                     repeat1(
                         seq(
                             ":",
-                            /[A-Z0-9]|[^\x00-\x7F]/,
-                            repeat(/[A-Za-z0-9\-]|[^\x00-\x7F]/),
+                            /[\p{Lu}\p{N}][\p{L}\p{N}\-]*/,
                         ),
                     ),
                 ),
