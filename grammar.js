@@ -99,13 +99,6 @@ module.exports = grammar({
         DOCUMENT: $ => token('document'),
         QUERY: $ => token('query'),
         CUSTOM: $ => token('custom'),
-        PUSHTAG: $ => token('pushtag'),
-        POPTAG: $ => token('poptag'),
-        PUSHMETA: $ => token('pushmeta'),
-        POPMETA: $ => token('popmeta'),
-        OPTION: $ => token('option'),
-        INCLUDE: $ => token('include'),
-        PLUGIN: $ => token('plugin'),
         _none: $ => token('NULL'),
         bool: $ => token(/TRUE|FALSE/),
         date: $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
@@ -246,8 +239,6 @@ module.exports = grammar({
         //    )
         //),
 
-        //account: $ => $.ACCOUNT,
-
         posting: $ =>
             choice(
                 seq(
@@ -295,7 +286,7 @@ module.exports = grammar({
             prec.left(seq(
                 $.key,
                 $._colon,
-                optional($._key_value_value),
+                $._key_value_value,
             )),
 
         key_value_line: $ => seq(
@@ -304,7 +295,6 @@ module.exports = grammar({
             $._eol
         ),
 
-        // OPTIONAL
         _key_value_value: $ =>
             choice(
                 $.string,
@@ -368,25 +358,25 @@ module.exports = grammar({
             ),
 
         pushtag: $ => seq(
-            alias($.PUSHTAG, "pushtag"),
+            "pushtag",
             $.tag,
             $._eol
         ),
 
         poptag: $ => seq(
-            alias($.POPTAG, "poptag"),
+            "poptag",
             $.tag,
             $._eol
         ),
 
         pushmeta: $ => seq(
-            alias($.PUSHMETA, "pushmeta"),
+            "pushmeta",
             $.key_value,
             $._eol
         ),
 
         popmeta: $ => seq(
-            alias($.POPMETA, "popmeta"),
+            "popmeta",
             $.key,
             $._colon,
             $._eol
@@ -636,14 +626,14 @@ module.exports = grammar({
             ),
 
         option: $ => seq(
-            alias($.OPTION, "option"),
+            "option",
             field("key", $.string),
             field("value", $.string),
             $._eol,
         ),
 
         include: $ => seq(
-            alias($.INCLUDE, "include"),
+            "include",
             $.string,
             $._eol,
         ),
@@ -651,12 +641,12 @@ module.exports = grammar({
         plugin: $ =>
             choice(
                 seq(
-                    alias($.PLUGIN, "plugin"),
+                    "plugin",
                     $.string,
                     $._eol
                 ),
                 seq(
-                    alias($.PLUGIN, "plugin"),
+                    "plugin",
                     $.string,
                     $.string,
                     $._eol

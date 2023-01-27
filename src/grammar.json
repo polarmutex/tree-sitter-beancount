@@ -364,55 +364,6 @@
         "value": "custom"
       }
     },
-    "PUSHTAG": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "pushtag"
-      }
-    },
-    "POPTAG": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "poptag"
-      }
-    },
-    "PUSHMETA": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "pushmeta"
-      }
-    },
-    "POPMETA": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "popmeta"
-      }
-    },
-    "OPTION": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "option"
-      }
-    },
-    "INCLUDE": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "include"
-      }
-    },
-    "PLUGIN": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "plugin"
-      }
-    },
     "_none": {
       "type": "TOKEN",
       "content": {
@@ -1236,16 +1187,8 @@
             "name": "_colon"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_key_value_value"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_key_value_value"
           }
         ]
       }
@@ -1430,12 +1373,7 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "PUSHTAG"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "pushtag"
         },
         {
@@ -1452,12 +1390,7 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "POPTAG"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "poptag"
         },
         {
@@ -1474,12 +1407,7 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "PUSHMETA"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "pushmeta"
         },
         {
@@ -1496,12 +1424,7 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "POPMETA"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "popmeta"
         },
         {
@@ -2606,12 +2529,7 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "OPTION"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "option"
         },
         {
@@ -2640,12 +2558,7 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "INCLUDE"
-          },
-          "named": false,
+          "type": "STRING",
           "value": "include"
         },
         {
@@ -2665,12 +2578,7 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "PLUGIN"
-              },
-              "named": false,
+              "type": "STRING",
               "value": "plugin"
             },
             {
@@ -2687,12 +2595,7 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "PLUGIN"
-              },
-              "named": false,
+              "type": "STRING",
               "value": "plugin"
             },
             {
