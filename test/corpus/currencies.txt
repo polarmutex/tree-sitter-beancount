@@ -46,7 +46,7 @@ different cost and price currency
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount (unary_number_expr (minus) (number)) (currency))

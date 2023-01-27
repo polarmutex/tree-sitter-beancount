@@ -12,7 +12,7 @@ expr add
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -44,7 +44,7 @@ expr sub
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -76,7 +76,7 @@ expr mult
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -108,7 +108,7 @@ expr div
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -141,7 +141,7 @@ expr neg
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -180,7 +180,7 @@ expr pos
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -214,7 +214,7 @@ expr predence
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -276,7 +276,7 @@ expr groups
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
@@ -319,7 +319,7 @@ expr different places
     (transaction
         (date)
         (txn)
-        (txn_strings (string))
+        (narration)
             (posting
                 (account)
                 (incomplete_amount
