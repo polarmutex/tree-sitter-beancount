@@ -17,7 +17,6 @@ orgmode heading
             (txn)
             (txn_strings (string))
             (tags_links (link) (tag))
-            (posting_or_kv_list
                 (posting
                     (account)
                     (incomplete_amount (number) (currency))
@@ -26,7 +25,6 @@ orgmode heading
                     (account)
                     (incomplete_amount (unary_number_expr (minus) (number)) (currency))
                 )
-            )
         )
     )
 )
@@ -49,7 +47,6 @@ orgmode subheading
             (txn)
             (txn_strings (string))
             (tags_links (link) (tag))
-            (posting_or_kv_list
                 (posting
                     (account)
                     (incomplete_amount (number) (currency))
@@ -58,7 +55,6 @@ orgmode subheading
                     (account)
                     (incomplete_amount (unary_number_expr (minus) (number)) (currency))
                 )
-            )
         )
     )
 )

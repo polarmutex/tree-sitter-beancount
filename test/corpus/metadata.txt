@@ -14,7 +14,6 @@ metadata begin
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (key_value_line
                 (key_value (key) (string))
             )
@@ -41,7 +40,6 @@ metadata begin
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -61,7 +59,6 @@ metadata middle
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -88,7 +85,6 @@ metadata middle
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -108,7 +104,6 @@ metadata end
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -135,7 +130,6 @@ metadata end
             (key_value_line
                 (key_value (key) (string))
             )
-        )
     )
 )
 
@@ -159,7 +153,6 @@ metadata many
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (key_value_line
                 (key_value (key) (string))
             )
@@ -198,7 +191,6 @@ metadata many
             (key_value_line
                 (key_value (key) (string))
             )
-        )
     )
 )
 
@@ -223,7 +215,6 @@ metadata indented
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (key_value_line (key_value (key) (string)))
             (posting
                 (account)
@@ -263,7 +254,6 @@ metadata indented
             (key_value_line
                 (key_value (key) (string))
             )
-        )
     )
 )
 
@@ -300,33 +290,25 @@ metadata other
     (open
         (date)
         (account)
-        (key_value_list
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (string)))
-        )
     )
     (close
         (date)
         (account)
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
     (note
         (date)
         (account)
         (string)
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
     (pad
         (date)
         (account)
         (account)
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
     (balance
         (date)
@@ -335,25 +317,19 @@ metadata other
             (number)
             (currency)
         )
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
     (event
         (date)
         (string)
         (string)
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
     (document
         (date)
         (account)
         (filename (string))
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
     (price
         (date)
@@ -362,9 +338,7 @@ metadata other
             (number)
             (currency)
         )
-        (key_value_list
             (key_value_line (key_value (key) (string)))
-        )
     )
 )
 
@@ -390,7 +364,6 @@ metadata datatypes
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (account)))
             (key_value_line (key_value (key) (date)))
@@ -400,7 +373,6 @@ metadata datatypes
             (key_value_line (key_value (key) (amount (number) (currency))))
             (key_value_line (key_value (key) (bool)))
             (key_value_line (key_value (key) (bool)))
-        )
     )
 )
 
@@ -421,11 +393,9 @@ metadata key syntax
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (string)))
             (key_value_line (key_value (key) (string)))
-        )
     )
 )

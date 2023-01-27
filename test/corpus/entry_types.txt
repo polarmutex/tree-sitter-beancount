@@ -13,7 +13,6 @@ entry transaction one string
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -30,7 +29,6 @@ entry transaction one string
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -49,7 +47,6 @@ entry transaction two string
         (date)
         (txn)
         (txn_strings (string) (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -66,7 +63,6 @@ entry transaction two string
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -85,7 +81,6 @@ entry transaction with txn keyword
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -102,7 +97,6 @@ entry transaction with txn keyword
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -172,9 +166,7 @@ entry open 2
     (open
         (date)
         (account)
-        (currency_list
             (currency)
-        )
     )
 )
 
@@ -190,11 +182,9 @@ entry open 3
     (open
         (date)
         (account)
-        (currency_list
             (currency)
             (currency)
             (currency)
-        )
     )
 )
 
@@ -210,9 +200,7 @@ entry open 4
     (open
         (date)
         (account)
-        (currency_list
             (currency)
-        )
         (opt_booking (string))
     )
 )
@@ -390,13 +378,11 @@ entry custom
     (custom
         (date)
         (string)
-        (custom_value_list
             (custom_value (string))
             (custom_value (date))
             (custom_value (bool))
             (custom_value (amount (number) (currency)))
             (custom_value (number))
-        )
     )
 )
 

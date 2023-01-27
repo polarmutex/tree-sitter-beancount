@@ -13,7 +13,6 @@ expr add
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -28,7 +27,6 @@ expr add
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -47,7 +45,6 @@ expr sub
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -62,7 +59,6 @@ expr sub
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -81,7 +77,6 @@ expr mult
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -96,7 +91,6 @@ expr mult
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -115,7 +109,6 @@ expr div
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -130,7 +123,6 @@ expr div
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -150,7 +142,6 @@ expr neg
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -172,7 +163,6 @@ expr neg
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -191,7 +181,6 @@ expr pos
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -206,7 +195,6 @@ expr pos
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -227,7 +215,6 @@ expr predence
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -272,7 +259,6 @@ expr predence
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -291,7 +277,6 @@ expr groups
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -314,7 +299,6 @@ expr groups
                     (currency)
                 )
             )
-        )
     )
 )
 
@@ -336,7 +320,6 @@ expr different places
         (date)
         (txn)
         (txn_strings (string))
-        (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount
@@ -344,14 +327,12 @@ expr different places
                     (currency)
                 )
                 (cost_spec
-                    (cost_comp_list
                         (cost_comp
                             (compound_amount
                                 (binary_number_expr (number) (asterisk) (number))
                                 (currency)
                             )
                         )
-                    )
                 )
                 (at)
                 (price_annotation
@@ -366,7 +347,6 @@ expr different places
                 (incomplete_amount (number) (currency))
                 (comment)
             )
-        )
     )
     (balance
         (date)
@@ -383,12 +363,10 @@ expr different places
             )
             (currency)
         )
-        (key_value_list
             (key_value_line
                 (key_value (key)
                     (unary_number_expr (minus) (binary_number_expr (number) (plus) (number)))
                 )
             )
-        )
     )
 )

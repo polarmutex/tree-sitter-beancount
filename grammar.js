@@ -192,7 +192,29 @@ module.exports = grammar({
                 field("tags_links", optional($.tags_links)),
                 field("comment", optional($.comment)),
                 $._eol,
-                field("posting_or_kv_list", optional($.posting_or_kv_list)),
+                field("posting_or_kv_list", optional(
+                    repeat1(
+                        choice(
+                            seq(
+                                $._indent,
+                                $._eol
+                            ),
+                            seq(
+                                $._indent,
+                                $.tags_links,
+                                $._eol
+                            ),
+                            $.key_value_line,
+                            $.posting,
+                            seq(
+                                $._indent,
+                                $.comment,
+                                $._eol
+                            )
+                        )
+                    ),
+                )),
+
             ),
 
         // OPTIONAL
@@ -285,30 +307,7 @@ module.exports = grammar({
             ),
 
         // OPTIONAL
-        posting_or_kv_list: $ =>
-            repeat1(
-                choice(
-                    seq(
-                        $._indent,
-                        $._eol
-                    ),
-                    seq(
-                        $._indent,
-                        $.tags_links,
-                        $._eol
-                    ),
-                    $.key_value_line,
-                    $.posting,
-                    seq(
-                        $._indent,
-                        $.comment,
-                        $._eol
-                    )
-                )
-            ),
-
-        // OPTIONAL
-        key_value_list: $ =>
+        _key_value_list: $ =>
             repeat1(
                 choice(
                     seq(
@@ -322,16 +321,6 @@ module.exports = grammar({
             ),
 
         // OPTIONAL
-        currency_list: $ =>
-            seq(
-                $.currency,
-                repeat(
-                    seq(
-                        ",",
-                        $.currency
-                    )
-                )
-            ),
 
         pushtag: $ => seq(
             "pushtag",
@@ -363,11 +352,21 @@ module.exports = grammar({
                 field("date", $.date),
                 "open",
                 field("account", $.account),
-                field("currencies", repeat($.currency_list)),
+                field("currencies", repeat(
+                    seq(
+                        $.currency,
+                        repeat(
+                            seq(
+                                ",",
+                                $.currency
+                            )
+                        )
+                    ),
+                )),
                 field("opt_booking", optional($.opt_booking)),
                 field("comment", optional($.comment)),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         // OPTIONAL
@@ -380,7 +379,7 @@ module.exports = grammar({
                 field("account", $.account),
                 field("comment", optional($.comment)),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         commodity: $ =>
@@ -390,7 +389,7 @@ module.exports = grammar({
                 field("currency", $.currency),
                 field("comment", optional($.comment)),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         pad: $ =>
@@ -401,7 +400,7 @@ module.exports = grammar({
                 field("from_account", $.account),
                 field("comment", optional($.comment)),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         balance: $ =>
@@ -417,7 +416,7 @@ module.exports = grammar({
                 ),
                 field("comment", optional($.comment)),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         amount: $ =>
@@ -477,18 +476,18 @@ module.exports = grammar({
             choice(
                 seq(
                     "{",
-                    field("cost_comp_list", optional($.cost_comp_list)),
+                    field("cost_comp_list", optional($._cost_comp_list)),
                     "}"
                 ),
                 seq(
                     "{{",
-                    field("cost_comp_list", optional($.cost_comp_list)),
+                    field("cost_comp_list", optional($._cost_comp_list)),
                     "}}"
                 ),
             ),
 
         // OPTIONAL
-        cost_comp_list: $ =>
+        _cost_comp_list: $ =>
             seq(
                 $.cost_comp,
                 repeat(
@@ -514,7 +513,7 @@ module.exports = grammar({
                 field("currency", $.currency),
                 field("amount", $.amount),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         event: $ =>
@@ -524,7 +523,7 @@ module.exports = grammar({
                 field("type", $.string),
                 field("desc", $.string),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         query: $ =>
@@ -534,7 +533,7 @@ module.exports = grammar({
                 field("name", $.string),
                 field("query", $.string),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         note: $ =>
@@ -544,7 +543,7 @@ module.exports = grammar({
                 field("account", $.account),
                 field("note", $.string),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         filename: $ => $.string,
@@ -557,7 +556,7 @@ module.exports = grammar({
                 field("filename", $.filename),
                 field("tags_links", optional($.tags_links)),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         custom_value: $ =>
@@ -570,19 +569,19 @@ module.exports = grammar({
                 $.account
             ),
 
-        custom_value_list: $ =>
-            repeat1(
-                $.custom_value
-            ),
 
         custom: $ =>
             seq(
                 field("date", $.date),
                 "custom",
                 field("name", $.string),
-                field("custom_value_list", optional($.custom_value_list)),
+                field("custom_value_list", optional(
+                    repeat1(
+                        $.custom_value
+                    ),
+                )),
                 $._eol,
-                optional($.key_value_list)
+                optional($._key_value_list)
             ),
 
         _entry: $ =>

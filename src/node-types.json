@@ -192,11 +192,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -277,11 +277,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -328,11 +328,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -430,30 +430,19 @@
     }
   },
   {
-    "type": "cost_comp_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "cost_comp",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "cost_spec",
     "named": true,
     "fields": {
       "cost_comp_list": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "cost_comp_list",
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "cost_comp",
             "named": true
           }
         ]
@@ -461,30 +450,15 @@
     }
   },
   {
-    "type": "currency_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "currency",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "custom",
     "named": true,
     "fields": {
       "custom_value_list": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "custom_value_list",
+            "type": "custom_value",
             "named": true
           }
         ]
@@ -511,11 +485,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -559,21 +533,6 @@
         },
         {
           "type": "unary_number_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "custom_value_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "custom_value",
           "named": true
         }
       ]
@@ -625,11 +584,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -671,11 +630,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -861,21 +820,6 @@
     }
   },
   {
-    "type": "key_value_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "key_value_line",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "note",
     "named": true,
     "fields": {
@@ -911,11 +855,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -950,7 +894,11 @@
         "required": false,
         "types": [
           {
-            "type": "currency_list",
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "currency",
             "named": true
           }
         ]
@@ -977,11 +925,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -1089,11 +1037,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -1225,33 +1173,6 @@
     }
   },
   {
-    "type": "posting_or_kv_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "key_value_line",
-          "named": true
-        },
-        {
-          "type": "posting",
-          "named": true
-        },
-        {
-          "type": "tags_links",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "price",
     "named": true,
     "fields": {
@@ -1287,11 +1208,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -1378,11 +1299,11 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "key_value_list",
+          "type": "key_value_line",
           "named": true
         }
       ]
@@ -1480,11 +1401,23 @@
         ]
       },
       "posting_or_kv_list": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "posting_or_kv_list",
+            "type": "comment",
+            "named": true
+          },
+          {
+            "type": "key_value_line",
+            "named": true
+          },
+          {
+            "type": "posting",
+            "named": true
+          },
+          {
+            "type": "tags_links",
             "named": true
           }
         ]
