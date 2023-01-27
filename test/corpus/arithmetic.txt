@@ -11,7 +11,7 @@ expr add
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -45,7 +45,7 @@ expr sub
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -79,7 +79,7 @@ expr mult
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -113,7 +113,7 @@ expr div
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -148,7 +148,7 @@ expr neg
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -189,7 +189,7 @@ expr pos
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -225,7 +225,7 @@ expr predence
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -289,7 +289,7 @@ expr groups
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -334,7 +334,7 @@ expr different places
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
@@ -344,7 +344,6 @@ expr different places
                     (currency)
                 )
                 (cost_spec
-                    (lcurl)
                     (cost_comp_list
                         (cost_comp
                             (compound_amount
@@ -353,7 +352,6 @@ expr different places
                             )
                         )
                     )
-                    (rcurl)
                 )
                 (at)
                 (price_annotation

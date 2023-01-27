@@ -23,7 +23,7 @@ comment before transaction
     (comment)
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (posting_or_kv_list
             (posting
                 (account)
@@ -57,7 +57,7 @@ comment after transaction
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (posting_or_kv_list
             (posting
                 (account)
@@ -92,7 +92,7 @@ comment between posting
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (posting_or_kv_list
             (posting
                 (account)
@@ -126,7 +126,7 @@ comment after posting
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (posting_or_kv_list
             (posting
                 (account)
@@ -160,7 +160,7 @@ comment after transaction start
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (comment)
         (posting_or_kv_list
             (posting

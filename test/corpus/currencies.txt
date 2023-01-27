@@ -45,18 +45,16 @@ different cost and price currency
 (file
     (transaction
         (date)
-        (txn (asterisk))
+        (txn)
         (txn_strings (string))
         (posting_or_kv_list
             (posting
                 (account)
                 (incomplete_amount (unary_number_expr (minus) (number)) (currency))
                 (cost_spec
-                    (lcurl)
                     (cost_comp_list
                         (cost_comp (compound_amount (number) (currency)))
                     )
-                    (rcurl)
                 )
                 (at)
                 (price_annotation

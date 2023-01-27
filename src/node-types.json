@@ -142,6 +142,11 @@
     }
   },
   {
+    "type": "asterisk",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "balance",
     "named": true,
     "fields": {
@@ -348,9 +353,17 @@
         ]
       },
       "per": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_number_expr",
             "named": true
@@ -366,9 +379,17 @@
         ]
       },
       "total": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_number_expr",
             "named": true
@@ -391,12 +412,8 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "asterisk",
-          "named": true
-        },
         {
           "type": "compound_amount",
           "named": true
@@ -441,28 +458,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "lcurl",
-          "named": true
-        },
-        {
-          "type": "lcurllcurl",
-          "named": true
-        },
-        {
-          "type": "rcurl",
-          "named": true
-        },
-        {
-          "type": "rcurlrcurl",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1016,10 +1011,6 @@
       "required": false,
       "types": [
         {
-          "type": "asterisk",
-          "named": true
-        },
-        {
           "type": "flag",
           "named": true
         }
@@ -1539,14 +1530,6 @@
       "required": false,
       "types": [
         {
-          "type": "TXN",
-          "named": true
-        },
-        {
-          "type": "asterisk",
-          "named": true
-        },
-        {
           "type": "flag",
           "named": true
         }
@@ -1608,19 +1591,35 @@
     "named": false
   },
   {
+    "type": "#",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": ";",
     "named": false
   },
   {
-    "type": "TXN",
-    "named": true
-  },
-  {
     "type": "account",
-    "named": true
-  },
-  {
-    "type": "asterisk",
     "named": true
   },
   {
@@ -1677,14 +1676,6 @@
   },
   {
     "type": "key",
-    "named": true
-  },
-  {
-    "type": "lcurl",
-    "named": true
-  },
-  {
-    "type": "lcurllcurl",
     "named": true
   },
   {
@@ -1748,14 +1739,6 @@
     "named": false
   },
   {
-    "type": "rcurl",
-    "named": true
-  },
-  {
-    "type": "rcurlrcurl",
-    "named": true
-  },
-  {
     "type": "slash",
     "named": true
   },
@@ -1766,5 +1749,29 @@
   {
     "type": "tag",
     "named": true
+  },
+  {
+    "type": "txn",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "{{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  },
+  {
+    "type": "}}",
+    "named": false
+  },
+  {
+    "type": "~",
+    "named": false
   }
 ]

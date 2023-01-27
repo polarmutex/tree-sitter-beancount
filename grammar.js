@@ -68,37 +68,13 @@ module.exports = grammar({
         /* Types for terminal symbols */
         _indent: $ => token(/[ \r\t]+/),
         _eol: $ => token(/\n/),
-        _pipe: $ => token('|'),
         atat: $ => token('@@'),
         at: $ => token('@'),
-        lcurllcurl: $ => token('{{'),
-        rcurlrcurl: $ => token('}}'),
-        lcurl: $ => token('{'),
-        rcurl: $ => token('}'),
-        _equal: $ => token('='),
-        _comma: $ => token(','),
-        _tilde: $ => token('~'),
-        _hash: $ => token('#'),
         asterisk: $ => token('*'),
         slash: $ => token('/'),
-        _colon: $ => token(':'),
         plus: $ => token('+'),
         minus: $ => token('-'),
-        _lparen: $ => token('('),
-        _rparen: $ => token(')'),
         flag: $ => token(/[!&?%PSTCURM*#]/),
-        TXN: $ => token('txn'),
-        BALANCE: $ => token('balance'),
-        OPEN: $ => token('open'),
-        CLOSE: $ => token('close'),
-        COMMODITY: $ => token('commodity'),
-        PAD: $ => token('pad'),
-        EVENT: $ => token('event'),
-        PRICE: $ => token('price'),
-        NOTE: $ => token('note'),
-        DOCUMENT: $ => token('document'),
-        QUERY: $ => token('query'),
-        CUSTOM: $ => token('custom'),
         _none: $ => token('NULL'),
         bool: $ => token(/TRUE|FALSE/),
         date: $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
@@ -139,10 +115,10 @@ module.exports = grammar({
         /* Grammar Rules */
 
         txn: $ => choice(
-            $.TXN,
+            "txn",
             $.flag,
-            $.asterisk,
-            $._hash
+            "*",
+            "#"
         ),
 
         _number_expr: $ =>
@@ -154,9 +130,9 @@ module.exports = grammar({
             ),
         _paren__number_expr: $ =>
             seq(
-                $._lparen,
+                "(",
                 $._number_expr,
-                $._rparen,
+                ")",
             ),
         unary_number_expr: $ =>
             prec(3,
@@ -222,8 +198,8 @@ module.exports = grammar({
         // OPTIONAL
         optflag: $ =>
             choice(
-                $.asterisk,
-                $._hash,
+                "*",
+                "#",
                 $.flag,
             ),
 
@@ -285,7 +261,7 @@ module.exports = grammar({
         key_value: $ =>
             prec.left(seq(
                 $.key,
-                $._colon,
+                ":",
                 $._key_value_value,
             )),
 
@@ -351,7 +327,7 @@ module.exports = grammar({
                 $.currency,
                 repeat(
                     seq(
-                        $._comma,
+                        ",",
                         $.currency
                     )
                 )
@@ -378,14 +354,14 @@ module.exports = grammar({
         popmeta: $ => seq(
             "popmeta",
             $.key,
-            $._colon,
+            ":",
             $._eol
         ),
 
         open: $ =>
             seq(
                 field("date", $.date),
-                alias($.OPEN, "open"),
+                "open",
                 field("account", $.account),
                 field("currencies", repeat($.currency_list)),
                 field("opt_booking", optional($.opt_booking)),
@@ -400,7 +376,7 @@ module.exports = grammar({
         close: $ =>
             seq(
                 field("date", $.date),
-                alias($.CLOSE, "close"),
+                "close",
                 field("account", $.account),
                 field("comment", optional($.comment)),
                 $._eol,
@@ -410,7 +386,7 @@ module.exports = grammar({
         commodity: $ =>
             seq(
                 field("date", $.date),
-                alias($.COMMODITY, "commodity"),
+                "commodity",
                 field("currency", $.currency),
                 field("comment", optional($.comment)),
                 $._eol,
@@ -420,7 +396,7 @@ module.exports = grammar({
         pad: $ =>
             seq(
                 field("date", $.date),
-                alias($.PAD, "pad"),
+                "pad",
                 field("account", $.account),
                 field("from_account", $.account),
                 field("comment", optional($.comment)),
@@ -431,7 +407,7 @@ module.exports = grammar({
         balance: $ =>
             seq(
                 field("date", $.date),
-                alias($.BALANCE, "balance"),
+                "balance",
                 field("account", $.account),
                 field("amount",
                     //choice(
@@ -458,7 +434,7 @@ module.exports = grammar({
                 ),
                 seq(
                     $._number_expr,
-                    $._tilde,
+                    "~",
                     $._number_expr,
                     $.currency
                 )
@@ -482,7 +458,7 @@ module.exports = grammar({
                 ),
                 seq(
                     field("per", optional($._number_expr)),
-                    $._hash,
+                    "#",
                     field("total", optional($._number_expr)),
                     field("currency", $.currency)
                 ),
@@ -500,14 +476,14 @@ module.exports = grammar({
         cost_spec: $ =>
             choice(
                 seq(
-                    $.lcurl,
+                    "{",
                     field("cost_comp_list", optional($.cost_comp_list)),
-                    $.rcurl
+                    "}"
                 ),
                 seq(
-                    $.lcurllcurl,
+                    "{{",
                     field("cost_comp_list", optional($.cost_comp_list)),
-                    $.rcurlrcurl
+                    "}}"
                 ),
             ),
 
@@ -517,7 +493,7 @@ module.exports = grammar({
                 $.cost_comp,
                 repeat(
                     seq(
-                        $._comma,
+                        ",",
                         $.cost_comp
                     )
                 )
@@ -528,13 +504,13 @@ module.exports = grammar({
                 $.compound_amount,
                 $.date,
                 $.string,
-                $.asterisk
+                "*"
             ),
 
         price: $ =>
             seq(
                 field("date", $.date),
-                alias($.PRICE, "price"),
+                "price",
                 field("currency", $.currency),
                 field("amount", $.amount),
                 $._eol,
@@ -544,7 +520,7 @@ module.exports = grammar({
         event: $ =>
             seq(
                 field("date", $.date),
-                alias($.EVENT, "event"),
+                "event",
                 field("type", $.string),
                 field("desc", $.string),
                 $._eol,
@@ -554,7 +530,7 @@ module.exports = grammar({
         query: $ =>
             seq(
                 field("date", $.date),
-                alias($.QUERY, "query"),
+                "query",
                 field("name", $.string),
                 field("query", $.string),
                 $._eol,
@@ -564,7 +540,7 @@ module.exports = grammar({
         note: $ =>
             seq(
                 field("date", $.date),
-                alias($.NOTE, "note"),
+                "note",
                 field("account", $.account),
                 field("note", $.string),
                 $._eol,
@@ -576,7 +552,7 @@ module.exports = grammar({
         document: $ =>
             seq(
                 field("date", $.date),
-                alias($.DOCUMENT, "document"),
+                "document",
                 field("account", $.account),
                 field("filename", $.filename),
                 field("tags_links", optional($.tags_links)),
@@ -602,7 +578,7 @@ module.exports = grammar({
         custom: $ =>
             seq(
                 field("date", $.date),
-                alias($.CUSTOM, "custom"),
+                "custom",
                 field("name", $.string),
                 field("custom_value_list", optional($.custom_value_list)),
                 $._eol,
@@ -686,7 +662,7 @@ module.exports = grammar({
                     $._eol
                 ),
                 seq(
-                    $._colon,
+                    ":",
                     /.*/,
                     $._eol
                 ),
