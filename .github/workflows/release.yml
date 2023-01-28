@@ -34,7 +34,7 @@ jobs:
       - name: Checking out sources
         uses: actions/checkout@v1
       - name: Cache Cargo
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/registry
