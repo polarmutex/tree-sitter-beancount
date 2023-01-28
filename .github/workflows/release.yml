@@ -59,7 +59,7 @@ jobs:
       - name: Checking out sources
         uses: actions/checkout@v1
       - name: Set up Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3.6.0
         with:
           node-version: '16'
           registry-url: 'https://registry.npmjs.org'
