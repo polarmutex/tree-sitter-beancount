@@ -98,7 +98,6 @@ module.exports = grammar({
         number: $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
         tag: $ => token(/#[A-Za-z0-9\-_/.]+/),
         link: $ => token(/\^[A-Za-z0-9\-_/.]+/),
-        key: $ => token(/[a-z][a-zA-Z0-9\-_]+/),
 
         /* Operator precedence.
          * This is pulled straight out of the textbook example:
@@ -208,7 +207,7 @@ module.exports = grammar({
                                 $.tags_links,
                                 $._eol
                             ),
-                            $.key_value_line,
+                            $._key_value_line,
                             $.posting,
                             seq(
                                 $._indent,
@@ -284,20 +283,9 @@ module.exports = grammar({
                 )
             ),
 
-        key_value: $ =>
-            prec.left(seq(
-                $.key,
-                ":",
-                $._key_value_value,
-            )),
+        key: $ => token(/[a-z][a-zA-Z0-9\-_]+/),
 
-        key_value_line: $ => seq(
-            $._indent,
-            $.key_value,
-            $._eol
-        ),
-
-        _key_value_value: $ =>
+        value: $ =>
             choice(
                 $.string,
                 $.account,
@@ -310,6 +298,24 @@ module.exports = grammar({
                 $.amount
             ),
 
+        key_value: $ =>
+            prec.left(seq(
+                $.key,
+                ":",
+                $.value,
+            )),
+
+        _key_value_line: $ => seq(
+            $._indent,
+            /*prec.left(seq(
+                $.key,
+                ":",
+                $.value,
+            )),*/
+            $.key_value,
+            $._eol
+        ),
+
         // OPTIONAL
         _key_value_list: $ =>
             repeat1(
@@ -319,7 +325,7 @@ module.exports = grammar({
                         $._eol
                     ),
                     seq(
-                        $.key_value_line
+                        $._key_value_line
                     )
                 )
             ),

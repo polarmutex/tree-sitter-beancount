@@ -196,7 +196,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -281,7 +281,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -332,7 +332,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -489,7 +489,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -588,7 +588,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -634,7 +634,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -758,62 +758,11 @@
       "required": true,
       "types": [
         {
-          "type": "account",
-          "named": true
-        },
-        {
-          "type": "amount",
-          "named": true
-        },
-        {
-          "type": "binary_number_expr",
-          "named": true
-        },
-        {
-          "type": "bool",
-          "named": true
-        },
-        {
-          "type": "currency",
-          "named": true
-        },
-        {
-          "type": "date",
-          "named": true
-        },
-        {
           "type": "key",
           "named": true
         },
         {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "tag",
-          "named": true
-        },
-        {
-          "type": "unary_number_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "key_value_line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "key_value",
+          "type": "value",
           "named": true
         }
       ]
@@ -859,7 +808,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -929,7 +878,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -1041,7 +990,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -1212,7 +1161,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -1303,7 +1252,7 @@
       "required": false,
       "types": [
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         }
       ]
@@ -1430,7 +1379,7 @@
           "named": true
         },
         {
-          "type": "key_value_line",
+          "type": "key_value",
           "named": true
         },
         {
@@ -1489,6 +1438,57 @@
         },
         {
           "type": "plus",
+          "named": true
+        },
+        {
+          "type": "unary_number_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "amount",
+          "named": true
+        },
+        {
+          "type": "binary_number_expr",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "currency",
+          "named": true
+        },
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tag",
           "named": true
         },
         {

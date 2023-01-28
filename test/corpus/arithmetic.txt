@@ -363,8 +363,9 @@ expr different places
             )
             (currency)
         )
-            (key_value_line
-                (key_value (key)
+            (key_value
+                (key)
+                (value
                     (unary_number_expr (minus) (binary_number_expr (number) (plus) (number)))
                 )
             )
