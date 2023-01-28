@@ -14,7 +14,7 @@ popmeta location:
 
 (file
     (pushmeta
-        (key_value (key) (string))
+        (key_value (key) (value (string)))
     )
     (transaction
         (date)

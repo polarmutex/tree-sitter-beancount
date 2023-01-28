@@ -280,13 +280,6 @@
         "value": "\\^[A-Za-z0-9\\-_/.]+"
       }
     },
-    "key": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[a-z][a-zA-Z0-9\\-_]+"
-      }
-    },
     "txn": {
       "type": "CHOICE",
       "members": [
@@ -634,7 +627,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "key_value_line"
+                    "name": "_key_value_line"
                   },
                   {
                     "type": "SYMBOL",
@@ -1057,45 +1050,14 @@
         }
       ]
     },
-    "key_value": {
-      "type": "PREC_LEFT",
-      "value": 0,
+    "key": {
+      "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "key"
-          },
-          {
-            "type": "STRING",
-            "value": ":"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_key_value_value"
-          }
-        ]
+        "type": "PATTERN",
+        "value": "[a-z][a-zA-Z0-9\\-_]+"
       }
     },
-    "key_value_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_indent"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "key_value"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_eol"
-        }
-      ]
-    },
-    "_key_value_value": {
+    "value": {
       "type": "CHOICE",
       "members": [
         {
@@ -1136,6 +1098,44 @@
         }
       ]
     },
+    "key_value": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "key"
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "value"
+          }
+        ]
+      }
+    },
+    "_key_value_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_indent"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "key_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
     "_key_value_list": {
       "type": "REPEAT1",
       "content": {
@@ -1159,7 +1159,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "key_value_line"
+                "name": "_key_value_line"
               }
             ]
           }

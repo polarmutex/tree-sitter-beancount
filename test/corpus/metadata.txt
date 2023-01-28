@@ -14,8 +14,9 @@ metadata begin
         (date)
         (txn)
         (narration)
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
             (posting
                 (account)
@@ -73,8 +74,9 @@ metadata middle
                     )
                 )
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
             (posting
                 (account)
@@ -127,8 +129,9 @@ metadata end
                     (currency)
                 )
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
     )
 )
@@ -153,8 +156,9 @@ metadata many
         (date)
         (txn)
         (narration)
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
             (posting
                 (account)
@@ -170,11 +174,13 @@ metadata many
                     )
                 )
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
             (posting
                 (account)
@@ -185,11 +191,13 @@ metadata many
                     (currency)
                 )
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
     )
 )
@@ -215,7 +223,7 @@ metadata indented
         (date)
         (txn)
         (narration)
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
             (posting
                 (account)
                 (incomplete_amount
@@ -230,11 +238,13 @@ metadata indented
                     )
                 )
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
             (posting
                 (account)
@@ -245,14 +255,17 @@ metadata indented
                     (currency)
                 )
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
-            (key_value_line
-                (key_value (key) (string))
+            (key_value
+                (key)
+                (value (string))
             )
     )
 )
@@ -290,25 +303,25 @@ metadata other
     (open
         (date)
         (account)
-            (key_value_line (key_value (key) (string)))
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
+            (key_value (key) (value (string)))
     )
     (close
         (date)
         (account)
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
     (note
         (date)
         (account)
         (string)
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
     (pad
         (date)
         (account)
         (account)
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
     (balance
         (date)
@@ -317,19 +330,19 @@ metadata other
             (number)
             (currency)
         )
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
     (event
         (date)
         (string)
         (string)
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
     (document
         (date)
         (account)
         (filename (string))
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
     (price
         (date)
@@ -338,7 +351,7 @@ metadata other
             (number)
             (currency)
         )
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
     )
 )
 
@@ -364,15 +377,15 @@ metadata datatypes
         (date)
         (txn)
         (narration)
-            (key_value_line (key_value (key) (string)))
-            (key_value_line (key_value (key) (account)))
-            (key_value_line (key_value (key) (date)))
-            (key_value_line (key_value (key) (currency)))
-            (key_value_line (key_value (key) (tag)))
-            (key_value_line (key_value (key) (number)))
-            (key_value_line (key_value (key) (amount (number) (currency))))
-            (key_value_line (key_value (key) (bool)))
-            (key_value_line (key_value (key) (bool)))
+            (key_value (key) (value (string)))
+            (key_value (key) (value (account)))
+            (key_value (key) (value (date)))
+            (key_value (key) (value (currency)))
+            (key_value (key) (value (tag)))
+            (key_value (key) (value (number)))
+            (key_value (key) (value (amount (number) (currency))))
+            (key_value (key) (value (bool)))
+            (key_value (key) (value (bool)))
     )
 )
 
@@ -393,9 +406,9 @@ metadata key syntax
         (date)
         (txn)
         (narration)
-            (key_value_line (key_value (key) (string)))
-            (key_value_line (key_value (key) (string)))
-            (key_value_line (key_value (key) (string)))
-            (key_value_line (key_value (key) (string)))
+            (key_value (key) (value (string)))
+            (key_value (key) (value (string)))
+            (key_value (key) (value (string)))
+            (key_value (key) (value (string)))
     )
 )
