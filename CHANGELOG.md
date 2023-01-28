@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.1...v2.1.2) (2023-01-28)
+
+
+### Bug Fixes
+
+* cleanup grammar upon feedback ([015e228](https://github.com/polarmutex/tree-sitter-beancount/commit/015e228ca684bbba5ee3e457020cf9c5d1d20afc))
+* npm publish ([4cbd1f0](https://github.com/polarmutex/tree-sitter-beancount/commit/4cbd1f09cd07c1f1fabf867c2cf354f9da53cc4c))
+
 ## [2.1.1](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.0...v2.1.1) (2022-07-02)
 
 
