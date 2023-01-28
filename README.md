@@ -1,5 +1,6 @@
 # tree-sitter-beancount
-a tree-sitter parser for the beancount syntax
+a [tree-sitter](https://github.com/tree-sitter/tree-sitter) parser for the [beancount](https://github.com/beancount/beancount) syntax
 
-[Beancount syntax reference](https://beancount.github.io/docs/beancount_language_syntax.html)
-[tree-sitter reference](https://tree-sitter.github.io)
+## Reference
+[Beancount syntax](https://beancount.github.io/docs/beancount_language_syntax.html)
+[tree-sitter](https://tree-sitter.github.io)
