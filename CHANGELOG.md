@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.2...v2.1.3) (2023-07-02)
+
+
+### Bug Fixes
+
+* detect in error recovery and exit scan ([f3c05c6](https://github.com/polarmutex/tree-sitter-beancount/commit/f3c05c68aa03631fb4b9f0f7592bfec48376e65a))
+
 ## [2.1.2](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.1...v2.1.2) (2023-01-28)
 
 

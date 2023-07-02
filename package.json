@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-beancount",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "a tree-sitter parser for the beancount syntax",
   "main": "bindings/node",
   "scripts": {
