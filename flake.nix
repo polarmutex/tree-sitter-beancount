@@ -82,13 +82,8 @@
             nativeBuildInputs = with pkgs; [
               nodejs
               nodePackages.node-gyp
-              #python39
-              #nodePackages.typescript
-              #rustc
-              #cargo
-              #rustfmt
-              #clippy
-              (tree-sitter.overrideAttrs (_: {webUISupport = true;}))
+              # broken (tree-sitter.override {webUISupport = true;})
+              tree-sitter
             ];
 
             inherit (checks.pre-commit) shellHook;
@@ -98,7 +93,11 @@
         packages = {
           default = packages.tree-sitter-beancount;
 
-          inherit (pkgs.tree-sitter.passthru.builtGrammars) tree-sitter-beancount;
+          tree-sitter-beancount = pkgs.callPackage (nixpkgs + "/pkgs/development/tools/parsing/tree-sitter/grammar.nix") {} {
+            language = "beancount";
+            src = ./.;
+            inherit (pkgs.tree-sitter) version;
+          };
 
           inherit (pkgs) tree-sitter;
         };
