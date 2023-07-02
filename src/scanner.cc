@@ -8,7 +8,7 @@ using std::iswspace;
 using std::vector;
 
 enum TokenType {
-    HL_STARS,
+    SECTION,
     SECTIONEND,
     END_OF_FILE,
 };
@@ -75,7 +75,15 @@ struct Scanner {
         lexer->advance(lexer, true);
     }
 
+    static bool in_error_recovery(const bool *valid_symbols) {
+        return (valid_symbols[SECTION] && valid_symbols[SECTIONEND]
+                && valid_symbols[END_OF_FILE]);
+    }
+
     bool scan(TSLexer *lexer, const bool *valid_symbols) {
+
+        if (in_error_recovery(valid_symbols))
+            return false;
 
         // - Section ends
         int16_t indent_length = 0;
@@ -116,9 +124,9 @@ struct Scanner {
                 org_section_stack.pop_back();
                 lexer->result_symbol = SECTIONEND;
                 return true;
-            } else if (valid_symbols[HL_STARS] && iswspace(lexer->lookahead)) {
+            } else if (valid_symbols[SECTION] && iswspace(lexer->lookahead)) {
                 org_section_stack.push_back(stars);
-                lexer->result_symbol = HL_STARS;
+                lexer->result_symbol = SECTION;
                 return true;
             }
             return false;
