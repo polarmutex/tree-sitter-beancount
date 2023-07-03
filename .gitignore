@@ -1,5 +1,9 @@
-node_modules
-build
+/build
+/node_modules
+/examples/*/
+/target
 
+Cargo.lock
+package-lock.json
 .direnv
 .pre-commit-config.yaml
