@@ -32,7 +32,7 @@ jobs:
           profile: minimal
           override: true
       - name: Checking out sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cache Cargo
         uses: actions/cache@v3
         with:
@@ -57,7 +57,7 @@ jobs:
     if: needs.release-please.outputs.release_created
     steps:
       - name: Checking out sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Node
         uses: actions/setup-node@v3.6.0
         with:
