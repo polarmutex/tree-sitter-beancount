@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.3...v2.2.0) (2023-10-10)
+
+
+### Features
+
+* add named field for narration and payee ([0631b99](https://github.com/polarmutex/tree-sitter-beancount/commit/0631b99d9096e10f4e289efe618e518debe918b4))
+
 ## [2.1.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.2...v2.1.3) (2023-07-02)
 
 
