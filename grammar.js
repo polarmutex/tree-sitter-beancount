@@ -169,10 +169,10 @@ module.exports = grammar({
         _txn_strings: $ =>
             choice(
                 seq(
-                    alias($.string, $.payee),
-                    alias($.string, $.narration),
+                    field("payee", alias($.string, $.payee)),
+                    field("narration", alias($.string, $.narration)),
                 ),
-                alias($.string, $.narration),
+                field("narration", alias($.string, $.narration)),
             ),
 
         // OPTIONAL
