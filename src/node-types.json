@@ -1349,6 +1349,26 @@
           }
         ]
       },
+      "narration": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "narration",
+            "named": true
+          }
+        ]
+      },
+      "payee": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "payee",
+            "named": true
+          }
+        ]
+      },
       "tags_links": {
         "multiple": false,
         "required": false,
@@ -1380,14 +1400,6 @@
         },
         {
           "type": "key_value",
-          "named": true
-        },
-        {
-          "type": "narration",
-          "named": true
-        },
-        {
-          "type": "payee",
           "named": true
         },
         {
