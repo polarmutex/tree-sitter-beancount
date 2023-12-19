@@ -10,17 +10,6 @@ let package = Package(
     targets: [
         .target(name: "TreeSitterBeancount",
                 path: ".",
-                exclude: [
-                    "binding.gyp",
-                    "bindings",
-                    "Cargo.toml",
-                    "grammar.js",
-                    "LICENSE",
-                    "package.json",
-                    "README.md",
-                    "src/grammar.json",
-                    "src/node-types.json",
-                ],
                 sources: [
                     "src/parser.c",
                     "src/scanner.cc",
