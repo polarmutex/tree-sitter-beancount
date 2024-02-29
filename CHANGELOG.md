@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.0...v2.3.1) (2024-02-29)
+
+
+### Bug Fixes
+
+* cargo version ([01cc2ca](https://github.com/polarmutex/tree-sitter-beancount/commit/01cc2ca9073b1dab75e6d7996f48331b0c3f9057))
+
 ## [2.3.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.2.0...v2.3.0) (2024-02-29)
 
 
