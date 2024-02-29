@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.2.0...v2.3.0) (2024-02-29)
+
+
+### Features
+
+* Add swift bindings ([0e08ee4](https://github.com/polarmutex/tree-sitter-beancount/commit/0e08ee4212edef5088bb3dd93ab0ba01f94792b0))
+
+
+### Bug Fixes
+
+* remove unneeded excludes ([cd08aef](https://github.com/polarmutex/tree-sitter-beancount/commit/cd08aefa20dc0f3d5984b08b5d468f75bf4fd096))
+
 ## [2.2.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.3...v2.2.0) (2023-10-10)
 
 
