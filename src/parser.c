@@ -1,4 +1,4 @@
-#include <tree_sitter/parser.h>
+#include "tree_sitter/parser.h"
 
 #if defined(__GNUC__) || defined(__clang__)
 #pragma GCC diagnostic push
@@ -16,7 +16,7 @@
 #define MAX_ALIAS_SEQUENCE_LENGTH 9
 #define PRODUCTION_ID_COUNT 88
 
-enum {
+enum ts_symbol_identifiers {
   sym_identifier = 1,
   anon_sym_LF = 2,
   anon_sym_CR = 3,
@@ -974,7 +974,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
 };
 
-enum {
+enum ts_field_identifiers {
   field_account = 1,
   field_amount = 2,
   field_comment = 3,
@@ -5713,33 +5713,6 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [613] = {.lex_state = 0},
   [614] = {.lex_state = 0},
   [615] = {.lex_state = 0},
-};
-
-enum {
-  ts_external_token__stars = 0,
-  ts_external_token__sectionend = 1,
-  ts_external_token__eof = 2,
-};
-
-static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
-  [ts_external_token__stars] = sym__stars,
-  [ts_external_token__sectionend] = sym__sectionend,
-  [ts_external_token__eof] = sym__eof,
-};
-
-static const bool ts_external_scanner_states[4][EXTERNAL_TOKEN_COUNT] = {
-  [1] = {
-    [ts_external_token__stars] = true,
-    [ts_external_token__sectionend] = true,
-    [ts_external_token__eof] = true,
-  },
-  [2] = {
-    [ts_external_token__stars] = true,
-  },
-  [3] = {
-    [ts_external_token__stars] = true,
-    [ts_external_token__sectionend] = true,
-  },
 };
 
 static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
@@ -16331,6 +16304,33 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1605] = {.entry = {.count = 1, .reusable = true}}, SHIFT(602),
   [1607] = {.entry = {.count = 1, .reusable = true}}, SHIFT(603),
   [1609] = {.entry = {.count = 1, .reusable = true}}, SHIFT(448),
+};
+
+enum ts_external_scanner_symbol_identifiers {
+  ts_external_token__stars = 0,
+  ts_external_token__sectionend = 1,
+  ts_external_token__eof = 2,
+};
+
+static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
+  [ts_external_token__stars] = sym__stars,
+  [ts_external_token__sectionend] = sym__sectionend,
+  [ts_external_token__eof] = sym__eof,
+};
+
+static const bool ts_external_scanner_states[4][EXTERNAL_TOKEN_COUNT] = {
+  [1] = {
+    [ts_external_token__stars] = true,
+    [ts_external_token__sectionend] = true,
+    [ts_external_token__eof] = true,
+  },
+  [2] = {
+    [ts_external_token__stars] = true,
+  },
+  [3] = {
+    [ts_external_token__stars] = true,
+    [ts_external_token__sectionend] = true,
+  },
 };
 
 #ifdef __cplusplus

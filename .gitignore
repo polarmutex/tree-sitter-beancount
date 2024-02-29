@@ -1,8 +1,5 @@
-node_modules
-build
-
-.direnv
-.pre-commit-config.yaml
-result
-
-.build/
+/node_modules
+/build
+/result
+/.direnv
+/.pre-commit-config.yaml
