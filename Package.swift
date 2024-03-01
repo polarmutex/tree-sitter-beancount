@@ -12,7 +12,7 @@ let package = Package(
                 path: ".",
                 sources: [
                     "src/parser.c",
-                    "src/scanner.cc",
+                    "src/scanner.c",
                 ],
                 publicHeadersPath: "bindings/swift",
                 cSettings: [.headerSearchPath("src")])
