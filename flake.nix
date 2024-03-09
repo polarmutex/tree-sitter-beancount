@@ -84,6 +84,7 @@
               nodePackages.node-gyp
               # broken (tree-sitter.override {webUISupport = true;})
               tree-sitter
+              cargo
             ];
 
             inherit (checks.pre-commit) shellHook;
