@@ -10,6 +10,7 @@
         "bindings/node/binding.cc",
         # If your language uses an external scanner, add it here.
         "src/parser.c",
+        # "src/scanner.c",
       ],
       "cflags_c": [
         "-std=c99",
