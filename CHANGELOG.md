@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.2](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.1...v2.3.2) (2024-03-09)
+
+
+### Bug Fixes
+
+* binding and lock files for rust ([0727d62](https://github.com/polarmutex/tree-sitter-beancount/commit/0727d62af0dea0a78bbf132f53876888fc656c19))
+* fix other scanner.cc references ([1f19abf](https://github.com/polarmutex/tree-sitter-beancount/commit/1f19abf1e162e1828013cb5434c6cf30f4054e80))
+
 ## [2.3.1](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.0...v2.3.1) (2024-02-29)
 
 
