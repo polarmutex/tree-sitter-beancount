@@ -50,3 +50,42 @@ extra whitespace transaction
     )
     (comment)
 )
+
+===========================
+embedded quotes in strings
+===========================
+
+
+2013-07-11 note Assets:Cash "\"test\""
+
+2013-07-11 * "\"Groups\"" "\"Some things\""
+    reference: "\"test\""
+    Assets:Cash  -50 USD
+    Expenses:FIXME
+
+---
+
+(file
+    (note
+        (date)
+        (account)
+        (string)
+    )
+    (transaction
+        (date)
+        (txn)
+        (payee)
+        (narration)
+        (key_value
+            (key)
+            (value
+                (string)))
+        (posting
+            (account)
+            (incomplete_amount
+                (unary_number_expr
+                    (minus)
+                    (number))
+                (currency)))
+        (posting
+            (account))))
