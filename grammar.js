@@ -94,7 +94,7 @@ module.exports = grammar({
                 ),
             ),
         currency: $ => token(/[A-Z][A-Z0-9\'\._\-]{0,22}[A-Z0-9]/),
-        string: $ => token(/"[^"]*"/),
+        string: $ => token(/"([^"]|\\")*"/),
         number: $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
         tag: $ => token(/#[A-Za-z0-9\-_/.]+/),
         link: $ => token(/\^[A-Za-z0-9\-_/.]+/),
