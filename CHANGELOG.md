@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.2...v2.3.3) (2024-07-20)
+
+
+### Bug Fixes
+
+* support comments as part of key value lists ([c25f803](https://github.com/polarmutex/tree-sitter-beancount/commit/c25f8034c977681653a8acd541c8b4877a58f474))
+* support embedded escaped quotes in strings ([9f6eb73](https://github.com/polarmutex/tree-sitter-beancount/commit/9f6eb73b2cc06325f6c31f9c58f84ba802a88fd0))
+
 ## [2.3.2](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.1...v2.3.2) (2024-03-09)
 
 
