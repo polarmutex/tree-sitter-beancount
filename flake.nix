@@ -7,7 +7,6 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = {
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -48,15 +47,15 @@
             src = ./.;
 
             hooks = {
-              clang-format = {
-                enable = true;
-                name = "clang-format";
-                entry = "${pkgs.clang-tools}/bin/clang-format -style=file -i";
-                types = ["text" "c"];
-                # I don't care for generated files' formatting
-                excludes = ["src/parser.c" "src/tree_sitter/parser.h"];
-                language = "system";
-              };
+              # clang-format = {
+              #   enable = true;
+              #   name = "clang-format";
+              #   entry = "${pkgs.clang-tools}/bin/clang-format -style=file -i";
+              #   types = ["text" "c"];
+              #   # I don't care for generated files' formatting
+              #   excludes = ["src/parser.c" "src/tree_sitter/parser.h"];
+              #   language = "system";
+              # };
 
               alejandra.enable = true;
 
@@ -67,12 +66,12 @@
                 pass_filenames = false;
               };
 
-              tree-sitter-files = {
-                enable = true;
-                name = "tree-sitter generated files";
-                entry = "${tree-sitter-env}/bin/tree-sitter generate";
-                pass_filenames = false;
-              };
+              # tree-sitter-files = {
+              #   enable = true;
+              #   name = "tree-sitter generated files";
+              #   entry = "${tree-sitter-env}/bin/tree-sitter generate --no-bindings";
+              #   pass_filenames = false;
+              # };
             };
           };
         };
