@@ -8,6 +8,9 @@ fn main() {
         .flag_if_supported("-Wno-unused-but-set-variable")
         .flag_if_supported("-Wno-trigraphs")
         .flag_if_supported("-O");
+    #[cfg(target_env = "msvc")]
+    c_config.flag("-utf-8");
+
     let parser_path = src_dir.join("parser.c");
     c_config.file(&parser_path);
 
