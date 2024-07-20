@@ -1,11 +1,26 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
+  - package-ecosystem: "cargo"
     directory: "/"
     schedule:
-      interval: daily
-    open-pull-requests-limit: 10
+      interval: "weekly"
     commit-message:
-      prefix: "chore:"
+      prefix: "chore(deps):"
     labels:
-      - dependabot
+      - "dependencies"
+      - "cargo"
+    groups:
+      cargo:
+        patterns: ["*"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci:"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    groups:
+      actions:
+        patterns: ["*"]
