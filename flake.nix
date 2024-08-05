@@ -93,27 +93,15 @@
         packages = {
           default = packages.tree-sitter-beancount;
 
-          tree-sitter-beancount = pkgs.callPackage (nixpkgs + "/pkgs/development/tools/parsing/tree-sitter/grammar.nix") {} {
+          tree-sitter-beancount = pkgs.tree-sitter.buildGrammar {
             language = "beancount";
+            generate = true;
             src = ./.;
-            inherit (pkgs.tree-sitter) version;
+            version = "n/a";
           };
 
           inherit (pkgs) tree-sitter;
         };
       }
-    )
-    // {
-      overlays = {
-        default = final: prev: {
-          tree-sitter = prev.tree-sitter.override {
-            extraGrammars = {
-              tree-sitter-beancount = {
-                src = ./.;
-              };
-            };
-          };
-        };
-      };
-    };
+    );
 }
