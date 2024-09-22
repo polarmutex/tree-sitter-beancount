@@ -119,6 +119,10 @@ static bool in_error_recovery(const bool *valid_symbols) {
             && valid_symbols[END_OF_FILE]);
 }
 
+static bool is_headline_marker(char c) {
+    return c == '*' || c == '#';
+}
+
 bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
 
     if (in_error_recovery(valid_symbols))
@@ -149,11 +153,11 @@ bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
         skip(lexer);
     }
 
-    if (indent_length == 0 && lexer->lookahead == '*') {
+    if (indent_length == 0 && is_headline_marker(lexer->lookahead)) {
         lexer->mark_end(lexer);
         int16_t stars = 1;
         skip(lexer);
-        while (lexer->lookahead == '*') {
+        while (is_headline_marker(lexer->lookahead)) {
             stars++;
             skip(lexer);
         }

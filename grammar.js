@@ -55,7 +55,7 @@ module.exports = grammar({
             repeat(field('subsection', $.section)),
             $._sectionend
         ),
-        _org_stars: $ => seq($._stars, /\*+/),
+        _org_stars: $ => seq($._stars, /(\*|#)+/),
         headline: $ => seq(
             $._org_stars,
             /[ \t]+/, // so it's not part of (item)
