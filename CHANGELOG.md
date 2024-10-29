@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.4](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.3...v2.3.4) (2024-10-29)
+
+
+### Bug Fixes
+
+* cargo version ([8093434](https://github.com/polarmutex/tree-sitter-beancount/commit/80934340cdd4b005ff15a24de9d99f36701a07e9))
+* generate bindings ([384c55e](https://github.com/polarmutex/tree-sitter-beancount/commit/384c55ede2a1f13e83d8e18dbef8f11304c379c2))
+* rerun generate ([e2984c6](https://github.com/polarmutex/tree-sitter-beancount/commit/e2984c6d96a8532e74c8223976d10aa854d5a772))
+
 ## [2.3.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.2...v2.3.3) (2024-07-20)
 
 
