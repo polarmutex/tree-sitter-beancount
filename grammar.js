@@ -88,7 +88,7 @@ module.exports = grammar({
                     repeat1(
                         seq(
                             ":",
-                            /[\p{Lu}\p{N}][\p{L}\p{N}\-]*/,
+                            /[\p{Lu}\p{N}\u4e00-\u9fff][\p{L}\p{N}\u4e00-\u9fff\-]*/,
                         ),
                     ),
                 ),
