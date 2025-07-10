@@ -288,11 +288,6 @@
     }
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "commodity",
     "named": true,
     "fields": {
@@ -1595,10 +1590,6 @@
     "named": false
   },
   {
-    "type": ";",
-    "named": false
-  },
-  {
     "type": "NULL",
     "named": false
   },
@@ -1625,6 +1616,10 @@
   {
     "type": "close",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "commodity",

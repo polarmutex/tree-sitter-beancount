@@ -43,29 +43,31 @@ module.exports = grammar({
         _any: $ => /[^\r\n]*/,
 
 
-        /*
-         * Org Header Sections
-         */
+        /*--------------------------------------------------------------------------------*/
+        /* SECTION AND HEADLINE RULES (Org-mode/Markdown support) */
+        /*--------------------------------------------------------------------------------*/
         section: $ => seq(
             field('headline', $.headline),
             repeat(choice(
                 $._declarations,
-                $._nl
+                $._nl,
+                field('subsection', $.section)
             )),
-            repeat(field('subsection', $.section)),
             $._sectionend
         ),
         _org_stars: $ => seq($._stars, /(\*|#)+/),
         headline: $ => seq(
             $._org_stars,
-            /[ \t]+/, // so it's not part of (item)
+            token(/[ \t]+/), // tokenized for performance
             optional(field('item', $.item)),
             $._nl,
         ),
         item: $ => token(/[^\r\n]+/),
 
 
-        /* Types for terminal symbols */
+        /*--------------------------------------------------------------------------------*/
+        /* TERMINAL SYMBOLS */
+        /*--------------------------------------------------------------------------------*/
         _indent: $ => token(/[ \r\t]+/),
         _eol: $ => token(/\n/),
         atat: $ => token('@@'),
@@ -78,9 +80,8 @@ module.exports = grammar({
         _none: $ => token('NULL'),
         bool: $ => token(/TRUE|FALSE/),
         date: $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
-        //An account name is a colon-separated list of capitalized words which begin with a letter, and whose first word must be one of five account types:
-        //Each component of the account names begin with a capital letter or a number and are followed by letters, numbers or dash (-) characters.
-        //All other characters are disallowed.
+        // Account names: Assets|Liabilities|Equity|Income|Expenses followed by colon-separated components
+        // Components can contain Unicode letters/numbers including Chinese characters (\u4e00-\u9fff)
         account: $ =>
             token(
                 seq(
@@ -99,20 +100,10 @@ module.exports = grammar({
         tag: $ => token(/#[A-Za-z0-9\-_/.]+/),
         link: $ => token(/\^[A-Za-z0-9\-_/.]+/),
 
-        /* Operator precedence.
-         * This is pulled straight out of the textbook example:
-         * https://www.gnu.org/software/bison/manual/html_node/Infix-Calc.html#Infix-Calc
-         */
-        // %left MINUS PLUS
-        // %left ASTERISK SLASH
-        // %precedence NEGATIVE /* negation--unary minus */
-
-        // Start symbol: file
-        /* We have some number of expected shift/reduce conflicts at 'eol'. */
-        //%expect 7
-
         /*--------------------------------------------------------------------------------*/
-        /* Grammar Rules */
+        /* ARITHMETIC EXPRESSIONS */
+        /*--------------------------------------------------------------------------------*/
+        // Operator precedence: PLUS/MINUS (left, 1), MULTIPLY/DIVIDE (left, 2), UNARY (3)
 
         txn: $ => choice(
             "txn",
@@ -241,46 +232,20 @@ module.exports = grammar({
         //),
 
         posting: $ =>
-            choice(
-                seq(
-                    $._indent,
-                    field("optflag", optional($.optflag)),
-                    field("account", $.account),
-                    field("amount", optional($.incomplete_amount)),
-                    field("cost_spec", optional($.cost_spec)),
-                    field("comment", optional($.comment)),
-                    $._eol
+            seq(
+                $._indent,
+                field("optflag", optional($.optflag)),
+                field("account", $.account),
+                field("amount", optional($.incomplete_amount)),
+                field("cost_spec", optional($.cost_spec)),
+                optional(
+                    seq(
+                        choice($.at, $.atat),
+                        field("price_annotation", optional($.price_annotation))
+                    )
                 ),
-                seq(
-                    $._indent,
-                    field("optflag", optional($.optflag)),
-                    field("account", $.account),
-                    field("amount", optional($.incomplete_amount)),
-                    field("cost_spec", optional($.cost_spec)),
-                    $.at,
-                    field("price_annotation", optional($.price_annotation)),
-                    field("comment", optional($.comment)),
-                    $._eol
-                ),
-                seq(
-                    $._indent,
-                    field("optflag", optional($.optflag)),
-                    field("account", $.account),
-                    field("amount", optional($.incomplete_amount)),
-                    field("cost_spec", optional($.cost_spec)),
-                    $.atat,
-                    field("price_annotation", optional($.price_annotation)),
-                    field("comment", optional($.comment)),
-                    $._eol
-                ),
-                seq(
-                    $._indent,
-                    field("optflag", optional($.optflag)),
-                    field("account", $.account),
-                    field("amount", optional($.incomplete_amount)),
-                    field("comment", optional($.comment)),
-                    $._eol
-                )
+                field("comment", optional($.comment)),
+                $._eol
             ),
 
         key: $ => token(/[a-z][a-zA-Z0-9\-_]+/),
@@ -666,10 +631,11 @@ module.exports = grammar({
             $._skipped_lines,
         ),
 
-        /* End Grammar Rules */
+        /*--------------------------------------------------------------------------------*/
+        /* UTILITY AND LEXICAL RULES */
         /*--------------------------------------------------------------------------------*/
 
-        comment: $ => seq(';', /.*/),
+        comment: $ => token(seq(';', /[^\r\n]*/)),
 
         // NOTE: includes reserved identifiers
         identifier: $ => /[a-z]+/,
@@ -678,12 +644,12 @@ module.exports = grammar({
             choice(
                 seq(
                     $.flag,
-                    /.*/,
+                    /[^\r\n]*/,
                     $._eol
                 ),
                 seq(
                     ":",
-                    /.*/,
+                    /[^\r\n]*/,
                     $._eol
                 ),
                 $._eol,
@@ -693,58 +659,5 @@ module.exports = grammar({
                 ),
             ),
 
-        _ASCII: $ => /[\x00-\x7f]/,
-        _UTF_8_1: $ => /[\x80-\xbf]/,
-        _UTF_8_2: $ => seq(
-            /[\xc2-\xdf]/,
-            $._UTF_8_1,
-        ),
-        _UTF_8_3: $ => choice(
-            seq(
-                /\xe0[\xa0-\xbf]/,
-                $._UTF_8_1,
-            ),
-            seq(
-                /[\xe1-\xec]/,
-                $._UTF_8_1,
-                $._UTF_8_1,
-            ),
-            seq(
-                /\xed[\x80-\x9f]/,
-                $._UTF_8_1,
-            ),
-            seq(
-                /[\xee-\xef]/,
-                $._UTF_8_1,
-                $._UTF_8_1,
-            ),
-        ),
-        _UTF_8_4: $ => choice(
-            seq(
-                /\xf0[\x90-\xbf]/,
-                $._UTF_8_1,
-                $._UTF_8_1,
-            ),
-            seq(
-                /[\xf1-\xf3]/,
-                $._UTF_8_1,
-                $._UTF_8_1,
-                $._UTF_8_1,
-            ),
-            seq(
-                /\xf4[\x80-\x8f]/,
-                $._UTF_8_1,
-                $._UTF_8_1,
-            ),
-        ),
-        _UTF_8_ONLY: $ => choice(
-            $._UTF_8_2,
-            $._UTF_8_3,
-            $._UTF_8_4,
-        ),
-        _UTF_8: $ => choice(
-            $._ASCII,
-            $._UTF_8_ONLY,
-        ),
     }
 })
