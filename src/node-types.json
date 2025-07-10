@@ -776,11 +776,6 @@
     }
   },
   {
-    "type": "item",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "key_value",
     "named": true,
     "fields": {},
@@ -1662,6 +1657,10 @@
   {
     "type": "include",
     "named": false
+  },
+  {
+    "type": "item",
+    "named": true
   },
   {
     "type": "key",
