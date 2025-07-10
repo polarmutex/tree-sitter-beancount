@@ -79,9 +79,9 @@ module.exports = grammar({
         flag: $ => token(/[!&?%PSTCURM*#]/),
         _none: $ => token('NULL'),
         bool: $ => token(/TRUE|FALSE/),
-        date: $ => token(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/),
+        date: $ => token(/([12]\d{3}[-\/](0[1-9]|1[0-2])[-\/](0[1-9]|[12]\d|3[01]))/),
         // Account names: Assets|Liabilities|Equity|Income|Expenses followed by colon-separated components
-        // Components can contain Unicode letters/numbers including Chinese characters (\u4e00-\u9fff)
+        // Components can contain Unicode letters/numbers including CJK characters
         account: $ =>
             token(
                 seq(
@@ -89,12 +89,12 @@ module.exports = grammar({
                     repeat1(
                         seq(
                             ":",
-                            /[\p{Lu}\p{N}\u4e00-\u9fff][\p{L}\p{N}\u4e00-\u9fff\-]*/,
+                            /[\p{Lu}\p{N}\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7a3][\p{L}\p{N}\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7a3\-]*/,
                         ),
                     ),
                 ),
             ),
-        currency: $ => token(/[A-Z][A-Z0-9\'\._\-]{0,22}[A-Z0-9]/),
+        currency: $ => token(/[A-Z]([A-Z0-9\'\._\-]{0,22}[A-Z0-9])?/),
         string: $ => token(/"([^"]|\\")*"/),
         number: $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
         tag: $ => token(/#[A-Za-z0-9\-_/.]+/),
