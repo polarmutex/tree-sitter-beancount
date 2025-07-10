@@ -40,7 +40,7 @@ module.exports = grammar({
 
         _nl: _ => choice('\n', '\r'),
         _eol: $ => choice('\n', '\r', $._eof),
-        _any: $ => /.*/,
+        _any: $ => /[^\r\n]*/,
 
 
         /*
@@ -62,7 +62,7 @@ module.exports = grammar({
             optional(field('item', $.item)),
             $._nl,
         ),
-        item: $ => $._any,
+        item: $ => token(/[^\r\n]+/),
 
 
         /* Types for terminal symbols */

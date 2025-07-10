@@ -45,7 +45,7 @@
     },
     "_any": {
       "type": "PATTERN",
-      "value": ".*"
+      "value": "[^\\r\\n]*"
     },
     "section": {
       "type": "SEQ",
@@ -138,8 +138,11 @@
       ]
     },
     "item": {
-      "type": "SYMBOL",
-      "name": "_any"
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\r\\n]+"
+      }
     },
     "_indent": {
       "type": "TOKEN",
