@@ -673,6 +673,7 @@
   {
     "type": "file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -1600,6 +1601,10 @@
   },
   {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "NULL",
     "named": false
   },
   {
