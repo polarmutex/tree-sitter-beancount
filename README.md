@@ -40,6 +40,7 @@ A [Tree-sitter](https://github.com/tree-sitter/tree-sitter) parser for the [Bean
 - ✅ **Org-mode & Markdown integration** - Parse Beancount embedded in Org-mode and Markdown documents
 - ✅ **Syntax highlighting** - Comprehensive highlighting queries for beautiful code presentation
 - ✅ **Automatic indentation** - Smart indentation queries for editor integration
+- ✅ **LSP features** - Local definitions and references for jump-to-definition, find-references, and validation
 - ✅ **High performance** - Optimized grammar with excellent parse speeds (8000+ bytes/ms average)
 - ✅ **Multiple language bindings** - Node.js, Rust, and Python support
 - ✅ **Editor integration ready** - Works with Neovim, Emacs, VS Code, and other editors
@@ -143,10 +144,11 @@ print(tree.root_node.sexp())
 
 ## Editor Integration
 
-This parser includes comprehensive syntax highlighting and indentation queries for an enhanced editing experience:
+This parser includes comprehensive queries for an enhanced editing experience:
 
 - **Syntax highlighting**: Dates, accounts, currencies, numbers, strings, tags, and comments are all highlighted with appropriate colors
 - **Automatic indentation**: When you type a transaction header like `2022-02-01 * "Buy CSL"`, the next line will be automatically indented for posting entries
+- **LSP features**: Jump to account definitions, find all references, validate account usage, and enable smart completions
 
 ### Neovim
 

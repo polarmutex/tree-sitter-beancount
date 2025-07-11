@@ -44,6 +44,58 @@ The queries should be automatically picked up when using the tree-sitter-beancou
 #### Other editors
 Refer to your editor's tree-sitter documentation for how to use indentation queries.
 
+## Local Definitions and References (locals.scm)
+
+The locals query enables advanced LSP features by tracking definitions, references, and scopes in Beancount files. This is particularly powerful for financial applications:
+
+### Tracked Entities
+
+**Account Lifecycle:**
+- **Definitions**: Accounts defined in `open` directives
+- **References**: Account usage in transactions, balance assertions, etc.
+- **Validation**: Detect accounts used before being opened
+
+**Currency Management:**
+- **Definitions**: Currencies declared in `commodity` directives  
+- **References**: Currency usage in amounts, prices, cost specifications
+- **Validation**: Detect undeclared currencies
+
+**Tags and Metadata:**
+- **Definitions**: Tags/metadata keys in `pushtag`/`pushmeta` directives
+- **References**: Tag/metadata usage throughout the file
+- **Scoping**: Track push/pop tag and metadata scopes
+
+**Financial Relationships:**
+- **Temporal tracking**: Account open/close dates, transaction dates
+- **Price relationships**: Which currencies have price data
+- **Balance assertions**: Which accounts have balance checks
+- **Document links**: Track document-account relationships
+
+### LSP Features Enabled
+
+- **Jump to Definition**: Click on account → jump to `open` directive
+- **Find All References**: Find all uses of an account, currency, or tag
+- **Rename Symbol**: Safely rename accounts across entire file
+- **Validation**: Highlight accounts used before being opened
+- **Auto-completion**: Suggest only opened accounts and declared currencies
+- **Hover Information**: Show account open date, currency info, etc.
+
+### Scopes
+
+- **File scope**: Global definitions (accounts, currencies)
+- **Transaction scope**: Postings and metadata within transactions  
+- **Section scope**: Org-mode/markdown headers create nested contexts
+- **Entry scopes**: Individual directives can contain metadata
+
+### Financial Analysis Support
+
+The query enables sophisticated financial analysis:
+- Track account hierarchies and relationships
+- Validate account lifecycle (opened → used → closed)
+- Analyze currency usage patterns
+- Temporal relationship tracking
+- Document cross-references
+
 ## Syntax Highlighting (highlights.scm)
 
 The highlighting query provides comprehensive syntax highlighting for Beancount files, mapping Beancount constructs to traditional programming language highlight groups:
@@ -109,10 +161,10 @@ Based on other mature tree-sitter parsers, here are additional query files that 
 - Could inject shell commands in custom directives
 - Could inject regex patterns in plugin configurations
 
-**`locals.scm`** - Local scope definitions and references
-- Define account name scopes
-- Track variable references in arithmetic expressions
-- Useful for LSP features like "go to definition"
+~~**`locals.scm`** - Local scope definitions and references~~ ✅ **Implemented**
+- ~~Define account name scopes~~
+- ~~Track variable references in arithmetic expressions~~
+- ~~Useful for LSP features like "go to definition"~~
 
 **`tags.scm`** - Semantic tagging for code analysis
 - Mark different types of directives for analysis
@@ -156,7 +208,7 @@ The most commonly implemented across tree-sitter parsers and likely to provide i
 1. **`textobjects.scm`** - Very popular for vim users, enables intuitive text manipulation
 2. **`folds.scm`** - Improves code organization and readability
 3. **`injections.scm`** - Enables multi-language support
-4. **`locals.scm`** - Enables advanced LSP features
+4. ~~**`locals.scm`** - Enables advanced LSP features~~ ✅ **Implemented**
 
 ### Contributing
 
