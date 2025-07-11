@@ -45,6 +45,7 @@ pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlight
 pub const LOCALS_QUERY: &'static str = include_str!("../../queries/locals.scm");
 // pub const TAGS_QUERY: &'static str = include_str!("../../queries/tags.scm");
 pub const INDENTS_QUERY: &'static str = include_str!("../../queries/indents.scm");
+pub const FOLDS_QUERY: &'static str = include_str!("../../queries/folds.scm");
 
 #[cfg(test)]
 mod tests {

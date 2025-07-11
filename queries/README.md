@@ -96,6 +96,76 @@ The query enables sophisticated financial analysis:
 - Temporal relationship tracking
 - Document cross-references
 
+## Code Folding (folds.scm)
+
+The folding query enables collapsing/expanding code regions for better organization and navigation of large Beancount files:
+
+### Foldable Regions
+
+**Transaction Folding:**
+- Multi-line transactions with postings and metadata
+- Collapse transaction details while keeping header visible
+- Useful for files with many complex transactions
+
+**Account Operations:**
+- `open` directives with metadata (documents, account IDs, etc.)
+- `close` directives with metadata (reasons, notes)
+- `balance` assertions with metadata (tolerances, sources)
+- All other entry types with associated metadata
+
+**Document Structure:**
+- **Sections**: Org-mode/markdown style headers with content
+- **Nested sections**: Hierarchical folding for complex documents
+- **Comment blocks**: Multiple consecutive comment lines
+
+**Financial Data:**
+- **Cost specifications**: Complex `{}` and `{{}}` cost specs
+- **Custom directives**: Large custom directive value lists
+- **Configuration blocks**: Multiple option/plugin/include directives
+
+### Folding Types
+
+Each fold is tagged with a specific type for editor customization:
+
+- `"transaction"` - Multi-line transactions
+- `"open_metadata"` - Account opening with metadata
+- `"balance_metadata"` - Balance assertions with metadata
+- `"section"` - Document sections and subsections
+- `"comment"` - Comment blocks
+- `"cost_spec"` - Cost specifications
+- `"metadata_block"` - Standalone metadata blocks
+
+### Usage Examples
+
+**Before folding:**
+```beancount
+2022-01-01 open Assets:Checking
+    document: "/docs/bank-account.pdf"
+    account_id: "123456789"
+    bank: "Example Bank"
+
+2022-02-01 * "Grocery Shopping" #food
+    description: "Weekly groceries"
+    store: "SuperMart"
+    receipt: "/receipts/2022-02-01.pdf"
+    Assets:Checking      -75.50 USD
+    Expenses:Food         75.50 USD
+```
+
+**After folding:**
+```beancount
+2022-01-01 open Assets:Checking [+]
+
+2022-02-01 * "Grocery Shopping" #food [+]
+```
+
+### Benefits
+
+- **Navigate large files**: Quickly jump between sections
+- **Focus on structure**: Hide implementation details
+- **Reduce cognitive load**: See only relevant parts
+- **Financial organization**: Group by time periods, accounts, or categories
+
 ## Syntax Highlighting (highlights.scm)
 
 The highlighting query provides comprehensive syntax highlighting for Beancount files, mapping Beancount constructs to traditional programming language highlight groups:
@@ -150,11 +220,11 @@ Based on other mature tree-sitter parsers, here are additional query files that 
 - "inner metadata block"
 - Very popular for vim/neovim users
 
-**`folds.scm`** - Code folding patterns
-- Fold transaction blocks
-- Fold metadata sections  
-- Fold org-mode/markdown sections
-- Fold large multi-posting transactions
+~~**`folds.scm`** - Code folding patterns~~ ✅ **Implemented**
+- ~~Fold transaction blocks~~
+- ~~Fold metadata sections~~
+- ~~Fold org-mode/markdown sections~~
+- ~~Fold large multi-posting transactions~~
 
 **`injections.scm`** - Language injections for embedding other languages
 - Could inject SQL in query directives
@@ -206,7 +276,7 @@ Based on other mature tree-sitter parsers, here are additional query files that 
 The most commonly implemented across tree-sitter parsers and likely to provide immediate user value:
 
 1. **`textobjects.scm`** - Very popular for vim users, enables intuitive text manipulation
-2. **`folds.scm`** - Improves code organization and readability
+2. ~~**`folds.scm`** - Improves code organization and readability~~ ✅ **Implemented**
 3. **`injections.scm`** - Enables multi-language support
 4. ~~**`locals.scm`** - Enables advanced LSP features~~ ✅ **Implemented**
 
