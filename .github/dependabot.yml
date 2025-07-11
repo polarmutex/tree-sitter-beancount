@@ -1,26 +1,72 @@
 version: 2
 updates:
+  # Rust dependencies
   - package-ecosystem: "cargo"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
     commit-message:
       prefix: "chore(deps):"
+      include: "scope"
     labels:
       - "dependencies"
       - "cargo"
+      - "automation"
+    reviewers:
+      - "polarmutex"
     groups:
-      cargo:
+      cargo-all:
         patterns: ["*"]
+    ignore:
+      # Ignore major version updates for tree-sitter (require manual review)
+      - dependency-name: "tree-sitter"
+        update-types: ["version-update:semver-major"]
+
+  # NPM dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    commit-message:
+      prefix: "chore(deps):"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "npm"
+      - "automation"
+    reviewers:
+      - "polarmutex"
+    groups:
+      npm-all:
+        patterns: ["*"]
+    ignore:
+      # Ignore major version updates for tree-sitter (require manual review)
+      - dependency-name: "tree-sitter*"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
     commit-message:
       prefix: "ci:"
+      include: "scope"
     labels:
       - "dependencies"
       - "github-actions"
+      - "automation"
+    reviewers:
+      - "polarmutex"
     groups:
-      actions:
+      actions-all:
         patterns: ["*"]
