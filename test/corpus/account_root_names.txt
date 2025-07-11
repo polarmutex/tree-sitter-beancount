@@ -1,0 +1,78 @@
+========================
+root account names only
+========================
+
+2023-10-01 * "payee example" "narration example"
+  Assets
+  Liabilities
+  Equity
+  Income  
+  Expenses
+
+---
+
+(file
+    (transaction
+        (date)
+        (txn)
+        (payee)
+        (narration)
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+    )
+)
+
+========================
+single letter account test
+========================
+
+2023-10-01 * "payee example" "narration example"
+  A
+
+---
+
+(file
+    (transaction
+        (date)
+        (txn)
+        (payee)
+        (narration)
+            (posting
+                (account)
+            )
+    )
+)
+
+========================
+lowercase identifier test
+========================
+
+2023-10-01 * "payee example" "narration example"
+  a
+
+---
+
+(file
+    (transaction
+        (date)
+        (txn)
+        (payee)
+        (narration)
+    )
+    (ERROR
+        (identifier)
+    )
+)

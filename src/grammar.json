@@ -224,27 +224,36 @@
     "account": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "Assets|Liabilities|Equity|Income|Expenses"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "Assets|Liabilities|Equity|Income|Expenses"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ":"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[\\p{Lu}\\p{N}\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff\\uac00-\\ud7a3][\\p{L}\\p{N}\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff\\uac00-\\ud7a3\\-]*"
+                    }
+                  ]
+                }
+              }
+            ]
           },
           {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": ":"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[\\p{Lu}\\p{N}\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff\\uac00-\\ud7a3][\\p{L}\\p{N}\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff\\uac00-\\ud7a3\\-]*"
-                }
-              ]
-            }
+            "type": "PATTERN",
+            "value": "[ALEI]"
           }
         ]
       }

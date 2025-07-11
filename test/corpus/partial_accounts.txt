@@ -1,0 +1,67 @@
+========================
+partial account names for LSP
+========================
+
+2023-10-01 * "Testing partial accounts for completion"
+  A
+  L  
+  E
+  I
+
+---
+
+(file
+    (transaction
+        (date)
+        (txn)
+        (narration)
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+    )
+)
+
+========================
+full vs partial account names
+========================
+
+2023-10-01 * "Full and partial accounts"
+  Assets
+  A
+  Assets:Cash
+  Liabilities:CreditCard
+  L
+
+---
+
+(file
+    (transaction
+        (date)
+        (txn)
+        (narration)
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+            (posting
+                (account)
+            )
+    )
+)
