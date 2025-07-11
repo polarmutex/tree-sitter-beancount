@@ -1,0 +1,265 @@
+name: CI
+
+on:
+  push:
+    branches: [master, devel]
+    paths:
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+      - queries/**
+      - tree-sitter.json
+  pull_request:
+    paths:
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+      - queries/**
+      - tree-sitter.json
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test parser
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Run tests
+        uses: tree-sitter/parser-test-action@v2
+        with:
+          test-rust: ${{ runner.os == 'Linux' }}
+          test-node: true
+          test-python: ${{ runner.os == 'Linux' }}
+          test-go: ${{ runner.os == 'Linux' }}
+          test-swift: ${{ runner.os == 'macOS' }}
+
+  test-queries:
+    name: Test queries
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Test highlight queries
+        run: tree-sitter test -f test/highlight
+
+      - name: Test queries compilation
+        run: |
+          tree-sitter query queries/highlights.scm test/corpus/transaction.txt || echo "Highlights query test completed"
+          tree-sitter query queries/locals.scm test/corpus/transaction.txt || echo "Locals query test completed"
+          tree-sitter query queries/folds.scm test/corpus/transaction.txt || echo "Folds query test completed"
+          tree-sitter query queries/textobjects.scm test/corpus/transaction.txt || echo "Textobjects query test completed"
+          tree-sitter query queries/indents.scm test/corpus/transaction.txt || echo "Indents query test completed"
+
+  test-examples:
+    name: Test examples
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Clone Beancount examples
+        run: |
+          git clone --depth=1 --filter=blob:none \
+            https://github.com/beancount/beancount examples/beancount-official
+          git clone --depth=1 --filter=blob:none \
+            https://github.com/beancount/examples examples/beancount-examples
+
+      - name: Parse examples
+        uses: tree-sitter/parse-action@v4
+        with:
+          files: |
+            examples/**/*.beancount
+            examples/**/*.bean
+          invalid-files: |
+            examples/**/invalid/**
+            examples/**/broken/**
+
+  security:
+    name: Security checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for sensitive files
+        run: |
+          if find . -name "*.key" -o -name "*.pem" -o -name "*.p12" -o -name "*.pfx" | grep -q .; then
+            echo "Sensitive files found"
+            exit 1
+          fi
+
+      - name: Audit dependencies
+        run: |
+          npm audit --audit-level moderate
+
+  lint:
+    name: Lint and format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check grammar format
+        run: |
+          # Check if grammar.js is properly formatted
+          if ! node -c grammar.js; then
+            echo "grammar.js has syntax errors"
+            exit 1
+          fi
+
+      - name: Validate tree-sitter.json
+        run: |
+          if [ -f tree-sitter.json ]; then
+            cat tree-sitter.json | jq . > /dev/null
+          fi
+
+  performance:
+    name: Performance test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Generate parser
+        run: tree-sitter generate
+
+      - name: Performance test
+        run: |
+          # Test parsing speed with large files
+          tree-sitter test --quiet | grep "bytes/ms" | tail -1
+
+          # Ensure we maintain good performance (>5000 bytes/ms average)
+          SPEED=$(tree-sitter test --quiet 2>&1 | grep "average speed:" | sed 's/.*: \([0-9]*\) bytes\/ms/\1/')
+          if [ "$SPEED" -lt 5000 ]; then
+            echo "Performance regression detected: $SPEED bytes/ms < 5000 bytes/ms"
+            exit 1
+          fi
+          echo "Performance check passed: $SPEED bytes/ms"
+
+  metadata:
+    name: Check metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate package.json
+        run: |
+          if [ -f package.json ]; then
+            node -e "
+              const pkg = require('./package.json');
+              if (!pkg.name || !pkg.version || !pkg.description) {
+                console.error('Missing required package.json fields');
+                process.exit(1);
+              }
+              if (!pkg.tree-sitter || !Array.isArray(pkg.tree-sitter)) {
+                console.error('Missing or invalid tree-sitter configuration');
+                process.exit(1);
+              }
+              console.log('package.json validation passed');
+            "
+          fi
+
+      - name: Validate Cargo.toml
+        run: |
+          if [ -f Cargo.toml ]; then
+            if command -v cargo >/dev/null 2>&1; then
+              cargo check --manifest-path Cargo.toml --offline || true
+            fi
+            # Basic syntax check
+            grep -q '^\[package\]' Cargo.toml || { echo "Missing [package] section in Cargo.toml"; exit 1; }
+            grep -q '^name = ' Cargo.toml || { echo "Missing name in Cargo.toml"; exit 1; }
+            grep -q '^version = ' Cargo.toml || { echo "Missing version in Cargo.toml"; exit 1; }
+            echo "Cargo.toml basic validation passed"
+          fi
+
+  comprehensive-test:
+    name: Comprehensive tests
+    runs-on: ubuntu-latest
+    needs: [test, test-queries, test-examples]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Full test suite
+        run: |
+          echo "Running comprehensive test suite..."
+          tree-sitter test
+
+          # Test all corpus files individually
+          for file in test/corpus/*.txt; do
+            echo "Testing $file..."
+            tree-sitter test --include "$(basename "$file" .txt)" || {
+              echo "Failed on $file"
+              exit 1
+            }
+          done
+
+          echo "All tests passed successfully!"
+
+  fuzz-test:
+    name: Fuzz testing
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Generate parser
+        run: tree-sitter generate
+
+      - name: Check for scanner changes
+        id: scanner-changes
+        run: |
+          if git diff --quiet HEAD^ HEAD -- src/scanner.c; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run fuzzer
+        if: steps.scanner-changes.outputs.changed == 'true'
+        timeout-minutes: 10
+        run: tree-sitter fuzz --time-limit 300

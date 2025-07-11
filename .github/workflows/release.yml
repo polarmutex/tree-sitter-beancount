@@ -1,17 +1,31 @@
-name: release
+name: Release
+
 permissions:
-  contents: read
+  contents: write
+  packages: write
+  attestations: write
+  id-token: write
+
 on:
   push:
     branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   release-please:
+    name: Create release
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - name: Create release
+        uses: google-github-actions/release-please-action@v4
         id: release
         with:
           release-type: node
@@ -20,55 +34,195 @@ jobs:
           bump-patch-for-minor-pre-major: true
           extra-files: |
             Cargo.toml
+          changelog-types: |
+            [
+              {"type":"feat","section":"Features","hidden":false},
+              {"type":"fix","section":"Bug Fixes","hidden":false},
+              {"type":"perf","section":"Performance","hidden":false},
+              {"type":"docs","section":"Documentation","hidden":false},
+              {"type":"test","section":"Tests","hidden":false},
+              {"type":"refactor","section":"Refactoring","hidden":false},
+              {"type":"chore","section":"Maintenance","hidden":true}
+            ]
 
-  publish_cargo:
-    name: Publish Crate
+  build-artifacts:
+    name: Build release artifacts
     runs-on: ubuntu-latest
     needs: [release-please]
     if: needs.release-please.outputs.release_created
     steps:
-      - name: Installing Rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
-      - name: Checking out sources
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Cache Cargo
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Generate parser
+        run: tree-sitter generate
+
+      - name: Build WebAssembly
+        run: tree-sitter build --wasm
+
+      - name: Create source tarball
+        run: |
+          tar -czf tree-sitter-beancount-${{ needs.release-please.outputs.version }}.tar.gz \
+            --exclude='.git*' \
+            --exclude='target' \
+            --exclude='node_modules' \
+            --exclude='*.tar.gz' \
+            .
+
+      - name: Upload release artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload ${{ needs.release-please.outputs.tag_name }} \
+            tree-sitter-beancount.wasm \
+            tree-sitter-beancount-${{ needs.release-please.outputs.version }}.tar.gz
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        if: github.repository_owner == 'polarmutex'
+        with:
+          subject-path: |
+            tree-sitter-beancount.wasm
+            tree-sitter-beancount-${{ needs.release-please.outputs.version }}.tar.gz
+
+  publish-cargo:
+    name: Publish to Crates.io
+    runs-on: ubuntu-latest
+    needs: [release-please]
+    if: needs.release-please.outputs.release_created
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo registry
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-publish-${{ hashFiles('**/Cargo.lock') }}
-      - name: Installing dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y -qq pkg-config libssl-dev
-      - uses: actions-rs/cargo@v1
-        with:
-          command: publish
-          args: --token ${{ secrets.CARGO_API_KEY }} --allow-dirty
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-release-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-release-
+            ${{ runner.os }}-cargo-
 
-  publish_npm:
-    name: Publish npm
+      - name: Test build
+        run: cargo build --release
+
+      - name: Publish to crates.io
+        run: cargo publish --token ${{ secrets.CARGO_API_KEY }}
+
+  publish-npm:
+    name: Publish to npm
     runs-on: ubuntu-latest
     needs: [release-please]
     if: needs.release-please.outputs.release_created
     steps:
-      - name: Checking out sources
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4.2.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Build and test
+        run: |
+          npm run build --if-present
+          npm test --if-present
+
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+#   publish-pypi:
+#     name: Publish to PyPI
+#     runs-on: ubuntu-latest
+#     needs: [release-please]
+#     if: needs.release-please.outputs.release_created
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+#
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
+#
+#       - name: Install build tools
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install build twine setuptools wheel
+#
+#       - name: Build Python package
+#         run: |
+#           # Create basic setup.py if it doesn't exist
+#           if [ ! -f setup.py ]; then
+#             cat > setup.py << 'EOF'
+# from setuptools import setup, find_packages
+#
+# setup(
+#     name="tree-sitter-beancount",
+#     version="${{ needs.release-please.outputs.version }}",
+#     description="Beancount grammar for tree-sitter",
+#     long_description=open("README.md").read(),
+#     long_description_content_type="text/markdown",
+#     author="polarmutex",
+#     url="https://github.com/polarmutex/tree-sitter-beancount",
+#     packages=find_packages(),
+#     include_package_data=True,
+#     package_data={
+#         "tree_sitter_beancount": ["*.so", "*.dylib", "*.dll"],
+#     },
+#     install_requires=["tree-sitter>=0.20.0"],
+#     classifiers=[
+#         "Development Status :: 4 - Beta",
+#         "Intended Audience :: Developers",
+#         "License :: OSI Approved :: MIT License",
+#         "Programming Language :: Python :: 3",
+#         "Programming Language :: Python :: 3.8",
+#         "Programming Language :: Python :: 3.9",
+#         "Programming Language :: Python :: 3.10",
+#         "Programming Language :: Python :: 3.11",
+#         "Programming Language :: Python :: 3.12",
+#     ],
+#     python_requires=">=3.8",
+# )
+# EOF
+#           fi
+#           python -m build
+#
+#       - name: Publish to PyPI
+#         env:
+#           TWINE_USERNAME: __token__
+#           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+#         run: twine upload dist/* --skip-existing
+#
+  notify-success:
+    name: Notify release success
+    runs-on: ubuntu-latest
+    needs: [release-please, build-artifacts, publish-cargo, publish-npm]
+    if: needs.release-please.outputs.release_created && success()
+    steps:
+      - name: Summary
+        run: |
+          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully released tree-sitter-beancount ${{ needs.release-please.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ GitHub release created" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Artifacts uploaded" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Published to Crates.io" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Published to npm" >> $GITHUB_STEP_SUMMARY
+          # echo "- ✅ Published to PyPI" >> $GITHUB_STEP_SUMMARY

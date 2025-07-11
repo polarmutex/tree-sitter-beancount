@@ -1,0 +1,196 @@
+name: Regenerate
+
+on:
+  schedule:
+    # Run every Monday at 09:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/dependabot.yml
+      - package-lock.json
+      - Cargo.lock
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  regenerate:
+    name: Regenerate parser
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.title, 'deps')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Regenerate parser
+        run: |
+          echo "Regenerating parser due to dependency update..."
+          tree-sitter generate --no-bindings
+
+          # Check if there are changes
+          if git diff --quiet src/parser.c src/grammar.json src/node-types.json; then
+            echo "No parser changes detected"
+            echo "regenerated=false" >> $GITHUB_OUTPUT
+          else
+            echo "Parser changes detected"
+            echo "regenerated=true" >> $GITHUB_OUTPUT
+          fi
+        id: regenerate
+
+      - name: Commit regenerated parser
+        if: steps.regenerate.outputs.regenerated == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add src/parser.c src/grammar.json src/node-types.json
+          git commit -m "chore: regenerate parser after dependency update
+          git push
+
+      - name: Comment on PR
+        if: steps.regenerate.outputs.regenerated == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🤖 Parser has been automatically regenerated due to dependency updates.'
+            })
+
+  check-grammar:
+    name: Check for grammar updates
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Check tree-sitter version
+        run: |
+          echo "Current tree-sitter version:"
+          tree-sitter --version
+
+          # Get latest tree-sitter version
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest | jq -r .tag_name)
+          echo "Latest tree-sitter version: $LATEST_VERSION"
+
+          # Check if we're up to date
+          CURRENT_VERSION=$(tree-sitter --version | cut -d' ' -f2)
+          if [ "$CURRENT_VERSION" != "${LATEST_VERSION#v}" ]; then
+            echo "Tree-sitter version update available: $CURRENT_VERSION -> ${LATEST_VERSION#v}"
+            echo "update_available=true" >> $GITHUB_OUTPUT
+            echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "Tree-sitter is up to date"
+            echo "update_available=false" >> $GITHUB_OUTPUT
+          fi
+        id: check-version
+
+      - name: Test current parser
+        run: |
+          echo "Testing current parser..."
+          tree-sitter test
+          echo "All tests passed with current tree-sitter version"
+
+      - name: Create issue for update
+        if: steps.check-version.outputs.update_available == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Update tree-sitter to ${{ steps.check-version.outputs.latest_version }}`;
+            const body = `
+            A new version of tree-sitter is available.
+
+            **Current version:** ${process.env.CURRENT_VERSION}
+            **Latest version:** ${{ steps.check-version.outputs.latest_version }}
+
+            Please consider updating and testing the parser with the new version.
+
+            - [ ] Update tree-sitter dependency
+            - [ ] Regenerate parser
+            - [ ] Run full test suite
+            - [ ] Update documentation if needed
+
+            🤖 This issue was created automatically by the regenerate workflow.
+            `;
+
+            // Check if issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'dependencies,automation'
+            });
+
+            const existingIssue = issues.data.find(issue =>
+              issue.title.includes('Update tree-sitter to')
+            );
+
+            if (!existingIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['dependencies', 'automation']
+              });
+              console.log('Created new issue for tree-sitter update');
+            } else {
+              console.log('Issue for tree-sitter update already exists');
+            }
+
+  validate-queries:
+    name: Validate query files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Validate all queries
+        run: |
+          echo "Validating query files..."
+
+          for query_file in queries/*.scm; do
+            if [ -f "$query_file" ]; then
+              echo "Validating $query_file..."
+              # Test query compilation by running it on test corpus
+              tree-sitter query "$query_file" test/corpus/transaction.txt > /dev/null || {
+                echo "❌ Query validation failed for $query_file"
+                exit 1
+              }
+              echo "✅ $query_file is valid"
+            fi
+          done
+
+          echo "All query files validated successfully!"
+
+      - name: Test query performance
+        run: |
+          echo "Testing query performance..."
+
+          # Test highlights query performance
+          if [ -f queries/highlights.scm ]; then
+            time tree-sitter query queries/highlights.scm test/corpus/*.txt > /dev/null
+            echo "Highlights query performance test completed"
+          fi
+
+          # Test locals query performance
+          if [ -f queries/locals.scm ]; then
+            time tree-sitter query queries/locals.scm test/corpus/*.txt > /dev/null
+            echo "Locals query performance test completed"
+          fi
