@@ -41,6 +41,7 @@ A [Tree-sitter](https://github.com/tree-sitter/tree-sitter) parser for the [Bean
 - ✅ **Syntax highlighting** - Comprehensive highlighting queries for beautiful code presentation
 - ✅ **Automatic indentation** - Smart indentation queries for editor integration
 - ✅ **Code folding** - Collapse/expand transactions, metadata, and sections for better organization
+- ✅ **Text objects** - Vim-style inner/around selections for intuitive text manipulation
 - ✅ **LSP features** - Local definitions and references for jump-to-definition, find-references, and validation
 - ✅ **High performance** - Optimized grammar with excellent parse speeds (8000+ bytes/ms average)
 - ✅ **Multiple language bindings** - Node.js, Rust, and Python support
@@ -150,6 +151,7 @@ This parser includes comprehensive queries for an enhanced editing experience:
 - **Syntax highlighting**: Dates, accounts, currencies, numbers, strings, tags, and comments are all highlighted with appropriate colors
 - **Automatic indentation**: When you type a transaction header like `2022-02-01 * "Buy CSL"`, the next line will be automatically indented for posting entries
 - **Code folding**: Collapse multi-line transactions, metadata blocks, and sections to focus on file structure
+- **Text objects**: Use vim-style selections like `vit` (select inner transaction), `cia` (change account), `dap` (delete posting)
 - **LSP features**: Jump to account definitions, find all references, validate account usage, and enable smart completions
 
 ### Neovim

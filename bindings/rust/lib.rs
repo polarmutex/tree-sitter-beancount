@@ -46,6 +46,7 @@ pub const LOCALS_QUERY: &'static str = include_str!("../../queries/locals.scm");
 // pub const TAGS_QUERY: &'static str = include_str!("../../queries/tags.scm");
 pub const INDENTS_QUERY: &'static str = include_str!("../../queries/indents.scm");
 pub const FOLDS_QUERY: &'static str = include_str!("../../queries/folds.scm");
+pub const TEXTOBJECTS_QUERY: &'static str = include_str!("../../queries/textobjects.scm");
 
 #[cfg(test)]
 mod tests {

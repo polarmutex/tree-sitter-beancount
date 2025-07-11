@@ -2,6 +2,97 @@
 
 This directory contains tree-sitter queries that help editors provide better editing support for Beancount files.
 
+## Text Objects (textobjects.scm)
+
+The text objects query enables vim-style text manipulation with inner and around selections for Beancount constructs. This is extremely popular among vim/neovim users.
+
+### Available Text Objects
+
+**Transaction Objects:**
+- **`at`** (around transaction) - Entire transaction including header
+- **`it`** (inner transaction) - Transaction content (postings + metadata)
+- **`ah`** (around header) - Transaction header (date + txn + description)
+- **`ip`** (inner postings) - All postings in a transaction
+
+**Posting Objects:**
+- **`ap`** (around posting) - Entire posting including indentation
+- **`ip`** (inner posting) - Posting content without indentation
+
+**Account & Amount Objects:**
+- **`aa`** (around account) - Account with context
+- **`ia`** (inner account) - Just the account name
+- **`aA`** (around amount) - Amount with surrounding context
+- **`iA`** (inner amount) - Number and currency only
+
+**Metadata Objects:**
+- **`am`** (around metadata) - Entire metadata line with indentation
+- **`im`** (inner metadata) - Key-value content only
+- **`aM`** (around metadata block) - Multiple metadata entries
+- **`iM`** (inner metadata block) - Multiple key-value pairs
+
+**Entry Objects:**
+- **`ae`** (around entry) - Entire entry including header
+- **`ie`** (inner entry) - Entry content without header
+
+**String Objects:**
+- **`as`** (around string) - String with quotes
+- **`is`** (inner string) - String content without quotes
+- **`ay`** (around payee) - Payee string
+- **`an`** (around narration) - Narration string
+
+**Financial Objects:**
+- **`ac`** (around currency) - Currency code
+- **`an`** (around number) - Numeric value
+- **`ax`** (around expression) - Arithmetic expressions
+- **`aC`** (around cost spec) - Cost specification with braces
+- **`iC`** (inner cost spec) - Cost specification content
+
+**Structure Objects:**
+- **`aS`** (around section) - Section with headline
+- **`iS`** (inner section) - Section content without headline
+- **`ad`** (around date) - Date value
+- **`aT`** (around tag) - Tag including #
+- **`aL`** (around link) - Link including ^
+
+### Usage Examples
+
+**Select entire transaction:**
+```vim
+vat  " Select around transaction
+```
+
+**Select transaction postings only:**
+```vim
+vit  " Select inner transaction (postings + metadata)
+```
+
+**Change account name:**
+```vim
+cia  " Change inner account
+```
+
+**Delete posting:**
+```vim
+dap  " Delete around posting
+```
+
+**Select amount for editing:**
+```vim
+viA  " Select inner amount (number + currency)
+```
+
+**Copy metadata block:**
+```vim
+yaM  " Yank around metadata block
+```
+
+### Benefits
+
+- **Intuitive selections**: Select exactly what you want to edit
+- **Faster editing**: Less cursor movement, more semantic operations
+- **Consistent patterns**: Same vim text object patterns across all constructs
+- **Financial-aware**: Understands Beancount structure and concepts
+
 ## Indentation (indents.scm)
 
 The indentation query provides rules for automatic indentation in Beancount files. It defines:
@@ -214,11 +305,11 @@ Based on other mature tree-sitter parsers, here are additional query files that 
 
 ### Standard Query Files
 
-**`textobjects.scm`** - Text objects for vim-style editing
-- Define "inner transaction" and "around transaction" 
-- "inner posting" and "around posting"
-- "inner metadata block"
-- Very popular for vim/neovim users
+~~**`textobjects.scm`** - Text objects for vim-style editing~~ ✅ **Implemented**
+- ~~Define "inner transaction" and "around transaction"~~
+- ~~"inner posting" and "around posting"~~
+- ~~"inner metadata block"~~
+- ~~Very popular for vim/neovim users~~
 
 ~~**`folds.scm`** - Code folding patterns~~ ✅ **Implemented**
 - ~~Fold transaction blocks~~
@@ -275,7 +366,7 @@ Based on other mature tree-sitter parsers, here are additional query files that 
 
 The most commonly implemented across tree-sitter parsers and likely to provide immediate user value:
 
-1. **`textobjects.scm`** - Very popular for vim users, enables intuitive text manipulation
+1. ~~**`textobjects.scm`** - Very popular for vim users, enables intuitive text manipulation~~ ✅ **Implemented**
 2. ~~**`folds.scm`** - Improves code organization and readability~~ ✅ **Implemented**
 3. **`injections.scm`** - Enables multi-language support
 4. ~~**`locals.scm`** - Enables advanced LSP features~~ ✅ **Implemented**
