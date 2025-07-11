@@ -86,11 +86,78 @@ The highlight groups are chosen to work well with popular color schemes:
 2022-02-02 #food ^receipt-123           ; tags/links=blue/cyan
 ```
 
-## Adding more queries
+## Future Query Opportunities
 
-You can add additional query files for:
-- `injections.scm` - Language injections  
-- `locals.scm` - Local variable definitions
-- `tags.scm` - Semantic tags
+Based on other mature tree-sitter parsers, here are additional query files that could enhance the Beancount editing experience:
 
-See the [tree-sitter query documentation](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#queries) for more information.
+### Standard Query Files
+
+**`textobjects.scm`** - Text objects for vim-style editing
+- Define "inner transaction" and "around transaction" 
+- "inner posting" and "around posting"
+- "inner metadata block"
+- Very popular for vim/neovim users
+
+**`folds.scm`** - Code folding patterns
+- Fold transaction blocks
+- Fold metadata sections  
+- Fold org-mode/markdown sections
+- Fold large multi-posting transactions
+
+**`injections.scm`** - Language injections for embedding other languages
+- Could inject SQL in query directives
+- Could inject shell commands in custom directives
+- Could inject regex patterns in plugin configurations
+
+**`locals.scm`** - Local scope definitions and references
+- Define account name scopes
+- Track variable references in arithmetic expressions
+- Useful for LSP features like "go to definition"
+
+**`tags.scm`** - Semantic tagging for code analysis
+- Mark different types of directives for analysis
+- Identify financial concepts (assets, liabilities, income, expenses)
+- Tag temporal relationships (date dependencies)
+
+**`matchup.scm`** - Bracket/delimiter matching
+- Match opening/closing braces in cost specs `{}` and `{{}}`
+- Match begin/end of transaction blocks
+- Match open/close account directives
+
+### Advanced/Specialized Queries
+
+**`context.scm`** - Context-aware selections (newer feature)
+- Smart selection of related postings
+- Context-aware account completions
+
+**`rainbow.scm`** - Rainbow parentheses/delimiters
+- Colorize nested cost specifications
+- Different colors for different nesting levels
+
+**`outline.scm`** - Document outline/structure
+- Extract transaction summaries for outline view
+- Show account hierarchy
+- Display date-based organization
+
+**`symbols.scm`** - Symbol extraction for navigation
+- Extract all account names as symbols
+- Extract all transaction descriptions
+- Extract all tags and links
+
+**`lints.scm`** - Static analysis patterns
+- Detect unbalanced transactions
+- Find missing required metadata
+- Identify suspicious patterns
+
+### Implementation Priority
+
+The most commonly implemented across tree-sitter parsers and likely to provide immediate user value:
+
+1. **`textobjects.scm`** - Very popular for vim users, enables intuitive text manipulation
+2. **`folds.scm`** - Improves code organization and readability
+3. **`injections.scm`** - Enables multi-language support
+4. **`locals.scm`** - Enables advanced LSP features
+
+### Contributing
+
+If you're interested in implementing any of these queries, contributions are welcome! See the [tree-sitter query documentation](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#queries) for more information on query syntax and patterns.
