@@ -38,10 +38,11 @@ A [Tree-sitter](https://github.com/tree-sitter/tree-sitter) parser for the [Bean
 - ✅ **Complete Beancount syntax support** - Parse all Beancount directives and constructs
 - ✅ **Unicode support** - Full support for international characters including Chinese characters in account names
 - ✅ **Org-mode & Markdown integration** - Parse Beancount embedded in Org-mode and Markdown documents
+- ✅ **Automatic indentation** - Smart indentation queries for editor integration
 - ✅ **High performance** - Optimized grammar with excellent parse speeds (8000+ bytes/ms average)
 - ✅ **Multiple language bindings** - Node.js, Rust, and Python support
 - ✅ **Editor integration ready** - Works with Neovim, Emacs, VS Code, and other editors
-- ✅ **Comprehensive testing** - 122+ test cases covering all syntax features
+- ✅ **Comprehensive testing** - 177+ test cases covering all syntax features
 
 ## Installation
 
@@ -140,6 +141,8 @@ print(tree.root_node.sexp())
 ```
 
 ## Editor Integration
+
+This parser includes indentation queries that provide automatic indentation for Beancount files. When you type a transaction header like `2022-02-01 * "Buy CSL"`, the next line will be automatically indented for posting entries.
 
 ### Neovim
 
