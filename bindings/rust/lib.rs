@@ -5,10 +5,12 @@
 //!
 //! ```
 //! let code = "";
-//! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_beancount::language()).expect("Error loading beancount grammar");
+//! let mut parser = tree_sitter_beancount::tree_sitter::Parser::new();
+//! parser.set_language(&tree_sitter_beancount::language()).expect("Error loading beancount grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
+//!
+//! This crate re-exports `tree-sitter` for convenience, so you don't need to add it as a separate dependency.
 //!
 //! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 //! [language func]: fn.language.html
@@ -16,6 +18,9 @@
 //! [tree-sitter]: https://tree-sitter.github.io/
 
 use tree_sitter::Language;
+
+// Re-export tree-sitter for user convenience
+pub use tree_sitter;
 
 extern "C" {
     fn tree_sitter_beancount() -> Language;
@@ -44,9 +49,9 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 mod tests {
     #[test]
     fn test_can_load_grammar() {
-        let mut parser = tree_sitter::Parser::new();
+        let mut parser = super::tree_sitter::Parser::new();
         parser
-            .set_language(super::language())
+            .set_language(&super::language())
             .expect("Error loading beancount language");
     }
 }
