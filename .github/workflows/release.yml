@@ -56,9 +56,7 @@ jobs:
 
       - name: Validate grammar and generate parser
         run: |
-          echo "Validating grammar syntax..."
-          node -e "require('./grammar.js')" || { echo "Grammar validation failed"; exit 1; }
-          echo "Generating parser..."
+          echo "Validating grammar syntax and generating parser..."
           tree-sitter generate
 
       - name: Run comprehensive tests
