@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -85,7 +85,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Test highlight queries
         run: |
@@ -113,7 +113,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Clone Beancount examples
         run: |
@@ -192,7 +192,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Generate parser
         run: tree-sitter generate
@@ -261,7 +261,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Full test suite
         run: |
@@ -290,7 +290,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Generate parser
         run: tree-sitter generate
