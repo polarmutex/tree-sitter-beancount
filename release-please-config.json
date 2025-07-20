@@ -2,8 +2,7 @@
   "release-type": "node",
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
-  "include-v-in-tag": false,
-  "tag-separator": "-",
+  "include-v-in-tag": true,
   "separate-pull-requests": false,
   "skip-github-release": false,
   "draft": false,
@@ -29,7 +28,6 @@
   ],
   "packages": {
     ".": {
-      "package-name": "tree-sitter-beancount",
       "changelog-path": "CHANGELOG.md",
       "release-type": "node"
     }
