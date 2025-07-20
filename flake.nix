@@ -79,11 +79,13 @@
         devShells = {
           default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
-              nodejs
+              nodejs_22
               nodePackages.node-gyp
               # broken (tree-sitter.override {webUISupport = true;})
               tree-sitter
               cargo
+              python3
+              packages.sync-versions
             ];
 
             inherit (checks.pre-commit) shellHook;
@@ -101,6 +103,30 @@
           };
 
           inherit (pkgs) tree-sitter;
+
+          sync-versions = pkgs.writeShellScriptBin "sync-versions" ''
+            set -euo pipefail
+
+            # Get versions from Nix packages
+            NODE_VERSION=$(${pkgs.nodejs_22}/bin/node --version | sed 's/v//')
+            TREE_SITTER_VERSION=$(${pkgs.tree-sitter}/bin/tree-sitter --version | cut -d' ' -f2)
+
+            echo "Syncing versions:"
+            echo "  Node.js: $NODE_VERSION"
+            echo "  tree-sitter: $TREE_SITTER_VERSION"
+
+            # Update package.json with extracted versions
+            ${pkgs.jq}/bin/jq \
+              --arg node_version ">=''${NODE_VERSION%.*}.0" \
+              --arg ts_version "$TREE_SITTER_VERSION" \
+              '.engines.node = $node_version |
+               .devDependencies."tree-sitter-cli" = $ts_version |
+               .peerDependencies."tree-sitter" = $ts_version' \
+              package.json > package.json.tmp && mv package.json.tmp package.json
+
+            echo "Updated package.json versions"
+            echo "Run 'npm install' to update package-lock.json"
+          '';
         };
       }
     );
