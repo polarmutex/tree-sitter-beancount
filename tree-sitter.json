@@ -7,7 +7,7 @@
     "name": "beancount",
     "url": "https://github.com/polarmutex/tree-sitter-beancount",
     "description": "Tree-sitter grammar for Beancount",
-    "version": "2.3.3"
+    "version": "2.4.0"
   },
   "grammars": [
     {
