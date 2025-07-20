@@ -2,6 +2,7 @@ name: Release
 
 permissions:
   contents: write
+  pull-requests: write
   packages: write
   attestations: write
   id-token: write
@@ -25,28 +26,15 @@ jobs:
       version: ${{ steps.release.outputs.version }}
     steps:
       - name: Create release
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         id: release
         with:
-          release-type: node
-          package-name: tree-sitter-beancount
-          bump-minor-pre-major: true
-          bump-patch-for-minor-pre-major: true
-          extra-files: |
-            Cargo.toml
-          changelog-types: |
-            [
-              {"type":"feat","section":"Features","hidden":false},
-              {"type":"fix","section":"Bug Fixes","hidden":false},
-              {"type":"perf","section":"Performance","hidden":false},
-              {"type":"docs","section":"Documentation","hidden":false},
-              {"type":"test","section":"Tests","hidden":false},
-              {"type":"refactor","section":"Refactoring","hidden":false},
-              {"type":"chore","section":"Maintenance","hidden":true}
-            ]
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
-  build-artifacts:
-    name: Build release artifacts
+  validate-and-build:
+    name: Validate parser and build artifacts
     runs-on: ubuntu-latest
     needs: [release-please]
     if: needs.release-please.outputs.release_created
@@ -54,31 +42,111 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v1
 
-      - name: Generate parser
-        run: tree-sitter generate
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate grammar and generate parser
+        run: |
+          echo "Validating grammar syntax..."
+          node -e "require('./grammar.js')" || { echo "Grammar validation failed"; exit 1; }
+          echo "Generating parser..."
+          tree-sitter generate
+
+      - name: Run comprehensive tests
+        run: |
+          echo "Running tree-sitter test suite..."
+          tree-sitter test
+          echo "Running npm tests..."
+          npm test
+
+      - name: Validate parser integrity
+        run: |
+          echo "Checking for parser compilation errors..."
+          gcc -c -I src src/parser.c -o /tmp/parser.o || { echo "Parser compilation failed"; exit 1; }
+          gcc -c -I src src/scanner.c -o /tmp/scanner.o || { echo "Scanner compilation failed"; exit 1; }
+          echo "Parser validation successful"
+
+      - name: Test example parsing
+        run: |
+          echo "Testing parser with sample Beancount files..."
+          if [ -d "examples" ]; then
+            for file in examples/*.beancount; do
+              if [ -f "$file" ]; then
+                echo "Parsing $file..."
+                tree-sitter parse "$file" --quiet || { echo "Failed to parse $file"; exit 1; }
+              fi
+            done
+          else
+            echo "No examples directory found, creating test file..."
+            cat > /tmp/test.beancount << 'EOF'
+            2023-01-01 open Assets:Checking
+            2023-01-02 * "Test transaction"
+              Assets:Checking  100.00 USD
+              Expenses:Food   -100.00 USD
+            EOF
+            tree-sitter parse /tmp/test.beancount --quiet || { echo "Failed to parse test file"; exit 1; }
+          fi
+          echo "Example parsing successful"
 
       - name: Build WebAssembly
-        run: tree-sitter build --wasm
-
-      - name: Create source tarball
         run: |
+          echo "Building WebAssembly module..."
+          tree-sitter build --wasm
+          echo "Validating WASM output..."
+          file tree-sitter-beancount.wasm | grep -q "WebAssembly" || { echo "Invalid WASM file"; exit 1; }
+
+      - name: Generate query files
+        run: |
+          echo "Generating tree-sitter queries..."
+          mkdir -p queries
+          # Create basic highlights query if it doesn't exist
+          if [ ! -f "queries/highlights.scm" ]; then
+            cat > queries/highlights.scm << 'EOF'
+            ; Highlights for tree-sitter-beancount
+            (date) @constant.numeric.date
+            (account) @variable.parameter.account
+            (currency) @constant.language.currency
+            (number) @constant.numeric
+            (string) @string
+            (comment) @comment
+            (txn) @keyword.control.transaction
+            (flag) @constant.character.flag
+            EOF
+          fi
+
+      - name: Create optimized source tarball
+        run: |
+          echo "Creating source distribution..."
           tar -czf tree-sitter-beancount-${{ needs.release-please.outputs.version }}.tar.gz \
             --exclude='.git*' \
             --exclude='target' \
             --exclude='node_modules' \
             --exclude='*.tar.gz' \
+            --exclude='.github' \
+            --exclude='examples' \
+            --exclude='corpus' \
+            --transform 's,^,tree-sitter-beancount-${{ needs.release-please.outputs.version }}/,' \
             .
+          echo "Source tarball created: $(ls -lh *.tar.gz)"
 
       - name: Upload release artifacts
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          echo "Uploading release artifacts..."
           gh release upload ${{ needs.release-please.outputs.tag_name }} \
             tree-sitter-beancount.wasm \
             tree-sitter-beancount-${{ needs.release-please.outputs.version }}.tar.gz
+          echo "Artifacts uploaded successfully"
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
@@ -91,7 +159,7 @@ jobs:
   publish-cargo:
     name: Publish to Crates.io
     runs-on: ubuntu-latest
-    needs: [release-please]
+    needs: [release-please, validate-and-build]
     if: needs.release-please.outputs.release_created
     steps:
       - name: Checkout repository
@@ -113,38 +181,75 @@ jobs:
             ${{ runner.os }}-cargo-release-
             ${{ runner.os }}-cargo-
 
-      - name: Test build
-        run: cargo build --release
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+
+      - name: Generate parser
+        run: tree-sitter generate
+
+      - name: Run Rust tests
+        run: |
+          echo "Building and testing Rust bindings..."
+          cargo build --release
+          cargo test --release
+
+      - name: Dry run publish
+        run: |
+          echo "Performing dry run..."
+          cargo publish --dry-run
 
       - name: Publish to crates.io
-        run: cargo publish --token ${{ secrets.CARGO_API_KEY }}
+        run: |
+          echo "Publishing to crates.io..."
+          cargo publish --token ${{ secrets.CARGO_API_KEY }}
+          echo "Successfully published to crates.io"
 
   publish-npm:
     name: Publish to npm
     runs-on: ubuntu-latest
-    needs: [release-please]
+    needs: [release-please, validate-and-build]
     if: needs.release-please.outputs.release_created
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and test
-        run: |
-          npm run build --if-present
-          npm test --if-present
+      - name: Generate parser
+        run: tree-sitter generate
 
+      - name: Build and test Node.js bindings
+        run: |
+          echo "Building for Node.js ${{ matrix.node-version }}..."
+          npm run build
+          npm test
+
+      - name: Test package integrity
+        if: matrix.node-version == 20
+        run: |
+          echo "Testing package contents..."
+          npm pack --dry-run
+          
       - name: Publish to npm
-        run: npm publish --access public
+        if: matrix.node-version == 20
+        run: |
+          echo "Publishing to npm..."
+          npm publish --access public
+          echo "Successfully published to npm"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -214,15 +319,26 @@ jobs:
   notify-success:
     name: Notify release success
     runs-on: ubuntu-latest
-    needs: [release-please, build-artifacts, publish-cargo, publish-npm]
+    needs: [release-please, validate-and-build, publish-cargo, publish-npm]
     if: needs.release-please.outputs.release_created && success()
     steps:
-      - name: Summary
+      - name: Generate release summary
         run: |
-          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
-          echo "Successfully released tree-sitter-beancount ${{ needs.release-please.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ GitHub release created" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Artifacts uploaded" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Published to Crates.io" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Published to npm" >> $GITHUB_STEP_SUMMARY
-          # echo "- ✅ Published to PyPI" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎉 Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully released **tree-sitter-beancount v${{ needs.release-please.outputs.version }}**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Completed Tasks" >> $GITHUB_STEP_SUMMARY
+          echo "- 🏷️ GitHub release created" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 Parser validation passed" >> $GITHUB_STEP_SUMMARY
+          echo "- 🧪 Comprehensive tests passed" >> $GITHUB_STEP_SUMMARY
+          echo "- 📦 WebAssembly build successful" >> $GITHUB_STEP_SUMMARY
+          echo "- 📋 Release artifacts uploaded" >> $GITHUB_STEP_SUMMARY
+          echo "- 🦀 Published to Crates.io" >> $GITHUB_STEP_SUMMARY
+          echo "- 📄 Published to npm" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔒 Build provenance attestation generated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Release Metrics" >> $GITHUB_STEP_SUMMARY
+          echo "- **Release Tag**: ${{ needs.release-please.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Release URL**: https://github.com/${{ github.repository }}/releases/tag/${{ needs.release-please.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Crates.io**: https://crates.io/crates/tree-sitter-beancount" >> $GITHUB_STEP_SUMMARY
+          echo "- **NPM**: https://www.npmjs.com/package/tree-sitter-beancount" >> $GITHUB_STEP_SUMMARY

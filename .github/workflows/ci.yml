@@ -307,4 +307,4 @@ jobs:
       - name: Run fuzzer
         if: steps.scanner-changes.outputs.changed == 'true'
         timeout-minutes: 10
-        run: tree-sitter fuzz --time-limit 300
+        run: tree-sitter fuzz --iterations 300

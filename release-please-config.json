@@ -1,0 +1,37 @@
+{
+  "release-type": "node",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "include-v-in-tag": false,
+  "tag-separator": "-",
+  "separate-pull-requests": false,
+  "skip-github-release": false,
+  "draft": false,
+  "prerelease": false,
+  "changelog-sections": [
+    {"type": "feat", "section": "Features", "hidden": false},
+    {"type": "fix", "section": "Bug Fixes", "hidden": false},
+    {"type": "perf", "section": "Performance", "hidden": false},
+    {"type": "docs", "section": "Documentation", "hidden": false},
+    {"type": "test", "section": "Tests", "hidden": false},
+    {"type": "refactor", "section": "Refactoring", "hidden": false},
+    {"type": "ci", "section": "CI/CD", "hidden": true},
+    {"type": "build", "section": "Build System", "hidden": true},
+    {"type": "chore", "section": "Maintenance", "hidden": true}
+  ],
+  "extra-files": [
+    "Cargo.toml",
+    {
+      "type": "json",
+      "path": "tree-sitter.json",
+      "jsonpath": "$.metadata.version"
+    }
+  ],
+  "packages": {
+    ".": {
+      "package-name": "tree-sitter-beancount",
+      "changelog-path": "CHANGELOG.md",
+      "release-type": "node"
+    }
+  }
+}
