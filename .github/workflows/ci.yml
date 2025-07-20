@@ -170,11 +170,8 @@ jobs:
 
       - name: Check grammar format
         run: |
-          # Check if grammar.js is properly formatted
-          if ! node -c grammar.js; then
-            echo "grammar.js has syntax errors"
-            exit 1
-          fi
+          # Validate grammar syntax using tree-sitter
+          tree-sitter generate --no-bindings
 
       - name: Validate tree-sitter.json
         run: |
