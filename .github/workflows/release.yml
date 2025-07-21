@@ -4,6 +4,10 @@ on:
   push:
     tags: ["*"]
 
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
 permissions:
   contents: write
   id-token: write
@@ -19,7 +23,6 @@ jobs:
 
   publish-cargo:
     name: Publish to Crates.io
-    if: needs.release-please.outputs.release_created
     uses: tree-sitter/workflows/.github/workflows/package-crates.yml@main
     secrets:
       CARGO_REGISTRY_TOKEN: ${{secrets.CARGO_REGISTRY_TOKEN}}
