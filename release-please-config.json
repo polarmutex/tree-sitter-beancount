@@ -1,8 +1,11 @@
 {
+  "release-type": "simple",
+  "include-v-in-tag": true,
+  "include-component-in-tag": false,
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
-  "include-v-in-tag": true,
-  "group-pull-request-title-pattern": "chore: release ${version}",
+  "pull-request-title-pattern": "chore: release ${version}",
+  "bootstrap-sha": "98d660ea047efe5fb08ac81d77959b86831e66fb",
   "separate-pull-requests": false,
   "skip-github-release": false,
   "draft": false,
@@ -27,10 +30,6 @@
     }
   ],
   "packages": {
-    ".": {
-      "changelog-path": "CHANGELOG.md",
-      "release-type": "node",
-      "include-component-in-tag": false
-    }
+    ".": {}
   }
 }
