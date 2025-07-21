@@ -1,72 +1,44 @@
 version: 2
 updates:
   # Rust dependencies
-  - package-ecosystem: "cargo"
-    directory: "/"
+  - package-ecosystem: cargo
+    directory: /
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "UTC"
+      interval: weekly
+      day: sunday
     commit-message:
-      prefix: "chore(deps):"
-      include: "scope"
+      prefix: build(deps)
     labels:
-      - "dependencies"
-      - "cargo"
-      - "automation"
-    reviewers:
-      - "polarmutex"
+      - dependencies
     groups:
-      cargo-all:
+       cargo:
         patterns: ["*"]
-    ignore:
-      # Ignore major version updates for tree-sitter (require manual review)
-      - dependency-name: "tree-sitter"
-        update-types: ["version-update:semver-major"]
 
   # NPM dependencies
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    versioning-strategy: increase
+    directory: /
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "UTC"
+      interval: weekly
+      day: sunday
     commit-message:
-      prefix: "chore(deps):"
-      include: "scope"
+      prefix: build(deps)
     labels:
-      - "dependencies"
-      - "npm"
-      - "automation"
-    reviewers:
-      - "polarmutex"
+      - dependencies
     groups:
-      npm-all:
+      npm:
         patterns: ["*"]
-    ignore:
-      # Ignore major version updates for tree-sitter (require manual review)
-      - dependency-name: "tree-sitter*"
-        update-types: ["version-update:semver-major"]
 
   # GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "UTC"
+      interval: weekly
+      day: sunday
     commit-message:
-      prefix: "ci:"
-      include: "scope"
+      prefix: ci
     labels:
-      - "dependencies"
-      - "github-actions"
-      - "automation"
-    reviewers:
-      - "polarmutex"
+      - dependencies
     groups:
-      actions-all:
+      actions:
         patterns: ["*"]
