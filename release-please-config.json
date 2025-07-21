@@ -5,7 +5,7 @@
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
   "pull-request-title-pattern": "chore: release ${version}",
-  "bootstrap-sha": "98d660ea047efe5fb08ac81d77959b86831e66fb",
+  "bootstrap-sha": "1b852a5aae38105db1b4f6ca22c662f69871fc4c",
   "separate-pull-requests": false,
   "skip-github-release": false,
   "draft": false,
@@ -30,6 +30,8 @@
     }
   ],
   "packages": {
-    ".": {}
+    ".": {
+      "release-type": "node"
+    }
   }
 }
