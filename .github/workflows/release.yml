@@ -1,41 +1,24 @@
 name: Release
 
-permissions:
-  contents: write
-  pull-requests: write
-  packages: write
-  attestations: write
-  id-token: write
-
 on:
   push:
-    branches: [master]
-  workflow_dispatch:
+    tags: ["*"]
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
 
 jobs:
-  release-please:
-    name: Create release
-    runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-      version: ${{ steps.release.outputs.version }}
-    steps:
-      - name: Create release
-        uses: googleapis/release-please-action@v4
-        id: release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
+  publish-github:
+    name: Publish to GitHub
+    uses: tree-sitter/workflows/.github/workflows/release.yml@main
+    with:
+      generate: false
+      attestations: true
 
   publish-cargo:
     name: Publish to Crates.io
-    needs: [release-please]
     if: needs.release-please.outputs.release_created
     uses: tree-sitter/workflows/.github/workflows/package-crates.yml@main
     secrets:
@@ -45,9 +28,7 @@ jobs:
 
   publish-npm:
     name: Publish to npm
-    needs: [release-please]
     uses: tree-sitter/workflows/.github/workflows/package-npm.yml@main
-    if: needs.release-please.outputs.release_created
     secrets:
       NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
     with:

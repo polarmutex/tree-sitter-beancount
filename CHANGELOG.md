@@ -1,80 +1,206 @@
 # Changelog
 
-## [2.3.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.2...v2.3.3) (2024-07-20)
+All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2025-07-21
 
-### Bug Fixes
+### 🚀 Features
 
-* support comments as part of key value lists ([c25f803](https://github.com/polarmutex/tree-sitter-beancount/commit/c25f8034c977681653a8acd541c8b4877a58f474))
-* support embedded escaped quotes in strings ([9f6eb73](https://github.com/polarmutex/tree-sitter-beancount/commit/9f6eb73b2cc06325f6c31f9c58f84ba802a88fd0))
+- Chinese characters in account
+- Add support for Markdown style headlines
+- Upgrade to ABI 15
 
-## [2.3.2](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.1...v2.3.2) (2024-03-09)
+### 🐛 Bug Fixes
 
+- Cargo version
+- Rerun generate
+- Generate bindings
+- Improve parser speed
+- Improve test coverage and fix some missing items in the syntax
+- #61 re-export tree-sitter for rust bindings
+- Ci release errors
+- Fix cicd
+- Fix cicd
 
-### Bug Fixes
+### 🚜 Refactor
 
-* binding and lock files for rust ([0727d62](https://github.com/polarmutex/tree-sitter-beancount/commit/0727d62af0dea0a78bbf132f53876888fc656c19))
-* fix other scanner.cc references ([1f19abf](https://github.com/polarmutex/tree-sitter-beancount/commit/1f19abf1e162e1828013cb5434c6cf30f4054e80))
+- Beancount grammar
+- Improve scanner c code
 
-## [2.3.1](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.0...v2.3.1) (2024-02-29)
+### 📚 Documentation
 
+- Improve readme
+- Add claude file
 
-### Bug Fixes
+### ⚙️ Miscellaneous Tasks
 
-* cargo version ([01cc2ca](https://github.com/polarmutex/tree-sitter-beancount/commit/01cc2ca9073b1dab75e6d7996f48331b0c3f9057))
+- Minor fixes
+- Bump the actions group across 1 directory with 2 updates
+- Bump actions/setup-node from 4.1.0 to 4.2.0 in the actions group
+- Workflow does not contain permissions
+- Workflow does not contain permissions
+- Run tree-sitter generate
+- Regenerate tree-sitter
+- Update nix flakes
+- Update workflows
+- Fix errors
+- Update release-please
 
-## [2.3.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.2.0...v2.3.0) (2024-02-29)
+## [2.3.3] - 2024-07-20
 
+### 🐛 Bug Fixes
 
-### Features
+- Support embedded escaped quotes in strings
+- Support comments as part of key value lists
 
-* Add swift bindings ([0e08ee4](https://github.com/polarmutex/tree-sitter-beancount/commit/0e08ee4212edef5088bb3dd93ab0ba01f94792b0))
+### ⚙️ Miscellaneous Tasks
 
+- Update dependabot config
+- Bump actions/setup-node from 4.0.2 to 4.0.3 in the actions group
+- *(master)* Release 2.3.3
 
-### Bug Fixes
+## [2.3.2] - 2024-03-09
 
-* remove unneeded excludes ([cd08aef](https://github.com/polarmutex/tree-sitter-beancount/commit/cd08aefa20dc0f3d5984b08b5d468f75bf4fd096))
+### 🐛 Bug Fixes
 
-## [2.2.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.3...v2.2.0) (2023-10-10)
+- Fix other scanner.cc references
+- Binding and lock files for rust
 
+### ⚙️ Miscellaneous Tasks
 
-### Features
+- Bump cargo version
+- *(master)* Release 2.3.2
 
-* add named field for narration and payee ([0631b99](https://github.com/polarmutex/tree-sitter-beancount/commit/0631b99d9096e10f4e289efe618e518debe918b4))
+## [2.3.1] - 2024-02-29
 
-## [2.1.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.2...v2.1.3) (2023-07-02)
+### 🐛 Bug Fixes
 
+- Cargo version
 
-### Bug Fixes
+### ⚙️ Miscellaneous Tasks
 
-* detect in error recovery and exit scan ([f3c05c6](https://github.com/polarmutex/tree-sitter-beancount/commit/f3c05c68aa03631fb4b9f0f7592bfec48376e65a))
+- *(master)* Release 2.3.1
 
-## [2.1.2](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.1...v2.1.2) (2023-01-28)
+## [2.3.0] - 2024-02-29
 
+### 🚀 Features
 
-### Bug Fixes
+- Add swift bindings
 
-* cleanup grammar upon feedback ([015e228](https://github.com/polarmutex/tree-sitter-beancount/commit/015e228ca684bbba5ee3e457020cf9c5d1d20afc))
-* npm publish ([4cbd1f0](https://github.com/polarmutex/tree-sitter-beancount/commit/4cbd1f09cd07c1f1fabf867c2cf354f9da53cc4c))
+### 🐛 Bug Fixes
 
-## [2.1.1](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.1.0...v2.1.1) (2022-07-02)
+- Remove unneeded excludes
 
+### 🚜 Refactor
 
-### Bug Fixes
+- Rewrite scanner in c
 
-* changelog for prior versions ([8197699](https://github.com/polarmutex/tree-sitter-beancount/commit/8197699421b9787a3940b097ced363b9a4ba2f13))
-* npm publish ([a105058](https://github.com/polarmutex/tree-sitter-beancount/commit/a1050584340a2375b6b480ba9e9691aebb9d33d5))
-* rust binding build error ([bfbfa12](https://github.com/polarmutex/tree-sitter-beancount/commit/bfbfa12da0e1c7e598768c0f46f90bbe179d4be5))
+### ⚙️ Miscellaneous Tasks
 
-## [2.1.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.0.0...v2.1.0) (2022-06-28)
+- Bump actions/setup-node from 3.8.1 to 4.0.1
+- Bump google-github-actions/release-please-action from 3 to 4
+- Bump actions/cache from 3 to 4
+- Bump actions/setup-node from 4.0.1 to 4.0.2
+- Update nix flakes
+- *(master)* Release 2.3.0
 
+## [2.2.0] - 2023-10-14
 
-### Features
+### 🚀 Features
 
-* support org sections ([1b06224](https://github.com/polarmutex/tree-sitter-beancount/commit/1b06224c446f49586b0952de795e1562c6d76e3b))
+- Add named field for narration and payee
 
-## [2.0.0] (2021-11-11)
+### ⚙️ Miscellaneous Tasks
 
-### Features
+- Bump actions/checkout from 3 to 4
+- Bump actions/setup-node from 3.6.0 to 3.8.1
+- Cleanup flake.nix
+- Update nix
+- *(master)* Release 2.2.0
 
-* Initial version of grammar
+## [2.1.3] - 2023-07-02
+
+### 🐛 Bug Fixes
+
+- Detect in error recovery and exit scan
+
+### ⚙️ Miscellaneous Tasks
+
+- Add dependbot
+- Bump actions/setup-node from 2.pre.beta to 3.6.0
+- Bump actions/checkout from 2 to 3
+- Bump actions/cache from 2 to 3
+- Nix flake update / formatting
+- Remove uneeded file
+- *(cicd)* Update dependencies to fix cicd
+- *(master)* Release 2.1.3
+
+## [2.1.2] - 2023-01-28
+
+### 🐛 Bug Fixes
+
+- Npm publish
+- Cleanup grammar upon feedback
+
+### 🚜 Refactor
+
+- Add supertypes
+- Identifier
+- Directives
+- Entry and symbols
+- Remove lists
+- Txn_strings
+- Account names
+- Key value
+
+### 📚 Documentation
+
+- Update readme
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated cargo lock
+- *(master)* Release 2.1.2
+
+## [2.1.1] - 2022-07-02
+
+### 🐛 Bug Fixes
+
+- Changelog for prior versions
+- Npm publish
+- Rust binding build error
+
+### ⚙️ Miscellaneous Tasks
+
+- *(master)* Release 2.1.1
+
+## [2.1.0] - 2022-06-28
+
+### 🚀 Features
+
+- Support org sections
+
+### ⚙️ Miscellaneous Tasks
+
+- Update release workflow
+- Fix release-please version for cargo
+- Fix cargo release number
+- Remove file
+- *(master)* Release 2.1.0
+
+## [2.0.0] - 2021-11-11
+
+### 🚀 Features
+
+- Updated grammar to match current beancount grammar v2 on the master branch
+- Upgrade to v0.19
+
+### 💼 Other
+
+- Fix typo
+
+### ⚙️ Miscellaneous Tasks
+
+- Publish cargo on release
+
+<!-- generated by git-cliff -->
