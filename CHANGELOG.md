@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.1] - 2025-07-21
+
+### 🐛 Bug Fixes
+
+- Cicd issues
+
 ## [2.4.0] - 2025-07-21
 
 ### 🚀 Features
@@ -19,8 +25,6 @@ All notable changes to this project will be documented in this file.
 - Improve test coverage and fix some missing items in the syntax
 - #61 re-export tree-sitter for rust bindings
 - Ci release errors
-- Fix cicd
-- Fix cicd
 
 ### 🚜 Refactor
 
@@ -45,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - Update workflows
 - Fix errors
 - Update release-please
+- V2.4.0
 
 ## [2.3.3] - 2024-07-20
 
@@ -57,7 +62,7 @@ All notable changes to this project will be documented in this file.
 
 - Update dependabot config
 - Bump actions/setup-node from 4.0.2 to 4.0.3 in the actions group
-- *(master)* Release 2.3.3
+- _(master)_ Release 2.3.3
 
 ## [2.3.2] - 2024-03-09
 
@@ -69,7 +74,7 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Bump cargo version
-- *(master)* Release 2.3.2
+- _(master)_ Release 2.3.2
 
 ## [2.3.1] - 2024-02-29
 
@@ -79,7 +84,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(master)* Release 2.3.1
+- _(master)_ Release 2.3.1
 
 ## [2.3.0] - 2024-02-29
 
@@ -102,7 +107,7 @@ All notable changes to this project will be documented in this file.
 - Bump actions/cache from 3 to 4
 - Bump actions/setup-node from 4.0.1 to 4.0.2
 - Update nix flakes
-- *(master)* Release 2.3.0
+- _(master)_ Release 2.3.0
 
 ## [2.2.0] - 2023-10-14
 
@@ -116,7 +121,7 @@ All notable changes to this project will be documented in this file.
 - Bump actions/setup-node from 3.6.0 to 3.8.1
 - Cleanup flake.nix
 - Update nix
-- *(master)* Release 2.2.0
+- _(master)_ Release 2.2.0
 
 ## [2.1.3] - 2023-07-02
 
@@ -132,8 +137,8 @@ All notable changes to this project will be documented in this file.
 - Bump actions/cache from 2 to 3
 - Nix flake update / formatting
 - Remove uneeded file
-- *(cicd)* Update dependencies to fix cicd
-- *(master)* Release 2.1.3
+- _(cicd)_ Update dependencies to fix cicd
+- _(master)_ Release 2.1.3
 
 ## [2.1.2] - 2023-01-28
 
@@ -160,7 +165,7 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Updated cargo lock
-- *(master)* Release 2.1.2
+- _(master)_ Release 2.1.2
 
 ## [2.1.1] - 2022-07-02
 
@@ -172,7 +177,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(master)* Release 2.1.1
+- _(master)_ Release 2.1.1
 
 ## [2.1.0] - 2022-06-28
 
@@ -186,7 +191,7 @@ All notable changes to this project will be documented in this file.
 - Fix release-please version for cargo
 - Fix cargo release number
 - Remove file
-- *(master)* Release 2.1.0
+- _(master)_ Release 2.1.0
 
 ## [2.0.0] - 2021-11-11
 
