@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.4.0](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.3...v2.4.0) (2025-07-21)
+
+
+### Features
+
+* Add support for Markdown style headlines ([53e128c](https://github.com/polarmutex/tree-sitter-beancount/commit/53e128cf73f47d88d70a1f50667d87c00e76fe60))
+* chinese characters in account ([97b46e5](https://github.com/polarmutex/tree-sitter-beancount/commit/97b46e5f37aa9030e9701c816e20760760ab4907))
+* upgrade to ABI 15 ([fe48b52](https://github.com/polarmutex/tree-sitter-beancount/commit/fe48b52805b3c6bebc3189c0e290ec4cb75dc5a7))
+
+
+### Bug Fixes
+
+* [#61](https://github.com/polarmutex/tree-sitter-beancount/issues/61) re-export tree-sitter for rust bindings ([6108878](https://github.com/polarmutex/tree-sitter-beancount/commit/610887893f4ec5aeeb407b88e0eb10bd7453545c))
+* cargo version ([8093434](https://github.com/polarmutex/tree-sitter-beancount/commit/80934340cdd4b005ff15a24de9d99f36701a07e9))
+* ci release errors ([598172e](https://github.com/polarmutex/tree-sitter-beancount/commit/598172e301c2240dea9ec48a5719d165eda0dfd5))
+* generate bindings ([384c55e](https://github.com/polarmutex/tree-sitter-beancount/commit/384c55ede2a1f13e83d8e18dbef8f11304c379c2))
+* improve parser speed ([e9251c5](https://github.com/polarmutex/tree-sitter-beancount/commit/e9251c51cfc41659cccdb815b48e29a595069f58))
+* improve test coverage and fix some missing items in the syntax ([2b609bf](https://github.com/polarmutex/tree-sitter-beancount/commit/2b609bf899c7e40c2ae2e32bd940e237a8efe6d6))
+* rerun generate ([e2984c6](https://github.com/polarmutex/tree-sitter-beancount/commit/e2984c6d96a8532e74c8223976d10aa854d5a772))
+
+
+### Documentation
+
+* add claude file ([86a23d3](https://github.com/polarmutex/tree-sitter-beancount/commit/86a23d3cfe9bf95351cbf0ad49833ec2144148e4))
+* improve readme ([94ab662](https://github.com/polarmutex/tree-sitter-beancount/commit/94ab662b9a88f6b2d2f240395550802bb6e265d1))
+
+
+### Refactoring
+
+* beancount grammar ([5949b99](https://github.com/polarmutex/tree-sitter-beancount/commit/5949b9999e86e420eca7534459240cb24b0357ef))
+* improve scanner c code ([3afb245](https://github.com/polarmutex/tree-sitter-beancount/commit/3afb245fc36a62e710d983b42e95b521114b2590))
+
 ## [2.3.3](https://github.com/polarmutex/tree-sitter-beancount/compare/v2.3.2...v2.3.3) (2024-07-20)
 
 
