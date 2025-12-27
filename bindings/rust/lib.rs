@@ -38,8 +38,8 @@ pub fn language() -> Language {
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
 pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
-mod token_kind;
-pub use token_kind::TokenKind;
+mod node_kind;
+pub use node_kind::NodeKine;
 
 // Uncomment these to include any queries that this grammar contains
 
@@ -59,13 +59,13 @@ mod tests {
     }
 
     #[test]
-    fn test_tokenkind_from_name() {
-        use super::TokenKind;
+    fn test_nodekine_from_name() {
+        use super::NodeKine;
 
-        assert_eq!(TokenKind::from_name("account"), Some(TokenKind::Account));
-        assert_eq!(TokenKind::from_name("string"), Some(TokenKind::String));
-        assert_eq!(TokenKind::from_name("number"), Some(TokenKind::Number));
-        assert_eq!(TokenKind::from_name("flag"), Some(TokenKind::Flag));
-        assert_eq!(TokenKind::from_name("does_not_exist"), None);
+        assert_eq!(NodeKine::from_name("account"), Some(NodeKine::Account));
+        assert_eq!(NodeKine::from_name("string"), Some(NodeKine::String));
+        assert_eq!(NodeKine::from_name("number"), Some(NodeKine::Number));
+        assert_eq!(NodeKine::from_name("flag"), Some(NodeKine::Flag));
+        assert_eq!(NodeKine::from_name("does_not_exist"), None);
     }
 }

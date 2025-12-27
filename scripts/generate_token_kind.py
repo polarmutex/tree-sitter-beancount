@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Rust TokenKind enum from node-types.json.
+"""Generate Rust NodeKine enum from node-types.json.
 
 Usage:
     python scripts/generate_token_kind.py
@@ -14,7 +14,7 @@ from typing import Any, Dict
 
 ROOT = Path(__file__, "../..").resolve()
 NODE_TYPES_PATH = ROOT / "src" / "node-types.json"
-OUT_PATH = ROOT / "bindings" / "rust" / "token_kind.rs"
+OUT_PATH = ROOT / "bindings" / "rust" / "node_kind.rs"
 
 
 def to_pascal(name: str) -> str:
@@ -53,17 +53,17 @@ def main() -> None:
         "// To regenerate, run: python scripts/generate_token_kind.py",
         "",
         "#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]",
-        "pub enum TokenKind {",
+        "pub enum NodeKine {",
     ]
     lines += [f"    {v}," for v in variants]
     lines.append("    Unknown,")
     lines.append("}")
     lines.append("")
-    lines.append("impl TokenKind {")
+    lines.append("impl NodeKine {")
     lines.append("    pub fn from_name(name: &str) -> Option<Self> {")
     lines.append("        Some(match name {")
     lines += [
-        f'            "{name}" => TokenKind::{variant},'
+        f'            "{name}" => NodeKine::{variant},'
         for name, variant in zip(token_names, variants)
     ]
     lines.append("            _ => return None,")
@@ -73,10 +73,10 @@ def main() -> None:
     lines.append("    pub fn name(&self) -> &'static str {")
     lines.append("        match self {")
     lines += [
-        f'            TokenKind::{variant} => "{name}",'
+        f'            NodeKine::{variant} => "{name}",'
         for name, variant in zip(token_names, variants)
     ]
-    lines.append('            TokenKind::Unknown => "<unknown>",')
+    lines.append('            NodeKine::Unknown => "<unknown>",')
     lines.append("        }")
     lines.append("    }")
     lines.append("}")
