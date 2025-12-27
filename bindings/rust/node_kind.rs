@@ -26,9 +26,9 @@ pub enum NodeKine {
     Unknown,
 }
 
-impl NodeKine {
-    pub fn from_name(name: &str) -> Option<Self> {
-        Some(match name {
+impl From<&str> for NodeKine {
+    fn from(name: &str) -> Self {
+        match name {
             "account" => NodeKine::Account,
             "asterisk" => NodeKine::Asterisk,
             "at" => NodeKine::At,
@@ -49,10 +49,12 @@ impl NodeKine {
             "slash" => NodeKine::Slash,
             "string" => NodeKine::String,
             "tag" => NodeKine::Tag,
-            _ => return None,
-        })
+            _ => NodeKine::Unknown,
+        }
     }
+}
 
+impl NodeKine {
     pub fn name(&self) -> &'static str {
         match self {
             NodeKine::Account => "account",

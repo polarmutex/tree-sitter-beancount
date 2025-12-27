@@ -59,13 +59,13 @@ mod tests {
     }
 
     #[test]
-    fn test_nodekine_from_name() {
+    fn test_nodekine_from_str() {
         use super::NodeKine;
 
-        assert_eq!(NodeKine::from_name("account"), Some(NodeKine::Account));
-        assert_eq!(NodeKine::from_name("string"), Some(NodeKine::String));
-        assert_eq!(NodeKine::from_name("number"), Some(NodeKine::Number));
-        assert_eq!(NodeKine::from_name("flag"), Some(NodeKine::Flag));
-        assert_eq!(NodeKine::from_name("does_not_exist"), None);
+        assert_eq!(NodeKine::from("account"), NodeKine::Account);
+        assert_eq!(NodeKine::from("string"), NodeKine::String);
+        assert_eq!(NodeKine::from("number"), NodeKine::Number);
+        assert_eq!(NodeKine::from("flag"), NodeKine::Flag);
+        assert_eq!(NodeKine::from("does_not_exist"), NodeKine::Unknown);
     }
 }
