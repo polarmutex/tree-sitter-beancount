@@ -59,17 +59,19 @@ def main() -> None:
     lines.append("    Unknown,")
     lines.append("}")
     lines.append("")
-    lines.append("impl NodeKine {")
-    lines.append("    pub fn from_name(name: &str) -> Option<Self> {")
-    lines.append("        Some(match name {")
+    lines.append("impl From<&str> for NodeKine {")
+    lines.append("    fn from(name: &str) -> Self {")
+    lines.append("        match name {")
     lines += [
         f'            "{name}" => NodeKine::{variant},'
         for name, variant in zip(token_names, variants)
     ]
-    lines.append("            _ => return None,")
-    lines.append("        })")
+    lines.append("            _ => NodeKine::Unknown,")
+    lines.append("        }")
     lines.append("    }")
+    lines.append("}")
     lines.append("")
+    lines.append("impl NodeKine {")
     lines.append("    pub fn name(&self) -> &'static str {")
     lines.append("        match self {")
     lines += [
