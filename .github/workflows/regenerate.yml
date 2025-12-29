@@ -33,7 +33,7 @@ jobs:
       - name: Regenerate parser
         run: |
           echo "Regenerating parser due to dependency update..."
-          tree-sitter generate --no-bindings
+          tree-sitter generate
 
           # Check if there are changes
           if git diff --quiet src/parser.c src/grammar.json src/node-types.json; then
@@ -51,7 +51,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add src/parser.c src/grammar.json src/node-types.json
-          git commit -m "chore: regenerate parser after dependency update
+          git commit -m "chore: regenerate parser after dependency update"
           git push
 
       - name: Comment on PR
