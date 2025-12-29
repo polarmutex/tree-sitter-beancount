@@ -70,34 +70,9 @@ jobs:
           path: npm-audit-results.json
           retention-days: 30
 
-  codeql:
-    name: CodeQL analysis
-    runs-on: ubuntu-latest
-    if: github.repository_owner == 'polarmutex'
-    strategy:
-      fail-fast: false
-      matrix:
-        language: ['cpp', 'javascript']
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
-        with:
-          languages: ${{ matrix.language }}
-          queries: security-extended,security-and-quality
-
-      - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v2
-
-      - name: Build parser
-        run: tree-sitter generate
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v4
-        with:
-          category: "/language:${{matrix.language}}"
+  # CodeQL analysis disabled - using GitHub's default CodeQL setup instead
+  # The default setup is enabled in repository settings and conflicts with custom workflows
+  # To re-enable custom CodeQL: disable default setup in Security > Code scanning settings
 
   secret-scan:
     name: Secret scanning
@@ -108,13 +83,35 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run TruffleHog
-        uses: trufflesecurity/trufflehog@main
+      - name: Check if BASE and HEAD are different
+        id: check-commits
+        if: github.event_name == 'push'
+        run: |
+          BASE_SHA=$(git rev-parse origin/${{ github.event.repository.default_branch }} 2>/dev/null || echo "")
+          HEAD_SHA=$(git rev-parse HEAD)
+          if [ "$BASE_SHA" = "$HEAD_SHA" ]; then
+            echo "same=true" >> $GITHUB_OUTPUT
+            echo "BASE and HEAD are the same - will use filesystem scan"
+          else
+            echo "same=false" >> $GITHUB_OUTPUT
+            echo "BASE and HEAD are different - will use git scan"
+          fi
+
+      - name: Run TruffleHog (Git scan)
+        if: github.event_name == 'push' && steps.check-commits.outputs.same == 'false'
+        uses: trufflesecurity/trufflehog@v3.85.0
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
           head: HEAD
-          extra_args: --debug --only-verified
+          extra_args: --only-verified
+
+      - name: Run TruffleHog (Filesystem scan)
+        if: github.event_name != 'push' || steps.check-commits.outputs.same == 'true'
+        uses: trufflesecurity/trufflehog@v3.85.0
+        with:
+          path: ./
+          extra_args: --only-verified
 
   security-summary:
     name: Security summary
