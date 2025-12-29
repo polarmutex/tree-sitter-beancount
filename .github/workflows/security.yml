@@ -83,8 +83,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run TruffleHog (Git scan)
+      - name: Check if BASE and HEAD are different
+        id: check-commits
         if: github.event_name == 'push'
+        run: |
+          BASE_SHA=$(git rev-parse origin/${{ github.event.repository.default_branch }} 2>/dev/null || echo "")
+          HEAD_SHA=$(git rev-parse HEAD)
+          if [ "$BASE_SHA" = "$HEAD_SHA" ]; then
+            echo "same=true" >> $GITHUB_OUTPUT
+            echo "BASE and HEAD are the same - will use filesystem scan"
+          else
+            echo "same=false" >> $GITHUB_OUTPUT
+            echo "BASE and HEAD are different - will use git scan"
+          fi
+
+      - name: Run TruffleHog (Git scan)
+        if: github.event_name == 'push' && steps.check-commits.outputs.same == 'false'
         uses: trufflesecurity/trufflehog@v3.85.0
         with:
           path: ./
@@ -93,7 +107,7 @@ jobs:
           extra_args: --only-verified
 
       - name: Run TruffleHog (Filesystem scan)
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' || steps.check-commits.outputs.same == 'true'
         uses: trufflesecurity/trufflehog@v3.85.0
         with:
           path: ./
