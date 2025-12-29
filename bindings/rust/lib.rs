@@ -39,7 +39,7 @@ pub fn language() -> Language {
 pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
 mod node_kind;
-pub use node_kind::NodeKine;
+pub use node_kind::NodeKind;
 
 // Uncomment these to include any queries that this grammar contains
 
@@ -59,13 +59,13 @@ mod tests {
     }
 
     #[test]
-    fn test_nodekine_from_str() {
-        use super::NodeKine;
+    fn test_NodeKind_from_str() {
+        use super::NodeKind;
 
-        assert_eq!(NodeKine::from("account"), NodeKine::Account);
-        assert_eq!(NodeKine::from("string"), NodeKine::String);
-        assert_eq!(NodeKine::from("number"), NodeKine::Number);
-        assert_eq!(NodeKine::from("flag"), NodeKine::Flag);
-        assert_eq!(NodeKine::from("does_not_exist"), NodeKine::Unknown);
+        assert_eq!(NodeKind::from("account"), NodeKind::Account);
+        assert_eq!(NodeKind::from("string"), NodeKind::String);
+        assert_eq!(NodeKind::from("number"), NodeKind::Number);
+        assert_eq!(NodeKind::from("flag"), NodeKind::Flag);
+        assert_eq!(NodeKind::from("does_not_exist"), NodeKind::Unknown);
     }
 }
