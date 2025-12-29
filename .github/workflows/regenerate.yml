@@ -33,7 +33,7 @@ jobs:
       - name: Regenerate parser
         run: |
           echo "Regenerating parser due to dependency update..."
-          tree-sitter generate --no-bindings
+          tree-sitter generate
 
           # Check if there are changes
           if git diff --quiet src/parser.c src/grammar.json src/node-types.json; then
