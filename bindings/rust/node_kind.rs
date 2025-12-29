@@ -2,7 +2,7 @@
 // To regenerate, run: python scripts/generate_token_kind.py
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub enum NodeKine {
+pub enum NodeKind {
     Account,
     Asterisk,
     At,
@@ -26,59 +26,58 @@ pub enum NodeKine {
     Unknown,
 }
 
-impl From<&str> for NodeKine {
+impl From<&str> for NodeKind {
     fn from(name: &str) -> Self {
         match name {
-            "account" => NodeKine::Account,
-            "asterisk" => NodeKine::Asterisk,
-            "at" => NodeKine::At,
-            "atat" => NodeKine::Atat,
-            "bool" => NodeKine::Bool,
-            "comment" => NodeKine::Comment,
-            "currency" => NodeKine::Currency,
-            "date" => NodeKine::Date,
-            "flag" => NodeKine::Flag,
-            "item" => NodeKine::Item,
-            "key" => NodeKine::Key,
-            "link" => NodeKine::Link,
-            "minus" => NodeKine::Minus,
-            "narration" => NodeKine::Narration,
-            "number" => NodeKine::Number,
-            "payee" => NodeKine::Payee,
-            "plus" => NodeKine::Plus,
-            "slash" => NodeKine::Slash,
-            "string" => NodeKine::String,
-            "tag" => NodeKine::Tag,
-            _ => NodeKine::Unknown,
+            "account" => NodeKind::Account,
+            "asterisk" => NodeKind::Asterisk,
+            "at" => NodeKind::At,
+            "atat" => NodeKind::Atat,
+            "bool" => NodeKind::Bool,
+            "comment" => NodeKind::Comment,
+            "currency" => NodeKind::Currency,
+            "date" => NodeKind::Date,
+            "flag" => NodeKind::Flag,
+            "item" => NodeKind::Item,
+            "key" => NodeKind::Key,
+            "link" => NodeKind::Link,
+            "minus" => NodeKind::Minus,
+            "narration" => NodeKind::Narration,
+            "number" => NodeKind::Number,
+            "payee" => NodeKind::Payee,
+            "plus" => NodeKind::Plus,
+            "slash" => NodeKind::Slash,
+            "string" => NodeKind::String,
+            "tag" => NodeKind::Tag,
+            _ => NodeKind::Unknown,
         }
     }
 }
 
-impl NodeKine {
+impl NodeKind {
     pub fn name(&self) -> &'static str {
         match self {
-            NodeKine::Account => "account",
-            NodeKine::Asterisk => "asterisk",
-            NodeKine::At => "at",
-            NodeKine::Atat => "atat",
-            NodeKine::Bool => "bool",
-            NodeKine::Comment => "comment",
-            NodeKine::Currency => "currency",
-            NodeKine::Date => "date",
-            NodeKine::Flag => "flag",
-            NodeKine::Item => "item",
-            NodeKine::Key => "key",
-            NodeKine::Link => "link",
-            NodeKine::Minus => "minus",
-            NodeKine::Narration => "narration",
-            NodeKine::Number => "number",
-            NodeKine::Payee => "payee",
-            NodeKine::Plus => "plus",
-            NodeKine::Slash => "slash",
-            NodeKine::String => "string",
-            NodeKine::Tag => "tag",
-            NodeKine::Unknown => "<unknown>",
+            NodeKind::Account => "account",
+            NodeKind::Asterisk => "asterisk",
+            NodeKind::At => "at",
+            NodeKind::Atat => "atat",
+            NodeKind::Bool => "bool",
+            NodeKind::Comment => "comment",
+            NodeKind::Currency => "currency",
+            NodeKind::Date => "date",
+            NodeKind::Flag => "flag",
+            NodeKind::Item => "item",
+            NodeKind::Key => "key",
+            NodeKind::Link => "link",
+            NodeKind::Minus => "minus",
+            NodeKind::Narration => "narration",
+            NodeKind::Number => "number",
+            NodeKind::Payee => "payee",
+            NodeKind::Plus => "plus",
+            NodeKind::Slash => "slash",
+            NodeKind::String => "string",
+            NodeKind::Tag => "tag",
+            NodeKind::Unknown => "<unknown>",
         }
     }
 }
-

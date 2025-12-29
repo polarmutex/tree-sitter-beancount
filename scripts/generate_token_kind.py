@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Rust NodeKine enum from node-types.json.
+"""Generate Rust NodeKind enum from node-types.json.
 
 Usage:
     python scripts/generate_token_kind.py
@@ -53,32 +53,32 @@ def main() -> None:
         "// To regenerate, run: python scripts/generate_token_kind.py",
         "",
         "#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]",
-        "pub enum NodeKine {",
+        "pub enum NodeKind {",
     ]
     lines += [f"    {v}," for v in variants]
     lines.append("    Unknown,")
     lines.append("}")
     lines.append("")
-    lines.append("impl From<&str> for NodeKine {")
+    lines.append("impl From<&str> for NodeKind {")
     lines.append("    fn from(name: &str) -> Self {")
     lines.append("        match name {")
     lines += [
-        f'            "{name}" => NodeKine::{variant},'
+        f'            "{name}" => NodeKind::{variant},'
         for name, variant in zip(token_names, variants)
     ]
-    lines.append("            _ => NodeKine::Unknown,")
+    lines.append("            _ => NodeKind::Unknown,")
     lines.append("        }")
     lines.append("    }")
     lines.append("}")
     lines.append("")
-    lines.append("impl NodeKine {")
+    lines.append("impl NodeKind {")
     lines.append("    pub fn name(&self) -> &'static str {")
     lines.append("        match self {")
     lines += [
-        f'            NodeKine::{variant} => "{name}",'
+        f'            NodeKind::{variant} => "{name}",'
         for name, variant in zip(token_names, variants)
     ]
-    lines.append('            NodeKine::Unknown => "<unknown>",')
+    lines.append('            NodeKind::Unknown => "<unknown>",')
     lines.append("        }")
     lines.append("    }")
     lines.append("}")
