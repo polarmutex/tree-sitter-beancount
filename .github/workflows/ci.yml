@@ -11,6 +11,7 @@ on:
       - binding.gyp
       - queries/**
       - tree-sitter.json
+      - .github/workflows/ci.yml
   pull_request:
     paths:
       - grammar.js
@@ -20,6 +21,8 @@ on:
       - binding.gyp
       - queries/**
       - tree-sitter.json
+      - .github/workflows/ci.yml
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
