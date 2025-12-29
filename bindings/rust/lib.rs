@@ -38,6 +38,9 @@ pub fn language() -> Language {
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
 pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
+mod node_kind;
+pub use node_kind::NodeKine;
+
 // Uncomment these to include any queries that this grammar contains
 
 // pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
@@ -53,5 +56,16 @@ mod tests {
         parser
             .set_language(&super::language())
             .expect("Error loading beancount language");
+    }
+
+    #[test]
+    fn test_nodekine_from_str() {
+        use super::NodeKine;
+
+        assert_eq!(NodeKine::from("account"), NodeKine::Account);
+        assert_eq!(NodeKine::from("string"), NodeKine::String);
+        assert_eq!(NodeKine::from("number"), NodeKine::Number);
+        assert_eq!(NodeKine::from("flag"), NodeKine::Flag);
+        assert_eq!(NodeKine::from("does_not_exist"), NodeKine::Unknown);
     }
 }
