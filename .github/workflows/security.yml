@@ -96,7 +96,6 @@ jobs:
         if: github.event_name != 'push'
         uses: trufflesecurity/trufflehog@v3.85.0
         with:
-          scan-type: filesystem
           path: ./
           extra_args: --only-verified
 
