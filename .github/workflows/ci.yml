@@ -78,6 +78,23 @@ jobs:
             cargo test
           fi
 
+      - name: Set up Python
+        if: runner.os == 'Linux'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Test Python bindings
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          if [ -f pyproject.toml ]; then
+            pip install pytest tree-sitter
+            pip install .
+            cd bindings/python
+            pytest tests/
+          fi
+
   test-queries:
     name: Test queries
     runs-on: ubuntu-latest

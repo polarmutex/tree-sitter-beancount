@@ -63,8 +63,24 @@ tree-sitter-beancount = "2.3.3"
 
 ### Python
 
+Install from source:
+
 ```bash
-pip install tree-sitter tree-sitter-beancount
+git clone https://github.com/polarmutex/tree-sitter-beancount
+cd tree-sitter-beancount
+pip install .
+```
+
+Or install via pip (once published to PyPI):
+
+```bash
+pip install tree-sitter-beancount
+```
+
+You'll also need the tree-sitter Python package:
+
+```bash
+pip install tree-sitter
 ```
 
 ## Usage

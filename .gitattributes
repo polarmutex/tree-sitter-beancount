@@ -4,3 +4,7 @@
 src/grammar.json -diff
 src/node-types.json -diff
 src/parser.c -diff
+
+# Zig bindings
+build.zig linguist-generated
+build.zig.zon linguist-generated
