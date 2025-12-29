@@ -168,10 +168,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v2
+
       - name: Check grammar format
         run: |
           # Validate grammar syntax using tree-sitter
-          tree-sitter generate --no-bindings
+          tree-sitter generate
 
       - name: Validate tree-sitter.json
         run: |
