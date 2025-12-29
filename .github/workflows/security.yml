@@ -70,34 +70,9 @@ jobs:
           path: npm-audit-results.json
           retention-days: 30
 
-  codeql:
-    name: CodeQL analysis
-    runs-on: ubuntu-latest
-    if: github.repository_owner == 'polarmutex'
-    strategy:
-      fail-fast: false
-      matrix:
-        language: ['cpp', 'javascript']
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: ${{ matrix.language }}
-          queries: security-extended,security-and-quality
-
-      - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
-
-      - name: Build parser
-        run: tree-sitter generate
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:${{matrix.language}}"
+  # CodeQL analysis disabled - using GitHub's default CodeQL setup instead
+  # The default setup is enabled in repository settings and conflicts with custom workflows
+  # To re-enable custom CodeQL: disable default setup in Security > Code scanning settings
 
   secret-scan:
     name: Secret scanning
@@ -108,13 +83,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run TruffleHog
-        uses: trufflesecurity/trufflehog@main
+      - name: Run TruffleHog (Git scan)
+        if: github.event_name == 'push'
+        uses: trufflesecurity/trufflehog@v3.85.0
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
           head: HEAD
-          extra_args: --debug --only-verified
+          extra_args: --only-verified
+
+      - name: Run TruffleHog (Filesystem scan)
+        if: github.event_name != 'push'
+        uses: trufflesecurity/trufflehog@v3.85.0
+        with:
+          scan-type: filesystem
+          path: ./
+          extra_args: --only-verified
 
   security-summary:
     name: Security summary
