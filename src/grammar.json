@@ -2336,7 +2336,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-z]+"
+      "value": "[a-zA-Z]+"
     },
     "_skipped_lines": {
       "type": "CHOICE",

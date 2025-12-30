@@ -638,7 +638,8 @@ module.exports = grammar({
         comment: $ => token(seq(';', /[^\r\n]*/)),
 
         // NOTE: includes reserved identifiers
-        identifier: $ => /[a-z]+/,
+        // Allow uppercase letters to support incomplete account names for LSP completion
+        identifier: $ => /[a-zA-Z]+/,
 
         _skipped_lines: $ =>
             choice(
