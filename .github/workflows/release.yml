@@ -19,7 +19,6 @@ jobs:
     uses: tree-sitter/workflows/.github/workflows/release.yml@main
     with:
       generate: false
-      attestations: true
 
   publish-cargo:
     name: Publish to Crates.io
