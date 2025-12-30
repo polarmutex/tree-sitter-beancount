@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-beancount"
 description = "Tree-sitter grammar for Beancount"
-version = "2.4.1"
+version = "2.4.2"
 keywords = ["incremental", "parsing", "tree-sitter", "beancount"]
 classifiers = [
   "Intended Audience :: Developers",
