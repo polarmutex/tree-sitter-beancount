@@ -189,6 +189,16 @@
             "named": true
           }
         ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_balance",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -274,6 +284,16 @@
             "named": true
           }
         ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_close",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -317,6 +337,16 @@
         "types": [
           {
             "type": "date",
+            "named": true
+          }
+        ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_commodity",
             "named": true
           }
         ]
@@ -478,6 +508,16 @@
           }
         ]
       },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_custom",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -587,6 +627,16 @@
           }
         ]
       },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_document",
+            "named": true
+          }
+        ]
+      },
       "tags_links": {
         "multiple": false,
         "required": false,
@@ -639,6 +689,16 @@
         "types": [
           {
             "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_event",
             "named": true
           }
         ]
@@ -731,7 +791,18 @@
   {
     "type": "include",
     "named": true,
-    "fields": {},
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_include",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -823,6 +894,16 @@
           }
         ]
       },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_note",
+            "named": true
+          }
+        ]
+      },
       "note": {
         "multiple": false,
         "required": true,
@@ -893,6 +974,16 @@
           }
         ]
       },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_open",
+            "named": true
+          }
+        ]
+      },
       "opt_booking": {
         "multiple": false,
         "required": false,
@@ -959,6 +1050,16 @@
           }
         ]
       },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_option",
+            "named": true
+          }
+        ]
+      },
       "value": {
         "multiple": false,
         "required": true,
@@ -1014,6 +1115,16 @@
             "named": true
           }
         ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_pad",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -1030,7 +1141,18 @@
   {
     "type": "plugin",
     "named": true,
-    "fields": {},
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_plugin",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1045,7 +1167,18 @@
   {
     "type": "popmeta",
     "named": true,
-    "fields": {},
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_popmeta",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1060,7 +1193,18 @@
   {
     "type": "poptag",
     "named": true,
-    "fields": {},
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_poptag",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1195,6 +1339,16 @@
             "named": true
           }
         ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_price",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -1226,7 +1380,18 @@
   {
     "type": "pushmeta",
     "named": true,
-    "fields": {},
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_pushmeta",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1241,7 +1406,18 @@
   {
     "type": "pushtag",
     "named": true,
-    "fields": {},
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_pushtag",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1273,6 +1449,16 @@
         "types": [
           {
             "type": "date",
+            "named": true
+          }
+        ]
+      },
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_query",
             "named": true
           }
         ]
@@ -1606,52 +1792,24 @@
     "named": true
   },
   {
-    "type": "balance",
-    "named": false
-  },
-  {
     "type": "bool",
     "named": true
-  },
-  {
-    "type": "close",
-    "named": false
   },
   {
     "type": "comment",
     "named": true
   },
   {
-    "type": "commodity",
-    "named": false
-  },
-  {
     "type": "currency",
     "named": true
-  },
-  {
-    "type": "custom",
-    "named": false
   },
   {
     "type": "date",
     "named": true
   },
   {
-    "type": "document",
-    "named": false
-  },
-  {
-    "type": "event",
-    "named": false
-  },
-  {
     "type": "flag",
     "named": true
-  },
-  {
-    "type": "include",
-    "named": false
   },
   {
     "type": "item",
@@ -1659,6 +1817,78 @@
   },
   {
     "type": "key",
+    "named": true
+  },
+  {
+    "type": "keyword_balance",
+    "named": true
+  },
+  {
+    "type": "keyword_close",
+    "named": true
+  },
+  {
+    "type": "keyword_commodity",
+    "named": true
+  },
+  {
+    "type": "keyword_custom",
+    "named": true
+  },
+  {
+    "type": "keyword_document",
+    "named": true
+  },
+  {
+    "type": "keyword_event",
+    "named": true
+  },
+  {
+    "type": "keyword_include",
+    "named": true
+  },
+  {
+    "type": "keyword_note",
+    "named": true
+  },
+  {
+    "type": "keyword_open",
+    "named": true
+  },
+  {
+    "type": "keyword_option",
+    "named": true
+  },
+  {
+    "type": "keyword_pad",
+    "named": true
+  },
+  {
+    "type": "keyword_plugin",
+    "named": true
+  },
+  {
+    "type": "keyword_popmeta",
+    "named": true
+  },
+  {
+    "type": "keyword_poptag",
+    "named": true
+  },
+  {
+    "type": "keyword_price",
+    "named": true
+  },
+  {
+    "type": "keyword_pushmeta",
+    "named": true
+  },
+  {
+    "type": "keyword_pushtag",
+    "named": true
+  },
+  {
+    "type": "keyword_query",
     "named": true
   },
   {
@@ -1674,60 +1904,16 @@
     "named": true
   },
   {
-    "type": "note",
-    "named": false
-  },
-  {
     "type": "number",
     "named": true
-  },
-  {
-    "type": "open",
-    "named": false
-  },
-  {
-    "type": "option",
-    "named": false
-  },
-  {
-    "type": "pad",
-    "named": false
   },
   {
     "type": "payee",
     "named": true
   },
   {
-    "type": "plugin",
-    "named": false
-  },
-  {
     "type": "plus",
     "named": true
-  },
-  {
-    "type": "popmeta",
-    "named": false
-  },
-  {
-    "type": "poptag",
-    "named": false
-  },
-  {
-    "type": "price",
-    "named": false
-  },
-  {
-    "type": "pushmeta",
-    "named": false
-  },
-  {
-    "type": "pushtag",
-    "named": false
-  },
-  {
-    "type": "query",
-    "named": false
   },
   {
     "type": "slash",

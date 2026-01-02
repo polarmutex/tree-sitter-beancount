@@ -59,7 +59,7 @@ mod tests {
     }
 
     #[test]
-    fn test_NodeKind_from_str() {
+    fn test_node_kind_from_str() {
         use super::NodeKind;
 
         assert_eq!(NodeKind::from("account"), NodeKind::Account);

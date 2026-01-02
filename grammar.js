@@ -99,6 +99,24 @@ module.exports = grammar({
         number: $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
         tag: $ => token(/#[A-Za-z0-9\-_/.]+/),
         link: $ => token(/\^[A-Za-z0-9\-_/.]+/),
+        keyword_open: $ => token('open'),
+        keyword_close: $ => token('close'),
+        keyword_balance: $ => token('balance'),
+        keyword_price: $ => token('price'),
+        keyword_commodity: $ => token('commodity'),
+        keyword_pad: $ => token('pad'),
+        keyword_event: $ => token('event'),
+        keyword_query: $ => token('query'),
+        keyword_note: $ => token('note'),
+        keyword_document: $ => token('document'),
+        keyword_custom: $ => token('custom'),
+        keyword_pushtag: $ => token('pushtag'),
+        keyword_poptag: $ => token('poptag'),
+        keyword_pushmeta: $ => token('pushmeta'),
+        keyword_popmeta: $ => token('popmeta'),
+        keyword_option: $ => token('option'),
+        keyword_include: $ => token('include'),
+        keyword_plugin: $ => token('plugin'),
 
         /*--------------------------------------------------------------------------------*/
         /* ARITHMETIC EXPRESSIONS */
@@ -303,25 +321,25 @@ module.exports = grammar({
         // OPTIONAL
 
         pushtag: $ => seq(
-            "pushtag",
+            field("keyword", $.keyword_pushtag),
             $.tag,
             $._eol
         ),
 
         poptag: $ => seq(
-            "poptag",
+            field("keyword", $.keyword_poptag),
             $.tag,
             $._eol
         ),
 
         pushmeta: $ => seq(
-            "pushmeta",
+            field("keyword", $.keyword_pushmeta),
             $.key_value,
             $._eol
         ),
 
         popmeta: $ => seq(
-            "popmeta",
+            field("keyword", $.keyword_popmeta),
             $.key,
             ":",
             $._eol
@@ -330,7 +348,7 @@ module.exports = grammar({
         open: $ =>
             seq(
                 field("date", $.date),
-                "open",
+                field("keyword", $.keyword_open),
                 field("account", $.account),
                 field("currencies", repeat(
                     seq(
@@ -355,7 +373,7 @@ module.exports = grammar({
         close: $ =>
             seq(
                 field("date", $.date),
-                "close",
+                field("keyword", $.keyword_close),
                 field("account", $.account),
                 field("comment", optional($.comment)),
                 $._eol,
@@ -365,7 +383,7 @@ module.exports = grammar({
         commodity: $ =>
             seq(
                 field("date", $.date),
-                "commodity",
+                field("keyword", $.keyword_commodity),
                 field("currency", $.currency),
                 field("comment", optional($.comment)),
                 $._eol,
@@ -375,7 +393,7 @@ module.exports = grammar({
         pad: $ =>
             seq(
                 field("date", $.date),
-                "pad",
+                field("keyword", $.keyword_pad),
                 field("account", $.account),
                 field("from_account", $.account),
                 field("comment", optional($.comment)),
@@ -386,7 +404,7 @@ module.exports = grammar({
         balance: $ =>
             seq(
                 field("date", $.date),
-                "balance",
+                field("keyword", $.keyword_balance),
                 field("account", $.account),
                 field("amount",
                     //choice(
@@ -489,7 +507,7 @@ module.exports = grammar({
         price: $ =>
             seq(
                 field("date", $.date),
-                "price",
+                field("keyword", $.keyword_price),
                 field("currency", $.currency),
                 field("amount", $.amount),
                 field("comment", optional($.comment)),
@@ -500,7 +518,7 @@ module.exports = grammar({
         event: $ =>
             seq(
                 field("date", $.date),
-                "event",
+                field("keyword", $.keyword_event),
                 field("type", $.string),
                 field("desc", $.string),
                 field("comment", optional($.comment)),
@@ -511,7 +529,7 @@ module.exports = grammar({
         query: $ =>
             seq(
                 field("date", $.date),
-                "query",
+                field("keyword", $.keyword_query),
                 field("name", $.string),
                 field("query", $.string),
                 field("comment", optional($.comment)),
@@ -522,7 +540,7 @@ module.exports = grammar({
         note: $ =>
             seq(
                 field("date", $.date),
-                "note",
+                field("keyword", $.keyword_note),
                 field("account", $.account),
                 field("note", $.string),
                 field("comment", optional($.comment)),
@@ -535,7 +553,7 @@ module.exports = grammar({
         document: $ =>
             seq(
                 field("date", $.date),
-                "document",
+                field("keyword", $.keyword_document),
                 field("account", $.account),
                 field("filename", $.filename),
                 field("tags_links", optional($.tags_links)),
@@ -558,7 +576,7 @@ module.exports = grammar({
         custom: $ =>
             seq(
                 field("date", $.date),
-                "custom",
+                field("keyword", $.keyword_custom),
                 field("name", $.string),
                 field("custom_value_list", optional(
                     repeat1(
@@ -587,14 +605,14 @@ module.exports = grammar({
             ),
 
         option: $ => seq(
-            "option",
+            field("keyword", $.keyword_option),
             field("key", $.string),
             field("value", $.string),
             $._eol,
         ),
 
         include: $ => seq(
-            "include",
+            field("keyword", $.keyword_include),
             $.string,
             $._eol,
         ),
@@ -602,12 +620,12 @@ module.exports = grammar({
         plugin: $ =>
             choice(
                 seq(
-                    "plugin",
+                    field("keyword", $.keyword_plugin),
                     $.string,
                     $._eol
                 ),
                 seq(
-                    "plugin",
+                    field("keyword", $.keyword_plugin),
                     $.string,
                     $.string,
                     $._eol

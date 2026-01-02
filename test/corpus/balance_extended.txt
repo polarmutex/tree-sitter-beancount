@@ -9,14 +9,21 @@ balance with metadata
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance (number) (currency))
-            (key_value (key) (value (string)))
-            (key_value (key) (value (string)))
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))
+    (key_value
+      (key)
+      (value
+        (string)))
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ========================
 balance with high tolerance
@@ -27,12 +34,14 @@ balance with high tolerance
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance (number) (number) (currency))
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (number)
+      (number)
+      (currency))))
 
 ========================
 balance with tiny tolerance
@@ -43,12 +52,14 @@ balance with tiny tolerance
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance (number) (number) (currency))
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (number)
+      (number)
+      (currency))))
 
 ========================
 balance zero amount
@@ -59,12 +70,13 @@ balance zero amount
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance (number) (currency))
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))))
 
 ========================
 balance negative amount
@@ -75,12 +87,15 @@ balance negative amount
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance (unary_number_expr (minus) (number)) (currency))
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (unary_number_expr
+        (minus)
+        (number))
+      (currency))))
 
 ========================
 balance arithmetic
@@ -91,15 +106,16 @@ balance arithmetic
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance
-            (binary_number_expr (number) (plus) (number))
-            (currency)
-        )
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (binary_number_expr
+        (number)
+        (plus)
+        (number))
+      (currency))))
 
 ========================
 balance large numbers
@@ -110,9 +126,10 @@ balance large numbers
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance (number) (currency))
-    )
-)
+  (balance
+    (date)
+    (keyword_balance)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))))

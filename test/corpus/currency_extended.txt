@@ -10,11 +10,26 @@ currency special characters
 ---
 
 (file
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency)))
 
 ========================
 currency long names
@@ -26,9 +41,16 @@ currency long names
 ---
 
 (file
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency)))
 
 ========================
 currency with numbers
@@ -41,10 +63,21 @@ currency with numbers
 ---
 
 (file
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency)))
 
 ========================
 currency mixed characters
@@ -56,9 +89,16 @@ currency mixed characters
 ---
 
 (file
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency)))
 
 ========================
 currency short and standard
@@ -72,8 +112,23 @@ currency short and standard
 ---
 
 (file
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-    (open (date) (account) (currency))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency))
+  (open
+    (date)
+    (keyword_open)
+    (account)
+    (currency)))

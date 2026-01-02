@@ -10,11 +10,22 @@ account names with numbers
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))
 
 ========================
 account names with dashes
@@ -28,11 +39,22 @@ account names with dashes
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))
 
 ========================
 account names deep hierarchy
@@ -45,10 +67,18 @@ account names deep hierarchy
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))
 
 ========================
 account names unicode latin
@@ -61,10 +91,18 @@ account names unicode latin
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))
 
 ========================
 account names japanese
@@ -77,10 +115,18 @@ account names japanese
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))
 
 ========================
 account names korean
@@ -93,10 +139,18 @@ account names korean
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))
 
 ========================
 account names mixed
@@ -109,7 +163,15 @@ account names mixed
 ---
 
 (file
-    (open (date) (account))
-    (open (date) (account))
-    (open (date) (account))
-)
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account))
+  (open
+    (date)
+    (keyword_open)
+    (account)))

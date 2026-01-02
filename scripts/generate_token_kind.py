@@ -84,7 +84,7 @@ def main() -> None:
     lines.append("}")
     lines.append("")
 
-    OUT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    OUT_PATH.write_bytes(("\n".join(lines) + "\n").encode())
 
 
 if __name__ == "__main__":

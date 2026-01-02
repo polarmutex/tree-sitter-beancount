@@ -7,8 +7,9 @@ pushtag #sampleTag
 ---
 
 (file
-    (pushtag (tag))
-)
+  (pushtag
+    (keyword_pushtag)
+    (tag)))
 
 ================
 pop tag
@@ -19,5 +20,6 @@ poptag #sampleTag
 ---
 
 (file
-    (poptag (tag))
-)
+  (poptag
+    (keyword_poptag)
+    (tag)))
