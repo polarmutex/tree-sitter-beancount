@@ -48,3 +48,7 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+
+# Nix/dev environment specific
+.direnv/
+.pre-commit-config.yaml
