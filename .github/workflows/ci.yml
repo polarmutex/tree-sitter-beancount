@@ -328,3 +328,15 @@ jobs:
         if: steps.scanner-changes.outputs.changed == 'true'
         timeout-minutes: 10
         run: tree-sitter fuzz --iterations 300
+
+  wasm32:
+    name: compile rust binding on wasm32
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          target: wasm32-unknown-unknown
+
+      - run: cargo build --target wasm32-unknown-unknown --no-default-features --features=wasm

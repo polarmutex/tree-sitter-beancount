@@ -11,6 +11,10 @@
 #include <tree_sitter/parser.h>
 #include <wctype.h>
 
+#if !defined (UINT8_MAX)
+#define UINT8_MAX 255
+#endif
+
 // Utility macros
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -155,7 +159,7 @@ unsigned serialize(Scanner *scanner, char *buffer) {
     buffer[i++] = (char)indent_count;
 
     // Write indentation stack data (starting from index 1)
-    int iter = 1;
+    uint32_t iter = 1;
     for (; iter < scanner->indent_length_stack.length
            && i < TREE_SITTER_SERIALIZATION_BUFFER_SIZE;
          ++iter) {
