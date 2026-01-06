@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! This crate provides beancount language support for the [tree-sitter][] parsing library.
 //!
 //! Typically, you will use the [language][language func] function to add this language to a
