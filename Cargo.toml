@@ -7,20 +7,20 @@ categories = ["parsing", "text-editors"]
 repository = "https://github.com/polarmutex/tree-sitter-beancount"
 edition = "2018"
 license = "MIT"
-
 build = "bindings/rust/build.rs"
-include = [
-  "bindings/rust/*",
-  "grammar.js",
-  "queries/*",
-  "src/*",
-]
+include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 
 [lib]
 path = "bindings/rust/lib.rs"
 
+[features]
+default = ["std"]
+std = ["tree-sitter/std"]
+wasm = ["tree-sitter-language"]
+
 [dependencies]
-tree-sitter = "~0.26.3"
+tree-sitter = { version = "~0.26.3", default-features = false }
+tree-sitter-language = { version = "0.1.6", optional = true }
 
 [build-dependencies]
 cc = "1.2"
