@@ -773,7 +773,18 @@
   {
     "type": "key_value",
     "named": true,
-    "fields": {},
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1553,6 +1564,10 @@
         {
           "type": "unary_number_expr",
           "named": true
+        },
+        {
+          "type": "unquoted_string",
+          "named": true
         }
       ]
     }
@@ -1744,6 +1759,10 @@
   {
     "type": "txn",
     "named": false
+  },
+  {
+    "type": "unquoted_string",
+    "named": true
   },
   {
     "type": "{",

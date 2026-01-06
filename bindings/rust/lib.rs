@@ -39,8 +39,8 @@ pub fn language() -> Language {
 pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
 mod node_kind;
-pub use node_kind::NodeKind;
 pub use node_kind::LeafNodeKind;
+pub use node_kind::NodeKind;
 
 // Uncomment these to include any queries that this grammar contains
 
