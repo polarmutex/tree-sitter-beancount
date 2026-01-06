@@ -40,6 +40,7 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
 mod node_kind;
 pub use node_kind::NodeKind;
+pub use node_kind::LeafNodeKind;
 
 // Uncomment these to include any queries that this grammar contains
 
@@ -59,13 +60,13 @@ mod tests {
     }
 
     #[test]
-    fn test_NodeKind_from_str() {
-        use super::NodeKind;
+    fn test_leaf_node_kind_from_str() {
+        use super::LeafNodeKind;
 
-        assert_eq!(NodeKind::from("account"), NodeKind::Account);
-        assert_eq!(NodeKind::from("string"), NodeKind::String);
-        assert_eq!(NodeKind::from("number"), NodeKind::Number);
-        assert_eq!(NodeKind::from("flag"), NodeKind::Flag);
-        assert_eq!(NodeKind::from("does_not_exist"), NodeKind::Unknown);
+        assert_eq!(LeafNodeKind::from("account"), LeafNodeKind::Account);
+        assert_eq!(LeafNodeKind::from("string"), LeafNodeKind::String);
+        assert_eq!(LeafNodeKind::from("number"), LeafNodeKind::Number);
+        assert_eq!(LeafNodeKind::from("flag"), LeafNodeKind::Flag);
+        assert_eq!(LeafNodeKind::from("does_not_exist"), LeafNodeKind::Unknown);
     }
 }
