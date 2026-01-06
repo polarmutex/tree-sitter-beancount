@@ -6,7 +6,8 @@ comment
 
 ---
 
-(file (comment))
+(file
+  (comment))
 
 ===========================
 comment before transaction
@@ -20,26 +21,22 @@ comment before transaction
 ---
 
 (file
-    (comment)
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (comment)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ==========================
 comment after transaction
@@ -53,26 +50,22 @@ comment after transaction
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-            (comment)
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))
+    (comment)))
 
 ========================
 comment between posting
@@ -86,26 +79,22 @@ comment between posting
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (comment)
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (comment)
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ======================
 comment after posting
@@ -118,26 +107,22 @@ comment after posting
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-                (comment)
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency))
+      (comment))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ================================
 comment after transaction start
@@ -150,26 +135,22 @@ comment after transaction start
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-        (comment)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (comment)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ==============================
 comment after balance start
@@ -181,17 +162,17 @@ comment after balance start
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance
-            (number)
-            (currency))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (bool)))))
+  (balance
+    (date)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (bool)))))
 
 ====================================
 comment in balance key value list
@@ -205,18 +186,18 @@ comment in balance key value list
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance
-            (number)
-            (currency))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (bool)))
-        (comment)))
+  (balance
+    (date)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (bool)))
+    (comment)))
 
 ==============================
 comment after close start
@@ -228,14 +209,14 @@ comment after close start
 ---
 
 (file
-    (close
-        (date)
-        (account)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (close
+    (date)
+    (account)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in close key value list
@@ -249,15 +230,15 @@ comment in close key value list
 ---
 
 (file
-    (close
-        (date)
-        (account)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)))
+  (close
+    (date)
+    (account)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)))
 
 ==============================
 comment after commodity start
@@ -269,14 +250,14 @@ comment after commodity start
 ---
 
 (file
-    (commodity
-        (date)
-        (currency)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (number)))))
+  (commodity
+    (date)
+    (currency)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (number)))))
 
 ====================================
 comment in commodity key value list
@@ -290,15 +271,15 @@ comment in commodity key value list
 ---
 
 (file
-    (commodity
-        (date)
-        (currency)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (number)))
-        (comment)))
+  (commodity
+    (date)
+    (currency)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (number)))
+    (comment)))
 
 ==============================
 comment after open start
@@ -310,17 +291,17 @@ comment after open start
 ---
 
 (file
-    (open
-        (date)
-        (account)
-        (currency)
-        (opt_booking
-            (string))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (open
+    (date)
+    (account)
+    (currency)
+    (opt_booking
+      (string))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in open key value list
@@ -334,18 +315,19 @@ comment in open key value list
 ---
 
 (file
-    (open
-        (date)
-        (account)
-        (currency)
-        (opt_booking
-            (string))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)))
+  (open
+    (date)
+    (account)
+    (currency)
+    (opt_booking
+      (string))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)))
+
 ========
 comment
 ========
@@ -354,7 +336,8 @@ comment
 
 ---
 
-(file (comment))
+(file
+  (comment))
 
 ===========================
 comment before transaction
@@ -368,26 +351,22 @@ comment before transaction
 ---
 
 (file
-    (comment)
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (comment)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ==========================
 comment after transaction
@@ -401,26 +380,22 @@ comment after transaction
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-            (comment)
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))
+    (comment)))
 
 ========================
 comment between posting
@@ -434,26 +409,22 @@ comment between posting
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (comment)
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (comment)
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ======================
 comment after posting
@@ -466,26 +437,22 @@ comment after posting
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-                (comment)
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency))
+      (comment))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ================================
 comment after transaction start
@@ -498,26 +465,22 @@ comment after transaction start
 ---
 
 (file
-    (transaction
-        (date)
-        (txn)
-        (comment)
-            (posting
-                (account)
-                (incomplete_amount
-                    (number)
-                    (currency)
-                )
-            )
-            (posting
-                (account)
-                (incomplete_amount
-                    (unary_number_expr (minus) (number))
-                    (currency)
-                )
-            )
-    )
-)
+  (transaction
+    (date)
+    (txn)
+    (comment)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
 
 ==============================
 comment after balance start
@@ -529,17 +492,17 @@ comment after balance start
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance
-            (number)
-            (currency))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (bool)))))
+  (balance
+    (date)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (bool)))))
 
 ====================================
 comment in balance key value list
@@ -553,18 +516,18 @@ comment in balance key value list
 ---
 
 (file
-    (balance
-        (date)
-        (account)
-        (amount_tolerance
-            (number)
-            (currency))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (bool)))
-        (comment)))
+  (balance
+    (date)
+    (account)
+    (amount_tolerance
+      (number)
+      (currency))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (bool)))
+    (comment)))
 
 ==============================
 comment after close start
@@ -576,14 +539,14 @@ comment after close start
 ---
 
 (file
-    (close
-        (date)
-        (account)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (close
+    (date)
+    (account)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in close key value list
@@ -597,15 +560,15 @@ comment in close key value list
 ---
 
 (file
-    (close
-        (date)
-        (account)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)))
+  (close
+    (date)
+    (account)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)))
 
 ==============================
 comment after commodity start
@@ -617,14 +580,14 @@ comment after commodity start
 ---
 
 (file
-    (commodity
-        (date)
-        (currency)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (number)))))
+  (commodity
+    (date)
+    (currency)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (number)))))
 
 ====================================
 comment in commodity key value list
@@ -638,15 +601,15 @@ comment in commodity key value list
 ---
 
 (file
-    (commodity
-        (date)
-        (currency)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (number)))
-        (comment)))
+  (commodity
+    (date)
+    (currency)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (number)))
+    (comment)))
 
 ==============================
 comment after custom start
@@ -659,22 +622,22 @@ comment after custom start
 ---
 
 (file
-    (custom
-        (date)
-        (string)
-        (custom_value
-            (account))
-        (custom_value
-            (string))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (custom
+    (date)
+    (string)
+    (custom_value
+      (account))
+    (custom_value
+      (string))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in custom key value list
@@ -689,23 +652,23 @@ comment in custom key value list
 ---
 
 (file
-    (custom
-        (date)
-        (string)
-        (custom_value
-            (account))
-        (custom_value
-            (string))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (custom
+    (date)
+    (string)
+    (custom_value
+      (account))
+    (custom_value
+      (string))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ==============================
 comment after document start
@@ -718,20 +681,20 @@ comment after document start
 ---
 
 (file
-    (document
-        (date)
-        (account)
-        (filename
-            (string))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (document
+    (date)
+    (account)
+    (filename
+      (string))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in document key value list
@@ -746,21 +709,21 @@ comment in document key value list
 ---
 
 (file
-    (document
-        (date)
-        (account)
-        (filename
-            (string))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (document
+    (date)
+    (account)
+    (filename
+      (string))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ==============================
 comment after event start
@@ -772,15 +735,15 @@ comment after event start
 ---
 
 (file
-    (event
-        (date)
-        (string)
-        (string)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (event
+    (date)
+    (string)
+    (string)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in event key value list
@@ -794,16 +757,16 @@ comment in event key value list
 ---
 
 (file
-    (event
-        (date)
-        (string)
-        (string)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)))
+  (event
+    (date)
+    (string)
+    (string)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)))
 
 ==============================
 comment after note start
@@ -816,19 +779,19 @@ comment after note start
 ---
 
 (file
-    (note
-        (date)
-        (account)
-        (string)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (note
+    (date)
+    (account)
+    (string)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in note key value list
@@ -843,20 +806,20 @@ comment in note key value list
 ---
 
 (file
-    (note
-        (date)
-        (account)
-        (string)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (note
+    (date)
+    (account)
+    (string)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ==============================
 comment after pad start
@@ -868,15 +831,15 @@ comment after pad start
 ---
 
 (file
-    (pad
-        (date)
-        (account)
-        (account)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))))
+  (pad
+    (date)
+    (account)
+    (account)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))))
 
 ====================================
 comment in pad key value list
@@ -890,16 +853,16 @@ comment in pad key value list
 ---
 
 (file
-    (pad
-        (date)
-        (account)
-        (account)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (string)))
-        (comment)))
+  (pad
+    (date)
+    (account)
+    (account)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (string)))
+    (comment)))
 
 ==============================
 comment after price start
@@ -911,17 +874,17 @@ comment after price start
 ---
 
 (file
-    (price
-        (date)
-        (currency)
-        (amount
-            (number)
-            (currency))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (date)))))
+  (price
+    (date)
+    (currency)
+    (amount
+      (number)
+      (currency))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (date)))))
 
 ====================================
 comment in price key value list
@@ -935,18 +898,18 @@ comment in price key value list
 ---
 
 (file
-    (price
-        (date)
-        (currency)
-        (amount
-            (number)
-            (currency))
-        (comment)
-        (key_value
-            (key)
-            (value
-              (date)))
-        (comment)))
+  (price
+    (date)
+    (currency)
+    (amount
+      (number)
+      (currency))
+    (comment)
+    (key_value
+      (key)
+      (value
+        (date)))
+    (comment)))
 
 ==============================
 comment after query start
@@ -958,15 +921,15 @@ comment after query start
 ---
 
 (file
-    (query
-        (date)
-        (string)
-        (string)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (date)))))
+  (query
+    (date)
+    (string)
+    (string)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (date)))))
 
 ====================================
 comment in query key value list
@@ -980,13 +943,13 @@ comment in query key value list
 ---
 
 (file
-    (query
-        (date)
-        (string)
-        (string)
-        (comment)
-        (key_value
-            (key)
-            (value
-              (date)))
-        (comment)))
+  (query
+    (date)
+    (string)
+    (string)
+    (comment)
+    (key_value
+      (key)
+      (value
+        (date)))
+    (comment)))
