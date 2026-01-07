@@ -130,6 +130,7 @@
               python3
               packages.sync-versions
               git-cliff
+              cargo-edit
             ];
 
             inherit (checks.pre-commit) shellHook;

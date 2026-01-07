@@ -52,3 +52,4 @@ zig-out/
 # Nix/dev environment specific
 .direnv/
 .pre-commit-config.yaml
+.serena
