@@ -131,10 +131,12 @@ enum TokenType {
  * The scanner maintains two stacks to track the current parsing state:
  * - indent_length_stack: Tracks indentation levels for proper nesting
  * - org_section_stack: Tracks org-mode section nesting levels
+ * - eof_returned: Flag to prevent returning EOF multiple times (prevents infinite loops)
  */
 typedef struct {
     vec indent_length_stack; // Stack of indentation levels
     vec org_section_stack;   // Stack of org-mode section levels
+    bool eof_returned;       // Flag to prevent returning EOF multiple times
 } Scanner;
 
 /**
@@ -146,10 +148,13 @@ typedef struct {
  * Serializes the scanner's indentation and section stacks for later restoration.
  * This is used by tree-sitter to maintain parsing state across incremental updates.
  *
- * Format: [indent_count][indent_data...][section_count][section_data...]
+ * Format: [eof_returned][indent_count][indent_data...][section_count][section_data...]
  */
-unsigned serialize(Scanner *scanner, char *buffer) {
+static unsigned serialize(Scanner *scanner, char *buffer) {
     size_t i = 0;
+
+    // Serialize EOF flag
+    buffer[i++] = scanner->eof_returned ? 1 : 0;
 
     // Serialize indentation stack
     // Skip the first element (always 0) and limit to UINT8_MAX for safety
@@ -194,18 +199,25 @@ unsigned serialize(Scanner *scanner, char *buffer) {
  *
  * The stacks are always initialized with a base element of 0.
  */
-void deserialize(Scanner *scanner, const char *buffer, unsigned length) {
+static void deserialize(Scanner *scanner, const char *buffer, unsigned length) {
     // Reset scanner to initial state
     VEC_CLEAR(scanner->org_section_stack);
     VEC_CLEAR(scanner->indent_length_stack);
     VEC_PUSH(scanner->org_section_stack, 0);
     VEC_PUSH(scanner->indent_length_stack, 0);
+    scanner->eof_returned = false;
 
     // Handle empty buffer case
     if (length == 0)
         return;
 
     size_t i = 0;
+
+    // Deserialize EOF flag
+    scanner->eof_returned = (buffer[i++] != 0);
+
+    // Check if we have more data
+    if (i >= length) return;
 
     // Deserialize indentation stack
     size_t indent_count = (unsigned char)buffer[i++];
@@ -284,19 +296,26 @@ static int16_t count_leading_whitespace(TSLexer *lexer) {
 
 /**
  * @brief Handle end-of-file detection
+ * @param scanner The scanner state (for tracking eof_returned flag)
  * @param lexer The tree-sitter lexer interface
  * @param valid_symbols Array indicating which tokens are valid
  * @return true if EOF token was produced, false otherwise
  */
-static bool handle_eof(TSLexer *lexer, const bool *valid_symbols) {
+static bool handle_eof(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
     if (lexer->lookahead != '\0') {
         return false;
     }
 
+    // SECTIONEND can be returned multiple times at EOF to close nested sections
+    // The parser controls this via valid_symbols
     if (valid_symbols[SECTIONEND]) {
         lexer->result_symbol = SECTIONEND;
         return true;
-    } else if (valid_symbols[END_OF_FILE]) {
+    }
+
+    // END_OF_FILE should only be returned once to prevent infinite loops
+    if (valid_symbols[END_OF_FILE] && !scanner->eof_returned) {
+        scanner->eof_returned = true;
         lexer->result_symbol = END_OF_FILE;
         return true;
     }
@@ -361,7 +380,7 @@ static bool parse_section_header(Scanner *scanner, TSLexer *lexer, const bool *v
  * - End of file detection
  * - Indentation tracking for proper nesting
  */
-bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
+static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
 
     // Don't produce tokens during error recovery
     if (in_error_recovery(valid_symbols))
@@ -374,7 +393,7 @@ bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
     int16_t indent_length = count_leading_whitespace(lexer);
 
     // Handle end of file
-    if (handle_eof(lexer, valid_symbols)) {
+    if (handle_eof(scanner, lexer, valid_symbols)) {
         return true;
     }
 
@@ -395,6 +414,7 @@ bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
 static void init_scanner(Scanner *scanner) {
     scanner->indent_length_stack = (vec)VEC_NEW;
     scanner->org_section_stack = (vec)VEC_NEW;
+    scanner->eof_returned = false;
 
     // Initialize stacks with base element 0
     VEC_PUSH(scanner->indent_length_stack, 0);
