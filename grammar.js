@@ -223,17 +223,11 @@ module.exports = grammar({
                 $.flag,
             ),
 
-        price_annotation: $ => $.incomplete_amount,
-        //choice(
-        //    seq(
-        //        $.atat,
-        //        $.incomplete_amount
-        //    ),
-        //    seq(
-        //        $.at,
-        //        $.incomplete_amount
-        //    )
-        //),
+        price_annotation: $ =>
+            choice(
+                $.incomplete_amount,
+                $.currency
+            ),
 
         posting: $ =>
             seq(

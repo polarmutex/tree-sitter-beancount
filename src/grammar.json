@@ -709,8 +709,17 @@
       ]
     },
     "price_annotation": {
-      "type": "SYMBOL",
-      "name": "incomplete_amount"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "incomplete_amount"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "currency"
+        }
+      ]
     },
     "posting": {
       "type": "SEQ",

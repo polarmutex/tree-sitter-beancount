@@ -2,11 +2,13 @@
 comment
 ========
 
+;; 2012-06-01  BEGIN --------------------------------
 ;; This is some comment.
 
 ---
 
 (file
+  (comment)
   (comment))
 
 ===========================
