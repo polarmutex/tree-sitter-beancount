@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-beancount"
 description = "beancount grammar for the tree-sitter parsing library"
-version = "2.4.2"
+version = "2.5.0"
 keywords = ["incremental", "parsing", "beancount", "tree-sitter"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/polarmutex/tree-sitter-beancount"

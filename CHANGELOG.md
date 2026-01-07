@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2026-01-07
+
+### 🚀 Features
+
+- *(rust)* Add LeafNodeKind (#123)
+- *(rust)* Support wasm32-unknown-unknown target (#127)
+- Expanded support for custom root account names
+
+### 🐛 Bug Fixes
+
+- Remove Windows-incompatible symlink
+- Handle single line beancount files #129 (#130)
+- Some compatibility with beancount
+- Support partial amount
+
+### 💼 Other
+
+- *(deps)* Bump the npm group with 2 updates (#126)
+
+### 🎨 Styling
+
+- *(rust)* Disable dead_code lint warning (#131)
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump the actions group with 4 updates (#125)
+- Remove tmp files
+- Update nix and justfile
+
 ## [2.4.1] - 2025-07-21
 
 ### 🐛 Bug Fixes
