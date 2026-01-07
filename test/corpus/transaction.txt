@@ -134,6 +134,37 @@ zero prices
           (number)
           (currency))))))
 
+=================================
+price annotation without explicit price
+=================================
+
+2011-05-17 * ""
+    Expenses:Restaurant   1.00 USD @ CAD
+    Assets:Other         -1.00 CAD
+
+---
+
+(file
+  (transaction
+    (date)
+    (txn)
+    (narration)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency))
+      (at)
+      (price_annotation
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
+
 ===========
 zero units
 ===========
