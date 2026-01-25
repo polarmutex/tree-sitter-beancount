@@ -26,8 +26,19 @@ updates:
     labels:
       - dependencies
     groups:
+      # Tree-sitter packages (important for parser compatibility)
+      tree-sitter:
+        patterns:
+          - "tree-sitter*"
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+      # All other npm dependencies
       npm:
         patterns: ["*"]
+        exclude-patterns:
+          - "tree-sitter*"
 
   # GitHub Actions
   - package-ecosystem: github-actions
