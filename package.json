@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.26.3"
+    "tree-sitter-cli": "^0.26.5"
   },
   "engines": {
     "node": ">=22.0.0"
