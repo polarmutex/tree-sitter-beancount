@@ -1,13 +1,11 @@
 {
-  "version": "0.25.4",
-  "generator": {
-    "abi": 15
-  },
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
   "metadata": {
-    "name": "beancount",
-    "url": "https://github.com/polarmutex/tree-sitter-beancount",
     "description": "Tree-sitter grammar for Beancount",
-    "version": "2.4.1"
+    "version": "2.4.1",
+    "links": {
+      "repository": "https://github.com/polarmutex/tree-sitter-beancount"
+    }
   },
   "grammars": [
     {
