@@ -253,7 +253,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[A-Z]([A-Z0-9\\'\\._\\-]{0,22}[A-Z0-9])?"
+        "value": "[A-Z][A-Z0-9\\'\\._\\-]*[A-Z0-9]?"
       }
     },
     "string": {
