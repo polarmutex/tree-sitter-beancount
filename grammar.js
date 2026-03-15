@@ -97,7 +97,7 @@ module.exports = grammar({
                     ),
                 ),
             ),
-        currency: $ => token(/[A-Z]([A-Z0-9\'\._\-]{0,22}[A-Z0-9])?/),
+        currency: $ => token(/[A-Z][A-Z0-9\'\._\-]*[A-Z0-9]?/),
         string: $ => token(/"([^"]|\\")*"/),
         unquoted_string: $ => token(prec(-1, /[^\r\n]+/)),
         number: $ => token(/([0-9]+|[0-9][0-9,]+[0-9])(\.[0-9]*)?/),
