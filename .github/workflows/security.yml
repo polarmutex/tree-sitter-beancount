@@ -35,7 +35,7 @@ jobs:
         run: cargo audit --json | tee audit-results.json
 
       - name: Upload audit results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: cargo-audit-results
@@ -63,7 +63,7 @@ jobs:
           npm audit --audit-level=moderate --json | tee npm-audit-results.json || true
 
       - name: Upload audit results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: npm-audit-results
@@ -99,7 +99,7 @@ jobs:
 
       - name: Run TruffleHog (Git scan)
         if: github.event_name == 'push' && steps.check-commits.outputs.same == 'false'
-        uses: trufflesecurity/trufflehog@v3.92.4
+        uses: trufflesecurity/trufflehog@v3.93.6
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
@@ -108,7 +108,7 @@ jobs:
 
       - name: Run TruffleHog (Filesystem scan)
         if: github.event_name != 'push' || steps.check-commits.outputs.same == 'true'
-        uses: trufflesecurity/trufflehog@v3.92.4
+        uses: trufflesecurity/trufflehog@v3.93.6
         with:
           path: ./
           extra_args: --only-verified
