@@ -169,12 +169,17 @@ release-bump LEVEL:
     jq --arg version "$NEW_VERSION" '.version = $version' package.json > package.json.tmp
     mv package.json.tmp package.json
 
+    # Update tree-sitter.json version
+    echo "📝 Updating tree-sitter.json version to $NEW_VERSION..."
+    jq --arg version "$NEW_VERSION" '.metadata.version = $version' tree-sitter.json > tree-sitter.json.tmp
+    mv tree-sitter.json.tmp tree-sitter.json
+
     # Update CHANGELOG (prepend new release, keep existing)
     echo "📝 Updating CHANGELOG..."
     git cliff --unreleased --tag "$NEW_VERSION" --prepend CHANGELOG.md
 
     # Stage changes
-    git add Cargo.toml package.json CHANGELOG.md
+    git add Cargo.toml package.json tree-sitter.json CHANGELOG.md
 
     # Commit
     echo "💾 Creating release commit..."
@@ -225,12 +230,17 @@ release-auto:
     jq --arg version "$BUMPED_VERSION" '.version = $version' package.json > package.json.tmp
     mv package.json.tmp package.json
 
+    # Update tree-sitter.json version
+    echo "📝 Updating tree-sitter.json version to $BUMPED_VERSION..."
+    jq --arg version "$BUMPED_VERSION" '.metadata.version = $version' tree-sitter.json > tree-sitter.json.tmp
+    mv tree-sitter.json.tmp tree-sitter.json
+
     # Update CHANGELOG (prepend new release, keep existing)
     echo "📝 Updating CHANGELOG..."
     git cliff --unreleased --tag "$BUMPED_VERSION" --prepend CHANGELOG.md
 
     # Stage changes
-    git add Cargo.toml package.json CHANGELOG.md
+    git add Cargo.toml package.json tree-sitter.json CHANGELOG.md
 
     # Commit
     echo "💾 Creating release commit..."
