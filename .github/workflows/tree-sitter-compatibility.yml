@@ -1,0 +1,267 @@
+name: Tree-sitter Compatibility Check
+
+on:
+  schedule:
+    # Run every Monday at 10:00 UTC (after regenerate.yml)
+    - cron: '0 10 * * 1'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - package.json
+      - package-lock.json
+      - .github/workflows/tree-sitter-compatibility.yml
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-compatibility:
+    name: Check tree-sitter compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+
+      - name: Get tree-sitter versions
+        id: versions
+        run: |
+          # Get CLI version
+          CLI_VERSION=$(tree-sitter --version | grep -oP 'tree-sitter \K[0-9.]+')
+          echo "cli_version=$CLI_VERSION" >> $GITHUB_OUTPUT
+          echo "Tree-sitter CLI version: $CLI_VERSION"
+
+          # Get package.json dependency versions
+          if [ -f package.json ]; then
+            PEER_VERSION=$(node -p "require('./package.json').peerDependencies['tree-sitter'] || 'not specified'")
+            DEV_VERSION=$(node -p "require('./package.json').devDependencies['tree-sitter-cli'] || 'not specified'")
+            echo "peer_version=$PEER_VERSION" >> $GITHUB_OUTPUT
+            echo "dev_version=$DEV_VERSION" >> $GITHUB_OUTPUT
+            echo "Tree-sitter peer dependency: $PEER_VERSION"
+            echo "Tree-sitter-cli dev dependency: $DEV_VERSION"
+          fi
+
+          # Get latest versions from npm
+          LATEST_TS=$(npm view tree-sitter version 2>/dev/null || echo "unknown")
+          LATEST_CLI=$(npm view tree-sitter-cli version 2>/dev/null || echo "unknown")
+          echo "latest_ts=$LATEST_TS" >> $GITHUB_OUTPUT
+          echo "latest_cli=$LATEST_CLI" >> $GITHUB_OUTPUT
+          echo "Latest tree-sitter on npm: $LATEST_TS"
+          echo "Latest tree-sitter-cli on npm: $LATEST_CLI"
+
+      - name: Check ABI compatibility
+        id: abi
+        run: |
+          # Tree-sitter ABI version is typically the major version
+          # CLI and runtime should have matching ABI versions
+
+          CLI_MAJOR=$(echo "${{ steps.versions.outputs.cli_version }}" | cut -d. -f1)
+          PEER_MAJOR=$(echo "${{ steps.versions.outputs.peer_version }}" | grep -oP '\d+' | head -1 || echo "0")
+
+          echo "cli_abi=$CLI_MAJOR" >> $GITHUB_OUTPUT
+          echo "peer_abi=$PEER_MAJOR" >> $GITHUB_OUTPUT
+
+          if [ "$CLI_MAJOR" != "$PEER_MAJOR" ]; then
+            echo "compatible=false" >> $GITHUB_OUTPUT
+            echo "⚠️ ABI version mismatch detected!"
+            echo "CLI ABI: $CLI_MAJOR, Peer dependency ABI: $PEER_MAJOR"
+          else
+            echo "compatible=true" >> $GITHUB_OUTPUT
+            echo "✅ ABI versions are compatible"
+          fi
+
+      - name: Test parser generation
+        run: |
+          echo "Testing parser generation with current tree-sitter version..."
+          tree-sitter generate
+
+          # Verify generated files exist
+          if [ ! -f src/parser.c ]; then
+            echo "❌ Parser generation failed: src/parser.c not found"
+            exit 1
+          fi
+
+          echo "✅ Parser generation successful"
+
+      - name: Test parser with current version
+        run: |
+          echo "Running parser tests..."
+          tree-sitter test
+          echo "✅ All tests passed"
+
+      - name: Check for version updates
+        id: updates
+        run: |
+          UPDATES_NEEDED=false
+          UPDATES_MESSAGE=""
+
+          # Check if peer dependency needs update
+          CURRENT_PEER="${{ steps.versions.outputs.peer_version }}"
+          LATEST_TS="${{ steps.versions.outputs.latest_ts }}"
+
+          if [ "$CURRENT_PEER" != "^$LATEST_TS" ] && [ "$LATEST_TS" != "unknown" ]; then
+            UPDATES_NEEDED=true
+            UPDATES_MESSAGE="$UPDATES_MESSAGE\n- tree-sitter: $CURRENT_PEER → ^$LATEST_TS"
+          fi
+
+          # Check if CLI needs update
+          CURRENT_CLI="${{ steps.versions.outputs.dev_version }}"
+          LATEST_CLI="${{ steps.versions.outputs.latest_cli }}"
+
+          if [ "$CURRENT_CLI" != "^$LATEST_CLI" ] && [ "$LATEST_CLI" != "unknown" ]; then
+            UPDATES_NEEDED=true
+            UPDATES_MESSAGE="$UPDATES_MESSAGE\n- tree-sitter-cli: $CURRENT_CLI → ^$LATEST_CLI"
+          fi
+
+          echo "updates_needed=$UPDATES_NEEDED" >> $GITHUB_OUTPUT
+          echo "updates_message=$UPDATES_MESSAGE" >> $GITHUB_OUTPUT
+
+      - name: Create compatibility report
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const compatible = '${{ steps.abi.outputs.compatible }}' === 'true';
+            const updatesNeeded = '${{ steps.updates.outputs.updates_needed }}' === 'true';
+
+            // Create a comment with the compatibility report
+            const report = `
+            ## Tree-sitter Compatibility Report
+
+            **Generated:** ${new Date().toISOString()}
+
+            ### Current Versions
+            - 🔧 tree-sitter CLI: \`${{ steps.versions.outputs.cli_version }}\`
+            - 📦 tree-sitter (peer): \`${{ steps.versions.outputs.peer_version }}\`
+            - 🛠️ tree-sitter-cli (dev): \`${{ steps.versions.outputs.dev_version }}\`
+
+            ### Latest Versions Available
+            - 📦 tree-sitter: \`${{ steps.versions.outputs.latest_ts }}\`
+            - 🛠️ tree-sitter-cli: \`${{ steps.versions.outputs.latest_cli }}\`
+
+            ### ABI Compatibility
+            ${compatible ?
+              '✅ **Compatible** - CLI and peer dependency ABI versions match' :
+              '⚠️ **Warning** - ABI version mismatch detected! This may cause parsing issues.'
+            }
+            - CLI ABI version: \`${{ steps.abi.outputs.cli_abi }}\`
+            - Peer dependency ABI: \`${{ steps.abi.outputs.peer_abi }}\`
+
+            ${updatesNeeded ?
+              '### 📋 Updates Available\n' +
+              '${{ steps.updates.outputs.updates_message }}'.replace(/\\n/g, '\n') :
+              '### ✅ All dependencies are up to date'
+            }
+
+            ---
+            🤖 *This report was generated automatically by the tree-sitter compatibility check workflow.*
+            `;
+
+            console.log(report);
+
+            // If there's an ABI incompatibility, create an issue
+            if (!compatible) {
+              const issues = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                labels: 'compatibility,urgent'
+              });
+
+              const existingIssue = issues.data.find(issue =>
+                issue.title.includes('Tree-sitter ABI compatibility issue')
+              );
+
+              if (!existingIssue) {
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: '⚠️ Tree-sitter ABI compatibility issue detected',
+                  body: report + '\n\n**Action Required:** Please update dependencies to resolve ABI mismatch.',
+                  labels: ['compatibility', 'urgent', 'dependencies']
+                });
+                console.log('Created issue for ABI compatibility problem');
+              }
+            }
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const compatible = '${{ steps.abi.outputs.compatible }}' === 'true';
+
+            const comment = `
+            ## 🔍 Tree-sitter Compatibility Check
+
+            **ABI Compatibility:** ${compatible ? '✅ Compatible' : '⚠️ Incompatible'}
+
+            - CLI version: \`${{ steps.versions.outputs.cli_version }}\` (ABI: \`${{ steps.abi.outputs.cli_abi }}\`)
+            - Peer dependency: \`${{ steps.versions.outputs.peer_version }}\` (ABI: \`${{ steps.abi.outputs.peer_abi }}\`)
+
+            ${compatible ?
+              'Parser tests passed successfully! ✅' :
+              '⚠️ **Warning:** ABI version mismatch may cause issues. Please verify compatibility.'
+            }
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  test-with-latest:
+    name: Test with latest tree-sitter
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Install latest tree-sitter-cli
+        run: |
+          npm install -g tree-sitter-cli@latest
+          echo "Installed tree-sitter CLI:"
+          tree-sitter --version
+
+      - name: Test parser with latest CLI
+        run: |
+          echo "Testing parser generation with latest tree-sitter-cli..."
+          tree-sitter generate
+
+          echo "Running tests with latest tree-sitter-cli..."
+          tree-sitter test
+
+          echo "✅ Parser is compatible with latest tree-sitter-cli"
+
+      - name: Report compatibility
+        if: success()
+        run: |
+          echo "✅ SUCCESS: Parser works with latest tree-sitter-cli"
+          echo "This indicates the parser is ready for the next tree-sitter update"
+
+      - name: Report incompatibility
+        if: failure()
+        run: |
+          echo "❌ FAILURE: Parser fails with latest tree-sitter-cli"
+          echo "This indicates the parser may need updates before upgrading tree-sitter"
+          exit 1
