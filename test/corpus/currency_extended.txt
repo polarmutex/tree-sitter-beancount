@@ -33,6 +33,7 @@ currency long names
 
 2023-01-01 open Assets:Commodity VERYLONGCURRENCYNAME123
 2023-01-01 open Assets:Test ABCDEFGHIJKLMNOPQRSTUVWX
+2026-02-27 price ETF_ISHARES_MSCI_WORLD_PEA 6.23 EUR
 
 ---
 
@@ -44,7 +45,13 @@ currency long names
   (open
     (date)
     (account)
-    (currency)))
+    (currency))
+  (price
+    (date)
+    (currency)
+    (amount
+      (number)
+      (currency))))
 
 ========================
 currency with numbers
