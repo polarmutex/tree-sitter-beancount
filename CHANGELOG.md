@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.1] - 2026-03-21
+
+### 🐛 Bug Fixes
+
+- Remove length limit from currency name
+- `tree-sitter.json` now obeys schema
+- Add tree-sitter.json to release bump
+
+### 💼 Other
+
+- *(deps)* Bump the npm group across 1 directory with 2 updates (#140)
+- *(deps)* Bump tree-sitter-cli in the tree-sitter group
+
+### ⚙️ Miscellaneous Tasks
+
+- Update dependbot
+- Bump the actions group across 1 directory with 2 updates (#138)
+- Update nix flake
+- Add tree-sitter comppat workflow
+
 ## [2.5.0] - 2026-01-07
 
 ### 🚀 Features
