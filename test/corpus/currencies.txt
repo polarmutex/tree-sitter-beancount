@@ -27,6 +27,48 @@ parse currencies
     (account)
     (currency)))
 
+=======================
+single letter currency
+=======================
+
+2014-01-19 open Assets:SingleLetter A
+
+---
+
+(file
+  (open
+    (date)
+    (account)
+    (currency)))
+
+=================================
+single letter currency in posting
+=================================
+
+2023-01-01 * "test"
+  Assets:Cash  100 A
+  Expenses:Food  -100 A
+
+---
+
+(file
+  (transaction
+    (date)
+    (txn)
+    (narration)
+    (posting
+      (account)
+      (incomplete_amount
+        (number)
+        (currency)))
+    (posting
+      (account)
+      (incomplete_amount
+        (unary_number_expr
+          (minus)
+          (number))
+        (currency)))))
+
 ================================
 different cost and price currency
 ================================
