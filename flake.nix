@@ -4,6 +4,10 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = {
@@ -16,6 +20,7 @@
     self,
     nixpkgs,
     flake-utils,
+    rust-overlay,
     pre-commit-hooks,
   }:
     {
@@ -67,8 +72,9 @@
       system: let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [self.overlays.default];
+          overlays = [self.overlays.default rust-overlay.overlays.default];
         };
+        rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         tree-sitter-env = pkgs.stdenv.mkDerivation {
           name = "tree-sitter-env";
           nativeBuildInputs = with pkgs; [
@@ -123,10 +129,10 @@
           default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               nodejs_22
-              nodePackages.node-gyp
+              node-gyp
               # broken (tree-sitter.override {webUISupport = true;})
               tree-sitter
-              cargo
+              rustToolchain
               python3
               packages.sync-versions
               git-cliff
