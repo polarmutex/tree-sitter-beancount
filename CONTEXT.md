@@ -49,6 +49,7 @@ Single braces `{}` mean per-unit cost; double braces `{{}}` mean total cost. Bot
 | `locals.scm` | Scope definitions — intentionally empty (no lexical scoping in Beancount) |
 | `tags.scm` | Symbol definitions: `open` → account definition, `commodity` → currency definition |
 | `textobjects.scm` | Text objects: transactions as `@function.outer`, postings as `@statement.outer` |
+| `injections.scm` | Language injection: BQL query strings (`query` field of `query` node) injected as `bql`; editors map `bql` to tree-sitter-sql or a custom BQL parser |
 
 ## Rust Binding: Typed Node Wrappers
 
@@ -66,4 +67,4 @@ Single braces `{}` mean per-unit cost; double braces `{{}}` mean total cost. Bot
 
 ## Deferred Work
 
-- **Issue #151**: `injections.scm` for BQL query string highlighting as SQL. Deferred because BQL is not standard SQL and requires users to have `tree-sitter-sql` installed.
+
