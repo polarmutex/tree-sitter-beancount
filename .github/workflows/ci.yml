@@ -121,6 +121,7 @@ jobs:
           tree-sitter query queries/locals.scm test/corpus/transaction.txt || echo "Locals query test completed"
           tree-sitter query queries/folds.scm test/corpus/transaction.txt || echo "Folds query test completed"
           tree-sitter query queries/textobjects.scm test/corpus/transaction.txt || echo "Textobjects query test completed"
+          tree-sitter query queries/tags.scm test/corpus/entry_types.txt || echo "Tags query test completed"
           tree-sitter query queries/indents.scm test/corpus/transaction.txt || echo "Indents query test completed"
 
   test-examples:
