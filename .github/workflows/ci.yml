@@ -57,15 +57,6 @@ jobs:
       - name: Run basic tests
         run: tree-sitter test
 
-      - name: Test Node.js bindings
-        shell: bash
-        run: |
-          if [ -f binding.gyp ] && [ -f package.json ]; then
-            # Install dependencies without building native modules
-            npm install --ignore-scripts
-            echo "Node.js bindings setup complete"
-          fi
-
       - name: Set up Rust
         if: runner.os == 'Linux'
         uses: dtolnay/rust-toolchain@stable
@@ -117,12 +108,12 @@ jobs:
 
       - name: Test queries compilation
         run: |
-          tree-sitter query queries/highlights.scm test/corpus/transaction.txt || echo "Highlights query test completed"
-          tree-sitter query queries/locals.scm test/corpus/transaction.txt || echo "Locals query test completed"
-          tree-sitter query queries/folds.scm test/corpus/transaction.txt || echo "Folds query test completed"
-          tree-sitter query queries/textobjects.scm test/corpus/transaction.txt || echo "Textobjects query test completed"
-          tree-sitter query queries/tags.scm test/corpus/entry_types.txt || echo "Tags query test completed"
-          tree-sitter query queries/indents.scm test/corpus/transaction.txt || echo "Indents query test completed"
+          tree-sitter query queries/highlights.scm test/corpus/transaction.txt
+          tree-sitter query queries/locals.scm test/corpus/transaction.txt
+          tree-sitter query queries/folds.scm test/corpus/transaction.txt
+          tree-sitter query queries/textobjects.scm test/corpus/transaction.txt
+          tree-sitter query queries/tags.scm test/corpus/entry_types.txt
+          tree-sitter query queries/indents.scm test/corpus/transaction.txt
 
   test-examples:
     name: Test examples
@@ -194,8 +185,8 @@ jobs:
 
       - name: Check grammar format
         run: |
-          # Validate grammar syntax using tree-sitter
           tree-sitter generate
+          git diff --exit-code src/ || { echo "Generated files are out of date. Run 'tree-sitter generate' and commit the result."; exit 1; }
 
       - name: Validate tree-sitter.json
         run: |
@@ -220,16 +211,16 @@ jobs:
 
       - name: Performance test
         run: |
-          # Test parsing speed with large files
-          tree-sitter test 2>&1 | grep "bytes/ms" | tail -1
-
-          # Ensure we maintain good performance (>5000 bytes/ms average)
           SPEED=$(tree-sitter test 2>&1 | grep "average speed:" | sed 's/.*: \([0-9]*\) bytes\/ms/\1/')
-          if [ -n "$SPEED" ] && [ "$SPEED" -lt 5000 ]; then
+          if [ -z "$SPEED" ]; then
+            echo "Could not parse performance output — tree-sitter output format may have changed"
+            exit 1
+          fi
+          if [ "$SPEED" -lt 5000 ]; then
             echo "Performance regression detected: $SPEED bytes/ms < 5000 bytes/ms"
             exit 1
           fi
-          echo "Performance check passed: ${SPEED:-unknown} bytes/ms"
+          echo "Performance check passed: $SPEED bytes/ms"
 
   metadata:
     name: Check metadata
@@ -270,45 +261,17 @@ jobs:
             echo "Cargo.toml basic validation passed"
           fi
 
-  comprehensive-test:
-    name: Comprehensive tests
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    needs: [test, test-queries, test-examples]
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v2
-
-      - name: Full test suite
-        run: |
-          echo "Running comprehensive test suite..."
-          tree-sitter test
-
-          # Test all corpus files individually
-          for file in test/corpus/*.txt; do
-            echo "Testing $file..."
-            tree-sitter test --include "$(basename "$file" .txt)" || {
-              echo "Failed on $file"
-              exit 1
-            }
-          done
-
-          echo "All tests passed successfully!"
-
   fuzz-test:
     name: Fuzz testing
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'pull_request'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
@@ -319,7 +282,8 @@ jobs:
       - name: Check for scanner changes
         id: scanner-changes
         run: |
-          if git diff --quiet HEAD^ HEAD -- src/scanner.c; then
+          BASE=$(git merge-base origin/master HEAD 2>/dev/null || git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)
+          if git diff --quiet "$BASE" HEAD -- src/scanner.c; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT

@@ -24,48 +24,7 @@
     pre-commit-hooks,
   }:
     {
-      overlays.default = final: prev: {
-        tree-sitter =
-          (prev.rustPlatform.buildRustPackage rec {
-            pname = "tree-sitter";
-            version = "0.25.8";
-
-            src = prev.fetchFromGitHub {
-              owner = "tree-sitter";
-              repo = "tree-sitter";
-              rev = "v${version}";
-              hash = "sha256-q465DMTiFHoOZy6cMvrSywwO1qJVXPmQ0OVIPmwib6c=";
-            };
-
-            cargoHash = "sha256-5xtsNE94J5Hg8rGkyzx8P6c8vl1x17zgpSulcGNVKmI=";
-
-            # Skip tests for now as some are failing
-            doCheck = false;
-
-            buildInputs = prev.lib.optionals prev.stdenv.isDarwin [
-              prev.darwin.apple_sdk.frameworks.Security
-            ];
-
-            # Skip shell completions generation for now
-            # The generate-completions subcommand may not be available in this version
-            postInstall = ''
-              # Future: Add shell completions generation when available
-            '';
-
-            meta = with prev.lib; {
-              description = "A parser generator tool and an incremental parsing library";
-              homepage = "https://tree-sitter.github.io/";
-              changelog = "https://github.com/tree-sitter/tree-sitter/releases/tag/v${version}";
-              license = licenses.mit;
-              maintainers = with maintainers; [siraben];
-              mainProgram = "tree-sitter";
-            };
-          })
-          // {
-            # Add the buildGrammar function from the original tree-sitter package
-            buildGrammar = prev.tree-sitter.buildGrammar;
-          };
-      };
+      overlays.default = _final: _prev: {};
     }
     // flake-utils.lib.eachDefaultSystem
     (

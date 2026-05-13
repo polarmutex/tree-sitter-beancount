@@ -3,15 +3,15 @@
  * @brief External scanner for tree-sitter-beancount parser
  *
  * This file implements an external scanner for the Beancount language parser.
- * It handles context-sensitive parsing of section headers and indentation tracking
- * for Org-mode style sections within Beancount files.
+ * It handles context-sensitive parsing of section headers and indentation
+ * tracking for Org-mode style sections within Beancount files.
  */
 
 #include <stdio.h>
 #include <tree_sitter/parser.h>
 #include <wctype.h>
 
-#if !defined (UINT8_MAX)
+#if !defined(UINT8_MAX)
 #define UINT8_MAX 255
 #endif
 
@@ -19,8 +19,8 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 // Configuration constants
-#define INITIAL_VEC_CAPACITY 16  // Initial capacity for dynamic arrays
-#define TAB_WIDTH 8              // Number of spaces equivalent to one tab
+#define INITIAL_VEC_CAPACITY 16 // Initial capacity for dynamic arrays
+#define TAB_WIDTH 8             // Number of spaces equivalent to one tab
 
 /**
  * @brief Dynamic array for storing integer values
@@ -52,7 +52,7 @@ typedef struct {
         }                                                                      \
         void *tmp = realloc((vec).data, (_cap) * sizeof((vec).data[0]));       \
         if (tmp == NULL) {                                                     \
-            /* Allocation failed - keep existing data and capacity */         \
+            /* Allocation failed - keep existing data and capacity */          \
             break;                                                             \
         }                                                                      \
         (vec).data = tmp;                                                      \
@@ -82,11 +82,11 @@ typedef struct {
  */
 #define VEC_PUSH(vec, el)                                                      \
     do {                                                                       \
-        if ((vec).capacity == (vec).length) {                                 \
-            uint32_t new_cap = MAX(INITIAL_VEC_CAPACITY, (vec).length * 2);   \
+        if ((vec).capacity == (vec).length) {                                  \
+            uint32_t new_cap = MAX(INITIAL_VEC_CAPACITY, (vec).length * 2);    \
             VEC_RESIZE((vec), new_cap);                                        \
             if ((vec).capacity < new_cap) {                                    \
-                /* Allocation failed - skip push to avoid buffer overflow */  \
+                /* Allocation failed - skip push to avoid buffer overflow */   \
                 break;                                                         \
             }                                                                  \
         }                                                                      \
@@ -97,8 +97,7 @@ typedef struct {
 #define VEC_POP(vec) (vec).length--;
 
 /** @brief Initialize a new empty vector */
-#define VEC_NEW                                                                \
-    { .length = 0, .capacity = 0, .data = NULL }
+#define VEC_NEW {.length = 0, .capacity = 0, .data = NULL}
 
 /** @brief Get the last element of a vector (assumes vector is not empty) */
 #define VEC_BACK(vec) ((vec).data[(vec).length - 1])
@@ -131,7 +130,8 @@ enum TokenType {
  * The scanner maintains two stacks to track the current parsing state:
  * - indent_length_stack: Tracks indentation levels for proper nesting
  * - org_section_stack: Tracks org-mode section nesting levels
- * - eof_returned: Flag to prevent returning EOF multiple times (prevents infinite loops)
+ * - eof_returned: Flag to prevent returning EOF multiple times (prevents
+ * infinite loops)
  */
 typedef struct {
     vec indent_length_stack; // Stack of indentation levels
@@ -145,10 +145,12 @@ typedef struct {
  * @param buffer The buffer to write the serialized data to
  * @return The number of bytes written to the buffer
  *
- * Serializes the scanner's indentation and section stacks for later restoration.
- * This is used by tree-sitter to maintain parsing state across incremental updates.
+ * Serializes the scanner's indentation and section stacks for later
+ * restoration. This is used by tree-sitter to maintain parsing state across
+ * incremental updates.
  *
- * Format: [eof_returned][indent_count][indent_data...][section_count][section_data...]
+ * Format:
+ * [eof_returned][indent_count][indent_data...][section_count][section_data...]
  */
 static unsigned serialize(Scanner *scanner, char *buffer) {
     size_t i = 0;
@@ -195,7 +197,8 @@ static unsigned serialize(Scanner *scanner, char *buffer) {
  * @param length The length of the buffer in bytes
  *
  * Restores the scanner's indentation and section stacks from serialized data.
- * This is used by tree-sitter to restore parsing state during incremental updates.
+ * This is used by tree-sitter to restore parsing state during incremental
+ * updates.
  *
  * The stacks are always initialized with a base element of 0.
  */
@@ -217,7 +220,8 @@ static void deserialize(Scanner *scanner, const char *buffer, unsigned length) {
     scanner->eof_returned = (buffer[i++] != 0);
 
     // Check if we have more data
-    if (i >= length) return;
+    if (i >= length)
+        return;
 
     // Deserialize indentation stack
     size_t indent_count = (unsigned char)buffer[i++];
@@ -227,7 +231,8 @@ static void deserialize(Scanner *scanner, const char *buffer, unsigned length) {
     }
 
     // Check if we have more data for org section stack
-    if (i >= length) return;
+    if (i >= length)
+        return;
 
     // Deserialize org section stack
     size_t org_section_count = (unsigned char)buffer[i++];
@@ -249,7 +254,8 @@ static inline void skip(TSLexer *lexer) {
 
 /**
  * @brief Check if the parser is in error recovery mode
- * @param valid_symbols Array indicating which symbols are valid at this position
+ * @param valid_symbols Array indicating which symbols are valid at this
+ * position
  * @return true if all scanner tokens are valid (indicates error recovery)
  *
  * When the parser is in error recovery, it will accept any token we produce.
@@ -274,7 +280,8 @@ static inline bool is_headline_marker(char c) {
 /**
  * @brief Count leading whitespace characters
  * @param lexer The tree-sitter lexer interface
- * @return The indentation length in spaces (tabs converted to equivalent spaces)
+ * @return The indentation length in spaces (tabs converted to equivalent
+ * spaces)
  *
  * Counts spaces and tabs at the beginning of a line, converting tabs to spaces
  * using the TAB_WIDTH constant. Stops at first non-whitespace character.
@@ -286,7 +293,7 @@ static int16_t count_leading_whitespace(TSLexer *lexer) {
         if (lexer->lookahead == ' ') {
             indent_length++;
         } else if (lexer->lookahead == '\t') {
-            indent_length += TAB_WIDTH;  // Convert tabs to equivalent spaces
+            indent_length += TAB_WIDTH; // Convert tabs to equivalent spaces
         }
         skip(lexer); // Skip whitespace character
     }
@@ -301,7 +308,8 @@ static int16_t count_leading_whitespace(TSLexer *lexer) {
  * @param valid_symbols Array indicating which tokens are valid
  * @return true if EOF token was produced, false otherwise
  */
-static bool handle_eof(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
+static bool
+handle_eof(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
     if (lexer->lookahead != '\0') {
         return false;
     }
@@ -330,7 +338,9 @@ static bool handle_eof(Scanner *scanner, TSLexer *lexer, const bool *valid_symbo
  * @param valid_symbols Array indicating which tokens are valid
  * @return true if section token was produced, false otherwise
  */
-static bool parse_section_header(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
+static bool parse_section_header(Scanner *scanner,
+                                 TSLexer *lexer,
+                                 const bool *valid_symbols) {
     if (!is_headline_marker(lexer->lookahead)) {
         return false;
     }
