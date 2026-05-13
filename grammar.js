@@ -88,7 +88,7 @@ module.exports = grammar({
         account: $ =>
             token(
                 seq(
-                    /[A-Z][\p{L}\p{N}\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7a3]*/,
+                    /[\p{Lu}\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7a3][\p{L}\p{N}\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7a3]*/,
                     repeat(
                         seq(
                             ":",

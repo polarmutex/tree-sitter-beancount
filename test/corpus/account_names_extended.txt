@@ -1,3 +1,32 @@
+===========================
+account names cyrillic root
+===========================
+
+1900-02-12 open Капитал:Retained-Earnings
+1900-02-12 open Активы:Cash
+1900-02-12 open Обязательства:CreditCard
+1900-02-12 open Доходы:Salary
+1900-02-12 open Расходы:Food
+
+---
+
+(file
+  (open
+    (date)
+    (account))
+  (open
+    (date)
+    (account))
+  (open
+    (date)
+    (account))
+  (open
+    (date)
+    (account))
+  (open
+    (date)
+    (account)))
+
 ========================
 account names with numbers
 ========================
