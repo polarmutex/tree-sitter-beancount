@@ -109,7 +109,6 @@ impl LeafNodeKind {
     }
 }
 
-#[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum NonTerminalNodeKind {
     Directive,
@@ -208,7 +207,6 @@ impl From<&str> for NonTerminalNodeKind {
 }
 
 impl NonTerminalNodeKind {
-    #[allow(dead_code)]
     pub fn name(&self) -> &'static str {
         match self {
             NonTerminalNodeKind::Directive => "_directive",

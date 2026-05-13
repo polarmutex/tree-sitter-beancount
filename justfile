@@ -37,6 +37,11 @@ parse FILE:
 # Language Bindings
 # ========================================
 
+# Regenerate Rust binding enums and typed node wrappers from src/node-types.json
+generate-bindings:
+    python scripts/generate_token_kind.py
+    rustfmt bindings/rust/node_kind.rs bindings/rust/node_types.rs
+
 # Build Rust bindings
 build-rust:
     cargo build --release

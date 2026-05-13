@@ -43,6 +43,9 @@ mod node_kind;
 pub use node_kind::LeafNodeKind;
 pub use node_kind::NodeKind;
 
+mod node_types;
+pub use node_types::*;
+
 // Uncomment these to include any queries that this grammar contains
 
 // pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
