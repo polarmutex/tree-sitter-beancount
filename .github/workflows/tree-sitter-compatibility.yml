@@ -197,7 +197,8 @@ jobs:
             }
 
       - name: Comment on PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
+        continue-on-error: true
         uses: actions/github-script@v9
         with:
           script: |
