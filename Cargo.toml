@@ -19,7 +19,7 @@ std = ["tree-sitter/std"]
 wasm = ["tree-sitter-language"]
 
 [dependencies]
-tree-sitter = { version = "~0.26.3", default-features = false }
+tree-sitter = { version = "~0.27.0", default-features = false }
 tree-sitter-language = { version = "0.1.6", optional = true }
 
 [build-dependencies]
