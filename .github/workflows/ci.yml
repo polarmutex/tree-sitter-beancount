@@ -297,6 +297,8 @@ jobs:
   wasm32:
     name: compile rust binding on wasm32
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
 
