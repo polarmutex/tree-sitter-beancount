@@ -80,7 +80,7 @@ module.exports = grammar({
         flag: $ => token(/[!&?%PSTCURM*#]/),
         _none: $ => token('NULL'),
         bool: $ => token(/TRUE|FALSE/),
-        date: $ => token(/([12]\d{3}[-\/](0[1-9]|1[0-2])[-\/](0[1-9]|[12]\d|3[01]))/),
+        date: $ => token(/((000[1-9]|00[1-9]\d|0[1-9]\d{2}|[1-9]\d{3})[-\/](0[1-9]|1[0-2])[-\/](0[1-9]|[12]\d|3[01]))/),
         // Account names: Assets|Liabilities|Equity|Income|Expenses followed by colon-separated components
         // Components can contain Unicode letters/numbers including CJK characters
         // account: $ => $.identifier, // token(/[^\s\\ \n\r]/),

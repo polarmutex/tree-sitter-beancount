@@ -86,13 +86,21 @@ date leap year
 date range boundaries
 ============================
 
+0001-01-01 open Assets:MinimumDate
 1900-01-01 open Assets:Historical
 2099-12-31 close Assets:Historical
+9999-12-31 close Assets:MaximumDate
 
 ---
 
 (file
   (open
+    (date)
+    (account))
+  (open
+    (date)
+    (account))
+  (close
     (date)
     (account))
   (close
