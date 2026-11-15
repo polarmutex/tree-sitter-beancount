@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/bryall/tree-sitter-beancount#readme",
   "dependencies": {
-    "node-addon-api": "^8.9.0",
+    "node-addon-api": "^8.9.2",
     "node-gyp-build": "^4.8.0",
     "tar-fs": "^3.1.3"
   },
