@@ -114,6 +114,7 @@ jobs:
           tree-sitter query queries/textobjects.scm test/corpus/transaction.txt
           tree-sitter query queries/tags.scm test/corpus/entry_types.txt
           tree-sitter query queries/indents.scm test/corpus/transaction.txt
+          tree-sitter query queries/injections.scm test/corpus/entry_types.txt
 
   test-examples:
     name: Test examples
