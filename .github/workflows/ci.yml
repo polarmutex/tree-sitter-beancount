@@ -133,7 +133,7 @@ jobs:
             https://github.com/beancount/beancount.git examples/beancount-official
 
       - name: Parse examples
-        uses: tree-sitter/parse-action@v4
+        uses: tree-sitter/parse-action@v5
         with:
           files: |
             examples/**/*.beancount
